@@ -1,0 +1,26 @@
+\select@language {slovene}
+\contentsline {chapter}{Predgovor}{iii}
+\contentsline {chapter}{\numberline {1}Analiza zmogljivosti obla"cnih storitev razli"cnih ponudnikov (T. Osolin, A. Travnikar, M. Dolenc)}{1}
+\contentsline {section}{\numberline {1.1}Opis problema}{1}
+\contentsline {section}{\numberline {1.2}Namen}{1}
+\contentsline {section}{\numberline {1.3}Izbira ponudnikov}{2}
+\contentsline {subsection}{\numberline {1.3.1}Digital Ocean}{2}
+\contentsline {subsection}{\numberline {1.3.2}Amazon Web Services}{2}
+\contentsline {subsection}{\numberline {1.3.3}Google Cloud Platform}{2}
+\contentsline {section}{\numberline {1.4}Izbira tehnologij}{3}
+\contentsline {subsection}{\numberline {1.4.1}PerfKit Benchmarker}{3}
+\contentsline {subsection}{\numberline {1.4.2}Python}{3}
+\contentsline {subsection}{\numberline {1.4.3}Odjemalec}{3}
+\contentsline {section}{\numberline {1.5}Izbrane metrike}{3}
+\contentsline {subsection}{\numberline {1.5.1}Prepustnost omre"zja}{3}
+\contentsline {subsection}{\numberline {1.5.2}Hitrost procesiranja}{5}
+\contentsline {subsection}{\numberline {1.5.3}Zmogljivost datote"cnega sistema}{5}
+\contentsline {section}{\numberline {1.6}Opis bremena}{5}
+\contentsline {subsection}{\numberline {1.6.1}Iperf}{5}
+\contentsline {subsection}{\numberline {1.6.2}CoreMark}{6}
+\contentsline {subsection}{\numberline {1.6.3}FIO}{6}
+\contentsline {section}{\numberline {1.7}Rezultati meritev}{6}
+\contentsline {subsection}{\numberline {1.7.1}Testiranje prepustnosti omre"zja}{7}
+\contentsline {subsection}{\numberline {1.7.2}Testiranje hitrosti procesiranja}{9}
+\contentsline {subsection}{\numberline {1.7.3}Testiranje zmogljivosti datote"cnega sistema}{10}
+\contentsline {section}{\numberline {1.8}Komentarji rezultatov}{15}

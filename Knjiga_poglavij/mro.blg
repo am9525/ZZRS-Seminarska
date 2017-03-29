@@ -1,0 +1,22 @@
+This is BibTeX, Version 0.99dThe top-level auxiliary file: mro.aux
+A level-1 auxiliary file: preface.aux
+A level-1 auxiliary file: poglavje01.aux
+The style file: ieeetr.bst
+Database file #1: mro.bib
+Warning--entry type for "1_google" isn't style-file defined
+--line 14 of file mro.bib
+Warning--entry type for "1_aws" isn't style-file defined
+--line 21 of file mro.bib
+Warning--entry type for "1_dOcean" isn't style-file defined
+--line 28 of file mro.bib
+Warning--entry type for "1_perfkit" isn't style-file defined
+--line 35 of file mro.bib
+Warning--entry type for "1_python" isn't style-file defined
+--line 42 of file mro.bib
+Warning--entry type for "1_fio" isn't style-file defined
+--line 49 of file mro.bib
+Warning--entry type for "1_iperf" isn't style-file defined
+--line 57 of file mro.bib
+Warning--entry type for "1_coremark" isn't style-file defined
+--line 64 of file mro.bib
+(There were 8 warnings)

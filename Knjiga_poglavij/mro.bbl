@@ -1,0 +1,41 @@
+\begin{thebibliography}{1}
+
+\bibitem{1_performance}
+A.~Iosup, S.~Ostermann, M.~N. Yigitbasi, R.~Prodan, T.~Fahringer, and D.~H.
+  Epema, ``Performance analysis of cloud computing services for many-tasks
+  scientific computing,'' {\em Parallel and Distributed Systems, IEEE
+  Transactions on}, vol.~22, no.~6, pp.~931--945, 2011.
+
+\bibitem{1_dOcean}
+``Digitalocean: Simple cloud computing for developers.''
+  https://www.digitalocean.com/, Marec 2016.
+
+\bibitem{1_aws}
+``Amazon web services (aws) - cloud computing services.''
+  https://aws.amazon.com/, Marec 2016.
+
+\bibitem{1_google}
+``Google cloud computing, hosting services \& apis.''
+  https://cloud.google.com/, April 2016.
+
+\bibitem{1_perfkit}
+``Perfkit benchmarker.''
+  http://googlecloudplatform.github.io/PerfKitBenchmarker/, Marec 2016.
+
+\bibitem{1_python}
+``Welcome to python.org.'' https://www.python.org/, Marec 2016.
+
+\bibitem{1_iperf}
+``iperf - the network bandwidth measurement tool.''
+  https://iperf.fr/iperf-doc.php, April 2016.
+
+\bibitem{1_coremark}
+``Industry-standard benchmarks for embedded systems.''
+  http://www.eembc.org/coremark/faq.php, April 2016.
+
+\bibitem{1_fio}
+``Fio - flexible i/o tester synthetic benchmark.''
+  http://www.storagereview.com/fio\_flexible\_i\_o\_tester\_synthetic\_benchmark,
+  April 2016.
+
+\end{thebibliography}

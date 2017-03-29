@@ -1,0 +1,1109 @@
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9) (preloaded format=pdflatex 2015.2.4)  17 MAR 2017 08:04
+entering extended mode
+**mro.tex
+(C:\MihaMraz\Predmeti\ZZRS\ZZRS_2016_17\Vaje\Knjiga_poglavij\mro.tex
+LaTeX2e <2011/06/27>
+Babel <v3.8m> and hyphenation patterns for english, afrikaans, ancientgreek, arabic, armenian, assamese, basque, bengali
+, bokmal, bulgarian, catalan, coptic, croatian, czech, danish, dutch, esperanto, estonian, farsi, finnish, french, galic
+ian, german, german-x-2013-05-26, greek, gujarati, hindi, hungarian, icelandic, indonesian, interlingua, irish, italian,
+ kannada, kurmanji, latin, latvian, lithuanian, malayalam, marathi, mongolian, mongolianlmc, monogreek, ngerman, ngerman
+-x-2013-05-26, nynorsk, oriya, panjabi, pinyin, polish, portuguese, romanian, russian, sanskrit, serbian, slovak, sloven
+ian, spanish, swedish, swissgerman, tamil, telugu, turkish, turkmen, ukenglish, ukrainian, uppersorbian, usenglishmax, w
+elsh, loaded.
+("C:\Program Files\MiKTeX 2.9\tex\latex\base\book.cls"
+Document Class: book 2007/10/19 v1.4h Standard LaTeX document class
+("C:\Program Files\MiKTeX 2.9\tex\latex\base\bk10.clo"
+File: bk10.clo 2007/10/19 v1.4h Standard LaTeX file (size option)
+)
+\c@part=\count79
+\c@chapter=\count80
+\c@section=\count81
+\c@subsection=\count82
+\c@subsubsection=\count83
+\c@paragraph=\count84
+\c@subparagraph=\count85
+\c@figure=\count86
+\c@table=\count87
+\abovecaptionskip=\skip41
+\belowcaptionskip=\skip42
+\bibindent=\dimen102
+) ("C:\Program Files\MiKTeX 2.9\tex\latex\amsmath\amsmath.sty"
+Package: amsmath 2013/01/14 v2.14 AMS math features
+\@mathmargin=\skip43
+
+For additional information on amsmath, use the `?' option.
+("C:\Program Files\MiKTeX 2.9\tex\latex\amsmath\amstext.sty"
+Package: amstext 2000/06/29 v2.01
+ ("C:\Program Files\MiKTeX 2.9\tex\latex\amsmath\amsgen.sty"
+File: amsgen.sty 1999/11/30 v2.0
+\@emptytoks=\toks14
+\ex@=\dimen103
+)) ("C:\Program Files\MiKTeX 2.9\tex\latex\amsmath\amsbsy.sty"
+Package: amsbsy 1999/11/29 v1.2d
+\pmbraise@=\dimen104
+)
+("C:\Program Files\MiKTeX 2.9\tex\latex\amsmath\amsopn.sty"
+Package: amsopn 1999/12/14 v2.01 operator names
+)
+\inf@bad=\count88
+LaTeX Info: Redefining \frac on input line 210.
+\uproot@=\count89
+\leftroot@=\count90
+LaTeX Info: Redefining \overline on input line 306.
+\classnum@=\count91
+\DOTSCASE@=\count92
+LaTeX Info: Redefining \ldots on input line 378.
+LaTeX Info: Redefining \dots on input line 381.
+LaTeX Info: Redefining \cdots on input line 466.
+\Mathstrutbox@=\box26
+\strutbox@=\box27
+\big@size=\dimen105
+LaTeX Font Info:    Redeclaring font encoding OML on input line 566.
+LaTeX Font Info:    Redeclaring font encoding OMS on input line 567.
+\macc@depth=\count93
+\c@MaxMatrixCols=\count94
+\dotsspace@=\muskip10
+\c@parentequation=\count95
+\dspbrk@lvl=\count96
+\tag@help=\toks15
+\row@=\count97
+\column@=\count98
+\maxfields@=\count99
+\andhelp@=\toks16
+\eqnshift@=\dimen106
+\alignsep@=\dimen107
+\tagshift@=\dimen108
+\tagwidth@=\dimen109
+\totwidth@=\dimen110
+\lineht@=\dimen111
+\@envbody=\toks17
+\multlinegap=\skip44
+\multlinetaggap=\skip45
+\mathdisplay@stack=\toks18
+LaTeX Info: Redefining \[ on input line 2665.
+LaTeX Info: Redefining \] on input line 2666.
+)
+("C:\Program Files\MiKTeX 2.9\tex\latex\amsfonts\amssymb.sty"
+Package: amssymb 2013/01/14 v3.01 AMS font symbols
+
+("C:\Program Files\MiKTeX 2.9\tex\latex\amsfonts\amsfonts.sty"
+Package: amsfonts 2013/01/14 v3.01 Basic AMSFonts support
+\symAMSa=\mathgroup4
+\symAMSb=\mathgroup5
+LaTeX Font Info:    Overwriting math alphabet `\mathfrak' in version `bold'
+(Font)                  U/euf/m/n --> U/euf/b/n on input line 106.
+)) ("C:\Program Files\MiKTeX 2.9\tex\latex\base\makeidx.sty"
+Package: makeidx 2000/03/29 v1.0m Standard LaTeX package
+) ("C:\Program Files\MiKTeX 2.9\tex\latex\graphics\graphicx.sty"
+Package: graphicx 1999/02/16 v1.0f Enhanced LaTeX Graphics (DPC,SPQR)
+
+("C:\Program Files\MiKTeX 2.9\tex\latex\graphics\keyval.sty"
+Package: keyval 1999/03/16 v1.13 key=value parser (DPC)
+\KV@toks@=\toks19
+)
+("C:\Program Files\MiKTeX 2.9\tex\latex\graphics\graphics.sty"
+Package: graphics 2009/02/05 v1.0o Standard LaTeX Graphics (DPC,SPQR)
+ ("C:\Program Files\MiKTeX 2.9\tex\latex\graphics\trig.sty"
+Package: trig 1999/03/16 v1.09 sin cos tan (DPC)
+) ("C:\Program Files\MiKTeX 2.9\tex\latex\00miktex\graphics.cfg"
+File: graphics.cfg 2007/01/18 v1.5 graphics configuration of teTeX/TeXLive
+)
+Package graphics Info: Driver file: pdftex.def on input line 91.
+
+("C:\Program Files\MiKTeX 2.9\tex\latex\pdftex-def\pdftex.def"
+File: pdftex.def 2011/05/27 v0.06d Graphics/color for pdfTeX
+
+("C:\Program Files\MiKTeX 2.9\tex\generic\oberdiek\infwarerr.sty"
+Package: infwarerr 2010/04/08 v1.3 Providing info/warning/error messages (HO)
+)
+("C:\Program Files\MiKTeX 2.9\tex\generic\oberdiek\ltxcmds.sty"
+Package: ltxcmds 2011/11/09 v1.22 LaTeX kernel commands for general use (HO)
+)
+\Gread@gobject=\count100
+))
+\Gin@req@height=\dimen112
+\Gin@req@width=\dimen113
+)
+("C:\Program Files\MiKTeX 2.9\tex\latex\listings\listings.sty"
+\lst@mode=\count101
+\lst@gtempboxa=\box28
+\lst@token=\toks20
+\lst@length=\count102
+\lst@currlwidth=\dimen114
+\lst@column=\count103
+\lst@pos=\count104
+\lst@lostspace=\dimen115
+\lst@width=\dimen116
+\lst@newlines=\count105
+\lst@lineno=\count106
+\lst@maxwidth=\dimen117
+
+("C:\Program Files\MiKTeX 2.9\tex\latex\listings\lstmisc.sty"
+File: lstmisc.sty 2014/09/06 1.5e (Carsten Heinz)
+\c@lstnumber=\count107
+\lst@skipnumbers=\count108
+\lst@framebox=\box29
+)
+("C:\Program Files\MiKTeX 2.9\tex\latex\listings\listings.cfg"
+File: listings.cfg 2014/09/06 1.5e listings configuration
+))
+Package: listings 2014/09/06 1.5e (Carsten Heinz)
+
+("C:\Program Files\MiKTeX 2.9\tex\latex\graphics\color.sty"
+Package: color 2005/11/14 v1.0j Standard LaTeX Color (DPC)
+ ("C:\Program Files\MiKTeX 2.9\tex\latex\00miktex\color.cfg"
+File: color.cfg 2007/01/18 v1.5 color configuration of teTeX/TeXLive
+)
+Package color Info: Driver file: pdftex.def on input line 130.
+) ("C:\Program Files\MiKTeX 2.9\tex\latex\listings\lstlang1.sty"
+File: lstlang1.sty 2014/09/06 1.5e listings language file
+)
+("C:\Program Files\MiKTeX 2.9\tex\latex\oberdiek\epstopdf.sty"
+Package: epstopdf 2010/02/09 v2.5 Conversion with epstopdf on the fly (HO)
+
+("C:\Program Files\MiKTeX 2.9\tex\latex\oberdiek\epstopdf-base.sty"
+Package: epstopdf-base 2010/02/09 v2.5 Base part for package epstopdf
+
+("C:\Program Files\MiKTeX 2.9\tex\latex\oberdiek\grfext.sty"
+Package: grfext 2010/08/19 v1.1 Manage graphics extensions (HO)
+
+("C:\Program Files\MiKTeX 2.9\tex\generic\oberdiek\kvdefinekeys.sty"
+Package: kvdefinekeys 2011/04/07 v1.3 Define keys (HO)
+))
+("C:\Program Files\MiKTeX 2.9\tex\latex\oberdiek\kvoptions.sty"
+Package: kvoptions 2011/06/30 v3.11 Key value format for package options (HO)
+
+("C:\Program Files\MiKTeX 2.9\tex\generic\oberdiek\kvsetkeys.sty"
+Package: kvsetkeys 2012/04/25 v1.16 Key value parser (HO)
+
+("C:\Program Files\MiKTeX 2.9\tex\generic\oberdiek\etexcmds.sty"
+Package: etexcmds 2011/02/16 v1.5 Avoid name clashes with e-TeX commands (HO)
+
+("C:\Program Files\MiKTeX 2.9\tex\generic\oberdiek\ifluatex.sty"
+Package: ifluatex 2010/03/01 v1.3 Provides the ifluatex switch (HO)
+Package ifluatex Info: LuaTeX not detected.
+)
+Package etexcmds Info: Could not find \expanded.
+(etexcmds)             That can mean that you are not using pdfTeX 1.50 or
+(etexcmds)             that some package has redefined \expanded.
+(etexcmds)             In the latter case, load this package earlier.
+)))
+("C:\Program Files\MiKTeX 2.9\tex\generic\oberdiek\pdftexcmds.sty"
+Package: pdftexcmds 2011/11/29 v0.20 Utility functions of pdfTeX for LuaTeX (HO)
+
+("C:\Program Files\MiKTeX 2.9\tex\generic\oberdiek\ifpdf.sty"
+Package: ifpdf 2011/01/30 v2.3 Provides the ifpdf switch (HO)
+Package ifpdf Info: pdfTeX in PDF mode is detected.
+)
+Package pdftexcmds Info: LuaTeX not detected.
+Package pdftexcmds Info: \pdf@primitive is available.
+Package pdftexcmds Info: \pdf@ifprimitive is available.
+Package pdftexcmds Info: \pdfdraftmode found.
+)
+Package grfext Info: Graphics extension search list:
+(grfext)             [.png,.pdf,.jpg,.mps,.jpeg,.jbig2,.jb2,.PNG,.PDF,.JPG,.JPEG,.JBIG2,.JB2,.eps]
+(grfext)             \AppendGraphicsExtensions on input line 452.
+))
+("C:\Program Files\MiKTeX 2.9\tex\latex\tools\afterpage.sty"
+Package: afterpage 1995/10/27 v1.08 After-Page Package (DPC)
+\AP@output=\toks21
+\AP@partial=\box30
+\AP@footins=\box31
+) ("C:\Program Files\MiKTeX 2.9\tex\latex\eurosym\eurosym.sty"
+Package: eurosym 1998/08/06 v1.1 European currency symbol ``Euro''
+\@eurobox=\box32
+) ("C:\Program Files\MiKTeX 2.9\tex\latex\pgf\frontendlayer\tikz.sty"
+("C:\Program Files\MiKTeX 2.9\tex\latex\pgf\basiclayer\pgf.sty"
+("C:\Program Files\MiKTeX 2.9\tex\latex\pgf\utilities\pgfrcs.sty"
+("C:\Program Files\MiKTeX 2.9\tex\generic\pgf\utilities\pgfutil-common.tex"
+\pgfutil@everybye=\toks22
+\pgfutil@tempdima=\dimen118
+\pgfutil@tempdimb=\dimen119
+
+("C:\Program Files\MiKTeX 2.9\tex\generic\pgf\utilities\pgfutil-common-lists.tex"))
+("C:\Program Files\MiKTeX 2.9\tex\generic\pgf\utilities\pgfutil-latex.def"
+\pgfutil@abb=\box33
+
+("C:\Program Files\MiKTeX 2.9\tex\latex\ms\everyshi.sty"
+Package: everyshi 2001/05/15 v3.00 EveryShipout Package (MS)
+))
+("C:\Program Files\MiKTeX 2.9\tex\generic\pgf\utilities\pgfrcs.code.tex"
+Package: pgfrcs 2013/12/20 v3.0.0 (rcs-revision 1.28)
+))
+Package: pgf 2013/12/18 v3.0.0 (rcs-revision 1.14)
+
+("C:\Program Files\MiKTeX 2.9\tex\latex\pgf\basiclayer\pgfcore.sty"
+("C:\Program Files\MiKTeX 2.9\tex\latex\pgf\systemlayer\pgfsys.sty"
+("C:\Program Files\MiKTeX 2.9\tex\generic\pgf\systemlayer\pgfsys.code.tex"
+Package: pgfsys 2013/11/30 v3.0.0 (rcs-revision 1.47)
+
+("C:\Program Files\MiKTeX 2.9\tex\generic\pgf\utilities\pgfkeys.code.tex"
+\pgfkeys@pathtoks=\toks23
+\pgfkeys@temptoks=\toks24
+
+("C:\Program Files\MiKTeX 2.9\tex\generic\pgf\utilities\pgfkeysfiltered.code.tex"
+\pgfkeys@tmptoks=\toks25
+))
+\pgf@x=\dimen120
+\pgf@y=\dimen121
+\pgf@xa=\dimen122
+\pgf@ya=\dimen123
+\pgf@xb=\dimen124
+\pgf@yb=\dimen125
+\pgf@xc=\dimen126
+\pgf@yc=\dimen127
+\w@pgf@writea=\write3
+\r@pgf@reada=\read1
+\c@pgf@counta=\count109
+\c@pgf@countb=\count110
+\c@pgf@countc=\count111
+\c@pgf@countd=\count112
+\t@pgf@toka=\toks26
+\t@pgf@tokb=\toks27
+\t@pgf@tokc=\toks28
+
+("C:\Program Files\MiKTeX 2.9\tex\generic\pgf\systemlayer\pgf.cfg"
+File: pgf.cfg 2008/05/14  (rcs-revision 1.7)
+)
+Driver file for pgf: pgfsys-pdftex.def
+
+("C:\Program Files\MiKTeX 2.9\tex\generic\pgf\systemlayer\pgfsys-pdftex.def"
+File: pgfsys-pdftex.def 2013/07/18  (rcs-revision 1.33)
+
+("C:\Program Files\MiKTeX 2.9\tex\generic\pgf\systemlayer\pgfsys-common-pdf.def"
+File: pgfsys-common-pdf.def 2013/10/10  (rcs-revision 1.13)
+)))
+("C:\Program Files\MiKTeX 2.9\tex\generic\pgf\systemlayer\pgfsyssoftpath.code.tex"
+File: pgfsyssoftpath.code.tex 2013/09/09  (rcs-revision 1.9)
+\pgfsyssoftpath@smallbuffer@items=\count113
+\pgfsyssoftpath@bigbuffer@items=\count114
+)
+("C:\Program Files\MiKTeX 2.9\tex\generic\pgf\systemlayer\pgfsysprotocol.code.tex"
+File: pgfsysprotocol.code.tex 2006/10/16  (rcs-revision 1.4)
+))
+("C:\Program Files\MiKTeX 2.9\tex\latex\xcolor\xcolor.sty"
+Package: xcolor 2007/01/21 v2.11 LaTeX color extensions (UK)
+ ("C:\Program Files\MiKTeX 2.9\tex\latex\00miktex\color.cfg"
+File: color.cfg 2007/01/18 v1.5 color configuration of teTeX/TeXLive
+)
+Package xcolor Info: Driver file: pdftex.def on input line 225.
+LaTeX Info: Redefining \color on input line 702.
+Package xcolor Info: Model `cmy' substituted by `cmy0' on input line 1337.
+Package xcolor Info: Model `hsb' substituted by `rgb' on input line 1341.
+Package xcolor Info: Model `RGB' extended on input line 1353.
+Package xcolor Info: Model `HTML' substituted by `rgb' on input line 1355.
+Package xcolor Info: Model `Hsb' substituted by `hsb' on input line 1356.
+Package xcolor Info: Model `tHsb' substituted by `hsb' on input line 1357.
+Package xcolor Info: Model `HSB' substituted by `hsb' on input line 1358.
+Package xcolor Info: Model `Gray' substituted by `gray' on input line 1359.
+Package xcolor Info: Model `wave' substituted by `hsb' on input line 1360.
+) ("C:\Program Files\MiKTeX 2.9\tex\generic\pgf\basiclayer\pgfcore.code.tex"
+Package: pgfcore 2010/04/11 v3.0.0 (rcs-revision 1.7)
+
+("C:\Program Files\MiKTeX 2.9\tex\generic\pgf\math\pgfmath.code.tex"
+("C:\Program Files\MiKTeX 2.9\tex\generic\pgf\math\pgfmathcalc.code.tex"
+("C:\Program Files\MiKTeX 2.9\tex\generic\pgf\math\pgfmathutil.code.tex")
+("C:\Program Files\MiKTeX 2.9\tex\generic\pgf\math\pgfmathparser.code.tex"
+\pgfmath@dimen=\dimen128
+\pgfmath@count=\count115
+\pgfmath@box=\box34
+\pgfmath@toks=\toks29
+\pgfmath@stack@operand=\toks30
+\pgfmath@stack@operation=\toks31
+)
+("C:\Program Files\MiKTeX 2.9\tex\generic\pgf\math\pgfmathfunctions.code.tex"
+("C:\Program Files\MiKTeX 2.9\tex\generic\pgf\math\pgfmathfunctions.basic.code.tex")
+("C:\Program Files\MiKTeX 2.9\tex\generic\pgf\math\pgfmathfunctions.trigonometric.code.tex")
+("C:\Program Files\MiKTeX 2.9\tex\generic\pgf\math\pgfmathfunctions.random.code.tex")
+("C:\Program Files\MiKTeX 2.9\tex\generic\pgf\math\pgfmathfunctions.comparison.code.tex")
+("C:\Program Files\MiKTeX 2.9\tex\generic\pgf\math\pgfmathfunctions.base.code.tex")
+("C:\Program Files\MiKTeX 2.9\tex\generic\pgf\math\pgfmathfunctions.round.code.tex")
+("C:\Program Files\MiKTeX 2.9\tex\generic\pgf\math\pgfmathfunctions.misc.code.tex")
+("C:\Program Files\MiKTeX 2.9\tex\generic\pgf\math\pgfmathfunctions.integerarithmetics.code.tex")))
+("C:\Program Files\MiKTeX 2.9\tex\generic\pgf\math\pgfmathfloat.code.tex"
+\c@pgfmathroundto@lastzeros=\count116
+))
+("C:\Program Files\MiKTeX 2.9\tex\generic\pgf\basiclayer\pgfcorepoints.code.tex"
+File: pgfcorepoints.code.tex 2013/10/07  (rcs-revision 1.27)
+\pgf@picminx=\dimen129
+\pgf@picmaxx=\dimen130
+\pgf@picminy=\dimen131
+\pgf@picmaxy=\dimen132
+\pgf@pathminx=\dimen133
+\pgf@pathmaxx=\dimen134
+\pgf@pathminy=\dimen135
+\pgf@pathmaxy=\dimen136
+\pgf@xx=\dimen137
+\pgf@xy=\dimen138
+\pgf@yx=\dimen139
+\pgf@yy=\dimen140
+\pgf@zx=\dimen141
+\pgf@zy=\dimen142
+)
+("C:\Program Files\MiKTeX 2.9\tex\generic\pgf\basiclayer\pgfcorepathconstruct.code.tex"
+File: pgfcorepathconstruct.code.tex 2013/10/07  (rcs-revision 1.29)
+\pgf@path@lastx=\dimen143
+\pgf@path@lasty=\dimen144
+)
+("C:\Program Files\MiKTeX 2.9\tex\generic\pgf\basiclayer\pgfcorepathusage.code.tex"
+File: pgfcorepathusage.code.tex 2013/12/13  (rcs-revision 1.23)
+\pgf@shorten@end@additional=\dimen145
+\pgf@shorten@start@additional=\dimen146
+)
+("C:\Program Files\MiKTeX 2.9\tex\generic\pgf\basiclayer\pgfcorescopes.code.tex"
+File: pgfcorescopes.code.tex 2013/10/09  (rcs-revision 1.44)
+\pgfpic=\box35
+\pgf@hbox=\box36
+\pgf@layerbox@main=\box37
+\pgf@picture@serial@count=\count117
+)
+("C:\Program Files\MiKTeX 2.9\tex\generic\pgf\basiclayer\pgfcoregraphicstate.code.tex"
+File: pgfcoregraphicstate.code.tex 2013/09/19  (rcs-revision 1.11)
+\pgflinewidth=\dimen147
+)
+("C:\Program Files\MiKTeX 2.9\tex\generic\pgf\basiclayer\pgfcoretransformations.code.tex"
+File: pgfcoretransformations.code.tex 2013/10/10  (rcs-revision 1.17)
+\pgf@pt@x=\dimen148
+\pgf@pt@y=\dimen149
+\pgf@pt@temp=\dimen150
+)
+("C:\Program Files\MiKTeX 2.9\tex\generic\pgf\basiclayer\pgfcorequick.code.tex"
+File: pgfcorequick.code.tex 2008/10/09  (rcs-revision 1.3)
+)
+("C:\Program Files\MiKTeX 2.9\tex\generic\pgf\basiclayer\pgfcoreobjects.code.tex"
+File: pgfcoreobjects.code.tex 2006/10/11  (rcs-revision 1.2)
+)
+("C:\Program Files\MiKTeX 2.9\tex\generic\pgf\basiclayer\pgfcorepathprocessing.code.tex"
+File: pgfcorepathprocessing.code.tex 2013/09/09  (rcs-revision 1.9)
+)
+("C:\Program Files\MiKTeX 2.9\tex\generic\pgf\basiclayer\pgfcorearrows.code.tex"
+File: pgfcorearrows.code.tex 2013/11/07  (rcs-revision 1.40)
+\pgfarrowsep=\dimen151
+)
+("C:\Program Files\MiKTeX 2.9\tex\generic\pgf\basiclayer\pgfcoreshade.code.tex"
+File: pgfcoreshade.code.tex 2013/07/15  (rcs-revision 1.15)
+\pgf@max=\dimen152
+\pgf@sys@shading@range@num=\count118
+)
+("C:\Program Files\MiKTeX 2.9\tex\generic\pgf\basiclayer\pgfcoreimage.code.tex"
+File: pgfcoreimage.code.tex 2013/07/15  (rcs-revision 1.18)
+
+("C:\Program Files\MiKTeX 2.9\tex\generic\pgf\basiclayer\pgfcoreexternal.code.tex"
+File: pgfcoreexternal.code.tex 2013/07/15  (rcs-revision 1.20)
+\pgfexternal@startupbox=\box38
+))
+("C:\Program Files\MiKTeX 2.9\tex\generic\pgf\basiclayer\pgfcorelayers.code.tex"
+File: pgfcorelayers.code.tex 2013/07/18  (rcs-revision 1.7)
+)
+("C:\Program Files\MiKTeX 2.9\tex\generic\pgf\basiclayer\pgfcoretransparency.code.tex"
+File: pgfcoretransparency.code.tex 2013/09/30  (rcs-revision 1.5)
+)
+("C:\Program Files\MiKTeX 2.9\tex\generic\pgf\basiclayer\pgfcorepatterns.code.tex"
+File: pgfcorepatterns.code.tex 2013/11/07  (rcs-revision 1.5)
+)))
+("C:\Program Files\MiKTeX 2.9\tex\generic\pgf\modules\pgfmoduleshapes.code.tex"
+File: pgfmoduleshapes.code.tex 2013/10/31  (rcs-revision 1.34)
+\pgfnodeparttextbox=\box39
+)
+("C:\Program Files\MiKTeX 2.9\tex\generic\pgf\modules\pgfmoduleplot.code.tex"
+File: pgfmoduleplot.code.tex 2013/07/31  (rcs-revision 1.12)
+)
+("C:\Program Files\MiKTeX 2.9\tex\latex\pgf\compatibility\pgfcomp-version-0-65.sty"
+Package: pgfcomp-version-0-65 2007/07/03 v3.0.0 (rcs-revision 1.7)
+\pgf@nodesepstart=\dimen153
+\pgf@nodesepend=\dimen154
+)
+("C:\Program Files\MiKTeX 2.9\tex\latex\pgf\compatibility\pgfcomp-version-1-18.sty"
+Package: pgfcomp-version-1-18 2007/07/23 v3.0.0 (rcs-revision 1.1)
+))
+("C:\Program Files\MiKTeX 2.9\tex\latex\pgf\utilities\pgffor.sty"
+("C:\Program Files\MiKTeX 2.9\tex\latex\pgf\utilities\pgfkeys.sty"
+("C:\Program Files\MiKTeX 2.9\tex\generic\pgf\utilities\pgfkeys.code.tex"))
+("C:\Program Files\MiKTeX 2.9\tex\latex\pgf\math\pgfmath.sty"
+("C:\Program Files\MiKTeX 2.9\tex\generic\pgf\math\pgfmath.code.tex"))
+("C:\Program Files\MiKTeX 2.9\tex\generic\pgf\utilities\pgffor.code.tex"
+Package: pgffor 2013/12/13 v3.0.0 (rcs-revision 1.25)
+
+("C:\Program Files\MiKTeX 2.9\tex\generic\pgf\math\pgfmath.code.tex")
+\pgffor@iter=\dimen155
+\pgffor@skip=\dimen156
+\pgffor@stack=\toks32
+\pgffor@toks=\toks33
+))
+("C:\Program Files\MiKTeX 2.9\tex\generic\pgf\frontendlayer\tikz\tikz.code.tex"
+Package: tikz 2013/12/13 v3.0.0 (rcs-revision 1.142)
+
+("C:\Program Files\MiKTeX 2.9\tex\generic\pgf\libraries\pgflibraryplothandlers.code.tex"
+File: pgflibraryplothandlers.code.tex 2013/08/31 v3.0.0 (rcs-revision 1.20)
+\pgf@plot@mark@count=\count119
+\pgfplotmarksize=\dimen157
+)
+\tikz@lastx=\dimen158
+\tikz@lasty=\dimen159
+\tikz@lastxsaved=\dimen160
+\tikz@lastysaved=\dimen161
+\tikzleveldistance=\dimen162
+\tikzsiblingdistance=\dimen163
+\tikz@figbox=\box40
+\tikz@figbox@bg=\box41
+\tikz@tempbox=\box42
+\tikz@tempbox@bg=\box43
+\tikztreelevel=\count120
+\tikznumberofchildren=\count121
+\tikznumberofcurrentchild=\count122
+\tikz@fig@count=\count123
+
+("C:\Program Files\MiKTeX 2.9\tex\generic\pgf\modules\pgfmodulematrix.code.tex"
+File: pgfmodulematrix.code.tex 2013/09/17  (rcs-revision 1.8)
+\pgfmatrixcurrentrow=\count124
+\pgfmatrixcurrentcolumn=\count125
+\pgf@matrix@numberofcolumns=\count126
+)
+\tikz@expandcount=\count127
+
+("C:\Program Files\MiKTeX 2.9\tex\generic\pgf\frontendlayer\tikz\libraries\tikzlibrarytopaths.code.tex"
+File: tikzlibrarytopaths.code.tex 2008/06/17 v3.0.0 (rcs-revision 1.2)
+)))
+("C:\Program Files\MiKTeX 2.9\tex\latex\pgfplots\pgfplots.sty"
+("C:\Program Files\MiKTeX 2.9\tex\generic\pgfplots\pgfplots.revision.tex")
+Package: pgfplots 2015/05/02 v1.12.1 Data Visualization (1.12.1)
+
+("C:\Program Files\MiKTeX 2.9\tex\generic\pgfplots\pgfplots.code.tex"
+("C:\Program Files\MiKTeX 2.9\tex\generic\pgfplots\pgfplotscore.code.tex"
+\t@pgfplots@toka=\toks34
+\t@pgfplots@tokb=\toks35
+\t@pgfplots@tokc=\toks36
+\pgfplots@tmpa=\dimen164
+\c@pgfplots@coordindex=\count128
+\c@pgfplots@scanlineindex=\count129
+
+("C:\Program Files\MiKTeX 2.9\tex\generic\pgfplots\sys\pgfplotssysgeneric.code.tex"))
+("C:\Program Files\MiKTeX 2.9\tex\generic\pgfplots\libs\pgfplotslibrary.code.tex")
+("C:\Program Files\MiKTeX 2.9\tex\generic\pgfplots\oldpgfcompatib\pgfplotsoldpgfsupp_loader.code.tex"
+("C:\Program Files\MiKTeX 2.9\tex\generic\pgf\libraries\pgflibraryfpu.code.tex")
+Package pgfplots: loading complementary arithmetics for your pgf version...
+("C:\Program Files\MiKTeX 2.9\tex\generic\pgfplots\oldpgfcompatib\pgfplotsoldpgfsupp_pgflibraryfpu.code.tex")
+("C:\Program Files\MiKTeX 2.9\tex\generic\pgfplots\oldpgfcompatib\pgfplotsoldpgfsupp_pgfmathfloat.code.tex"
+\c@pgfmathroundto@lastzeros=\count130
+)
+("C:\Program Files\MiKTeX 2.9\tex\generic\pgfplots\oldpgfcompatib\pgfplotsoldpgfsupp_trig_format.code.tex"))
+("C:\Program Files\MiKTeX 2.9\tex\generic\pgfplots\util\pgfplotsutil.code.tex"
+("C:\Program Files\MiKTeX 2.9\tex\generic\pgfplots\liststructure\pgfplotsliststructure.code.tex")
+("C:\Program Files\MiKTeX 2.9\tex\generic\pgfplots\liststructure\pgfplotsliststructureext.code.tex")
+("C:\Program Files\MiKTeX 2.9\tex\generic\pgfplots\liststructure\pgfplotsarray.code.tex"
+\c@pgfplotsarray@tmp=\count131
+)
+("C:\Program Files\MiKTeX 2.9\tex\generic\pgfplots\liststructure\pgfplotsmatrix.code.tex")
+("C:\Program Files\MiKTeX 2.9\tex\generic\pgfplots\numtable\pgfplotstableshared.code.tex"
+\c@pgfplotstable@counta=\count132
+\t@pgfplotstable@a=\toks37
+)
+("C:\Program Files\MiKTeX 2.9\tex\generic\pgfplots\liststructure\pgfplotsdeque.code.tex")
+("C:\Program Files\MiKTeX 2.9\tex\generic\pgfplots\util\pgfplotsbinary.code.tex"
+("C:\Program Files\MiKTeX 2.9\tex\generic\pgfplots\util\pgfplotsbinary.data.code.tex"))
+("C:\Program Files\MiKTeX 2.9\tex\generic\pgfplots\util\pgfplotsutil.verb.code.tex")
+("C:\Program Files\MiKTeX 2.9\tex\generic\pgfplots\libs\pgflibrarypgfplots.surfshading.code.tex"
+\c@pgfplotslibrarysurf@no=\count133
+
+("C:\Program Files\MiKTeX 2.9\tex\generic\pgfplots\sys\pgflibrarypgfplots.surfshading.pgfsys-pdftex.def")))
+("C:\Program Files\MiKTeX 2.9\tex\generic\pgfplots\util\pgfplotscolormap.code.tex"
+("C:\Program Files\MiKTeX 2.9\tex\generic\pgfplots\util\pgfplotscolor.code.tex"))
+("C:\Program Files\MiKTeX 2.9\tex\generic\pgfplots\pgfplotsstackedplots.code.tex")
+("C:\Program Files\MiKTeX 2.9\tex\generic\pgfplots\pgfplotsplothandlers.code.tex"
+("C:\Program Files\MiKTeX 2.9\tex\generic\pgfplots\pgfplotsmeshplothandler.code.tex"))
+("C:\Program Files\MiKTeX 2.9\tex\generic\pgfplots\pgfplots.scaling.code.tex")
+("C:\Program Files\MiKTeX 2.9\tex\generic\pgfplots\pgfplotscoordprocessing.code.tex")
+("C:\Program Files\MiKTeX 2.9\tex\generic\pgfplots\pgfplots.errorbars.code.tex")
+("C:\Program Files\MiKTeX 2.9\tex\generic\pgfplots\pgfplots.markers.code.tex")
+("C:\Program Files\MiKTeX 2.9\tex\generic\pgfplots\pgfplotsticks.code.tex")
+("C:\Program Files\MiKTeX 2.9\tex\generic\pgfplots\pgfplots.paths.code.tex")
+("C:\Program Files\MiKTeX 2.9\tex\generic\pgf\frontendlayer\tikz\libraries\tikzlibrarydecorations.code.tex"
+("C:\Program Files\MiKTeX 2.9\tex\generic\pgf\modules\pgfmoduledecorations.code.tex"
+\pgfdecoratedcompleteddistance=\dimen165
+\pgfdecoratedremainingdistance=\dimen166
+\pgfdecoratedinputsegmentcompleteddistance=\dimen167
+\pgfdecoratedinputsegmentremainingdistance=\dimen168
+\pgf@decorate@distancetomove=\dimen169
+\pgf@decorate@repeatstate=\count134
+\pgfdecorationsegmentamplitude=\dimen170
+\pgfdecorationsegmentlength=\dimen171
+)
+\tikz@lib@dec@box=\box44
+)
+("C:\Program Files\MiKTeX 2.9\tex\generic\pgf\frontendlayer\tikz\libraries\tikzlibrarydecorations.pathmorphing.code.tex"
+("C:\Program Files\MiKTeX 2.9\tex\generic\pgf\libraries\decorations\pgflibrarydecorations.pathmorphing.code.tex"))
+("C:\Program Files\MiKTeX 2.9\tex\generic\pgf\frontendlayer\tikz\libraries\tikzlibrarydecorations.pathreplacing.code.tex
+" ("C:\Program Files\MiKTeX 2.9\tex\generic\pgf\libraries\decorations\pgflibrarydecorations.pathreplacing.code.tex"))
+\pgfplots@numplots=\count135
+\pgfplots@xmin@reg=\dimen172
+\pgfplots@xmax@reg=\dimen173
+\pgfplots@ymin@reg=\dimen174
+\pgfplots@ymax@reg=\dimen175
+\pgfplots@zmin@reg=\dimen176
+\pgfplots@zmax@reg=\dimen177
+)
+("C:\Program Files\MiKTeX 2.9\tex\generic\pgf\frontendlayer\tikz\libraries\tikzlibraryplotmarks.code.tex"
+File: tikzlibraryplotmarks.code.tex 2008/01/09 v3.0.0 (rcs-revision 1.1)
+
+("C:\Program Files\MiKTeX 2.9\tex\generic\pgf\libraries\pgflibraryplotmarks.code.tex"
+File: pgflibraryplotmarks.code.tex 2013/07/20 v3.0.0 (rcs-revision 1.13)
+)))
+("C:\Program Files\MiKTeX 2.9\tex\generic\pgf\frontendlayer\tikz\libraries\tikzlibrarypatterns.code.tex"
+File: tikzlibrarypatterns.code.tex 2008/01/15 v3.0.0 (rcs-revision 1.2)
+
+("C:\Program Files\MiKTeX 2.9\tex\generic\pgf\libraries\pgflibrarypatterns.code.tex"
+File: pgflibrarypatterns.code.tex 2008/03/03 v3.0.0 (rcs-revision 1.13)
+))
+("C:\Program Files\MiKTeX 2.9\tex\generic\pgfplots\libs\tikzlibrarypgfplots.groupplots.code.tex"
+\pgfplots@group@current@plot=\count136
+\pgfplots@group@current@row=\count137
+\pgfplots@group@current@column=\count138
+
+("C:\Program Files\MiKTeX 2.9\tex\generic\pgf\frontendlayer\tikz\libraries\tikzlibrarycalc.code.tex"
+File: tikzlibrarycalc.code.tex 2013/07/15 v3.0.0 (rcs-revision 1.9)
+))
+(C:\Users\mrazm\AppData\Roaming\MiKTeX\2.9\tex\latex\placeins\placeins.sty
+Package: placeins 2005/04/18  v 2.2
+)
+("C:\Program Files\MiKTeX 2.9\tex\latex\float\float.sty"
+Package: float 2001/11/08 v1.3d Float enhancements (AL)
+\c@float@type=\count139
+\float@exts=\toks38
+\float@box=\box45
+\@float@everytoks=\toks39
+\@floatcapt=\box46
+)
+\@float@every@figure=\toks40
+
+(C:\Users\mrazm\AppData\Roaming\MiKTeX\2.9\tex\latex\url\url.sty
+\Urlmuskip=\muskip11
+Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
+)
+("C:\Program Files\MiKTeX 2.9\tex\generic\babel\babel.sty"
+Package: babel 2008/07/08 v3.8m The Babel package
+
+*************************************
+* Local config file bblopts.cfg used
+*
+("C:\Program Files\MiKTeX 2.9\tex\latex\00miktex\bblopts.cfg"
+File: bblopts.cfg 2006/07/31 v1.0 MiKTeX 'babel' configuration
+)
+(C:\Users\mrazm\AppData\Roaming\MiKTeX\2.9\tex\latex\babel-slovenian\slovene.ldf
+Language: slovene 2005/03/31 v1.2m Slovene support from the babel system
+
+("C:\Program Files\MiKTeX 2.9\tex\generic\babel\babel.def"
+File: babel.def 2008/07/08 v3.8m Babel common definitions
+\babel@savecnt=\count140
+\U@D=\dimen178
+)
+Package babel Info: Making " an active character on input line 79.
+)) ("C:\Program Files\MiKTeX 2.9\tex\latex\base\fontenc.sty"
+Package: fontenc 2005/09/27 v1.99g Standard LaTeX package
+
+("C:\Program Files\MiKTeX 2.9\tex\latex\base\t1enc.def"
+File: t1enc.def 2005/09/27 v1.99g Standard LaTeX file
+LaTeX Font Info:    Redeclaring font encoding T1 on input line 43.
+)) ("C:\Program Files\MiKTeX 2.9\tex\latex\base\inputenc.sty"
+Package: inputenc 2008/03/30 v1.1d Input encoding file
+\inpenc@prehook=\toks41
+\inpenc@posthook=\toks42
+
+("C:\Program Files\MiKTeX 2.9\tex\latex\base\cp1250.def"
+File: cp1250.def 2008/03/30 v1.1d Input encoding file
+)) ("C:\Program Files\MiKTeX 2.9\tex\latex\fancyhdr\fancyhdr.sty"
+\fancy@headwidth=\skip46
+\f@ncyO@elh=\skip47
+\f@ncyO@erh=\skip48
+\f@ncyO@olh=\skip49
+\f@ncyO@orh=\skip50
+\f@ncyO@elf=\skip51
+\f@ncyO@erf=\skip52
+\f@ncyO@olf=\skip53
+\f@ncyO@orf=\skip54
+) ("C:\Program Files\MiKTeX 2.9\tex\latex\tools\multicol.sty"
+Package: multicol 2011/06/27 v1.7a multicolumn formatting (FMi)
+\c@tracingmulticols=\count141
+\mult@box=\box47
+\multicol@leftmargin=\dimen179
+\c@unbalance=\count142
+\c@collectmore=\count143
+\doublecol@number=\count144
+\multicoltolerance=\count145
+\multicolpretolerance=\count146
+\full@width=\dimen180
+\page@free=\dimen181
+\premulticols=\dimen182
+\postmulticols=\dimen183
+\multicolsep=\skip55
+\multicolbaselineskip=\skip56
+\partial@page=\box48
+\last@line=\box49
+\mult@rightbox=\box50
+\mult@grightbox=\box51
+\mult@gfirstbox=\box52
+\mult@firstbox=\box53
+\@tempa=\box54
+\@tempa=\box55
+\@tempa=\box56
+\@tempa=\box57
+\@tempa=\box58
+\@tempa=\box59
+\@tempa=\box60
+\@tempa=\box61
+\@tempa=\box62
+\@tempa=\box63
+\@tempa=\box64
+\@tempa=\box65
+\@tempa=\box66
+\@tempa=\box67
+\@tempa=\box68
+\@tempa=\box69
+\@tempa=\box70
+\c@columnbadness=\count147
+\c@finalcolumnbadness=\count148
+\last@try=\dimen184
+\multicolovershoot=\dimen185
+\multicolundershoot=\dimen186
+\mult@nat@firstbox=\box71
+\colbreak@box=\box72
+\multicol@sort@counter=\count149
+)
+(C:\Users\mrazm\AppData\Roaming\MiKTeX\2.9\tex\latex\ulem\ulem.sty
+\UL@box=\box73
+\UL@hyphenbox=\box74
+\UL@skip=\skip57
+\UL@hook=\toks43
+\UL@height=\dimen187
+\UL@pe=\count150
+\UL@pixel=\dimen188
+\ULC@box=\box75
+Package: ulem 2012/05/18
+\ULdepth=\dimen189
+)
+\c@definicija=\count151
+\c@zgled=\count152
+
+(C:\MihaMraz\Predmeti\ZZRS\ZZRS_2016_17\Vaje\Knjiga_poglavij\mro.aux
+(C:\MihaMraz\Predmeti\ZZRS\ZZRS_2016_17\Vaje\Knjiga_poglavij\preface.aux)
+(C:\MihaMraz\Predmeti\ZZRS\ZZRS_2016_17\Vaje\Knjiga_poglavij\poglavje01.aux))
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 90.
+LaTeX Font Info:    ... okay on input line 90.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 90.
+LaTeX Font Info:    ... okay on input line 90.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 90.
+LaTeX Font Info:    ... okay on input line 90.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 90.
+LaTeX Font Info:    ... okay on input line 90.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 90.
+LaTeX Font Info:    ... okay on input line 90.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 90.
+LaTeX Font Info:    ... okay on input line 90.
+
+(C:\Users\mrazm\AppData\Roaming\MiKTeX\2.9\tex\context\base\supp-pdf.mkii
+[Loading MPS to PDF converter (version 2006.09.02).]
+\scratchcounter=\count153
+\scratchdimen=\dimen190
+\scratchbox=\box76
+\nofMPsegments=\count154
+\nofMParguments=\count155
+\everyMPshowfont=\toks44
+\MPscratchCnt=\count156
+\MPscratchDim=\dimen191
+\MPnumerator=\count157
+\makeMPintoPDFobject=\count158
+\everyMPtoPDFconversion=\toks45
+)
+\c@lstlisting=\count159
+ ABD: EveryShipout initializing macros
+
+Package pgfplots Warning: running in backwards compatibility mode (unsuitable tick labels; missing features). Consider w
+riting \pgfplotsset{compat=1.12} into your preamble.
+ on input line 90.
+
+LaTeX Font Info:    Try loading font information for U+msa on input line 95.
+("C:\Program Files\MiKTeX 2.9\tex\latex\amsfonts\umsa.fd"
+File: umsa.fd 2013/01/14 v3.01 AMS symbols A
+)
+LaTeX Font Info:    Try loading font information for U+msb on input line 95.
+ ("C:\Program Files\MiKTeX 2.9\tex\latex\amsfonts\umsb.fd"
+File: umsb.fd 2013/01/14 v3.01 AMS symbols B
+)
+[1
+
+
+{C:/Users/mrazm/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map}] [2
+
+]
+(C:\MihaMraz\Predmeti\ZZRS\ZZRS_2016_17\Vaje\Knjiga_poglavij\mro.toc)
+\tf@toc=\write4
+ [1
+
+]
+(C:\MihaMraz\Predmeti\ZZRS\ZZRS_2016_17\Vaje\Knjiga_poglavij\preface.tex [2
+
+
+]) [3] [4
+
+
+]
+(C:\MihaMraz\Predmeti\ZZRS\ZZRS_2016_17\Vaje\Knjiga_poglavij\poglavje01.tex
+Poglavje 1.
+[1
+
+
+]
+Underfull \vbox (badness 1286) has occurred while \output is active []
+
+
+
+Package Fancyhdr Warning: \headheight is too small (12.0pt): 
+ Make it at least 24.51453pt.
+ We now make it that large for the rest of the document.
+ This may cause the page layout to be inconsistent, however.
+
+[2]
+Package epstopdf Info: Source file: <img/1_cloudScheme.eps>
+(epstopdf)                    date: 2016-04-11 15:46:49
+(epstopdf)                    size: 1601988 bytes
+(epstopdf)             Output file: <img/1_cloudScheme-eps-converted-to.pdf>
+(epstopdf)                    date: 2016-04-11 15:47:57
+(epstopdf)                    size: 21307 bytes
+(epstopdf)             Command: <epstopdf --outfile=img/1_cloudScheme-eps-converted-to.pdf img/1_cloudScheme.eps>
+(epstopdf)             \includegraphics on input line 51.
+Package epstopdf Info: Output file is already uptodate.
+ <img/1_cloudScheme-eps-converted-to.pdf, id=41, 513.92pt x 514.92375pt>
+File: img/1_cloudScheme-eps-converted-to.pdf Graphic file (type pdf)
+
+<use img/1_cloudScheme-eps-converted-to.pdf>
+Package pdftex.def Info: img/1_cloudScheme-eps-converted-to.pdf used on input line 51.
+(pdftex.def)             Requested size: 276.00105pt x 276.54611pt.
+ [3] [4 <C:/MihaMraz/Predmeti/ZZRS/ZZRS_2016_17/Vaje/Knjiga_poglavij/img/1_cloudScheme-eps-converted-to.pdf>] [5] [6]
+Package epstopdf Info: Source file: <img/1_uploadIperf.eps>
+(epstopdf)                    date: 2016-04-17 11:33:54
+(epstopdf)                    size: 1154744 bytes
+(epstopdf)             Output file: <img/1_uploadIperf-eps-converted-to.pdf>
+(epstopdf)                    date: 2016-04-17 11:35:37
+(epstopdf)                    size: 9852 bytes
+(epstopdf)             Command: <epstopdf --outfile=img/1_uploadIperf-eps-converted-to.pdf img/1_uploadIperf.eps>
+(epstopdf)             \includegraphics on input line 91.
+Package epstopdf Info: Output file is already uptodate.
+ <img/1_uploadIperf-eps-converted-to.pdf, id=57, 422.57875pt x 253.94875pt>
+File: img/1_uploadIperf-eps-converted-to.pdf Graphic file (type pdf)
+
+<use img/1_uploadIperf-eps-converted-to.pdf>
+Package pdftex.def Info: img/1_uploadIperf-eps-converted-to.pdf used on input line 91.
+(pdftex.def)             Requested size: 276.00105pt x 165.86684pt.
+Package epstopdf Info: Source file: <img/1_table_iperf_ul.eps>
+(epstopdf)                    date: 2016-05-15 15:09:42
+(epstopdf)                    size: 193056 bytes
+(epstopdf)             Output file: <img/1_table_iperf_ul-eps-converted-to.pdf>
+(epstopdf)                    date: 2016-05-15 15:09:44
+(epstopdf)                    size: 6625 bytes
+(epstopdf)             Command: <epstopdf --outfile=img/1_table_iperf_ul-eps-converted-to.pdf img/1_table_iperf_ul.eps>
+(epstopdf)             \includegraphics on input line 100.
+Package epstopdf Info: Output file is already uptodate.
+ <img/1_table_iperf_ul-eps-converted-to.pdf, id=58, 229.85875pt x 76.285pt>
+File: img/1_table_iperf_ul-eps-converted-to.pdf Graphic file (type pdf)
+
+<use img/1_table_iperf_ul-eps-converted-to.pdf>
+Package pdftex.def Info: img/1_table_iperf_ul-eps-converted-to.pdf used on input line 100.
+(pdftex.def)             Requested size: 276.00105pt x 91.60323pt.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [7 <C:/MihaMraz/Predmeti/ZZRS/ZZRS_2016_17/Vaje/Knjiga_poglavij/img/1_uploadIperf-eps-converted-to.pdf>]
+Package epstopdf Info: Source file: <img/1_downloadIperf.eps>
+(epstopdf)                    date: 2016-04-17 11:33:43
+(epstopdf)                    size: 1204934 bytes
+(epstopdf)             Output file: <img/1_downloadIperf-eps-converted-to.pdf>
+(epstopdf)                    date: 2016-04-17 11:35:38
+(epstopdf)                    size: 10215 bytes
+(epstopdf)             Command: <epstopdf --outfile=img/1_downloadIperf-eps-converted-to.pdf img/1_downloadIperf.eps>
+(epstopdf)             \includegraphics on input line 109.
+Package epstopdf Info: Output file is already uptodate.
+
+<img/1_downloadIperf-eps-converted-to.pdf, id=66, 426.59375pt x 261.97874pt>
+File: img/1_downloadIperf-eps-converted-to.pdf Graphic file (type pdf)
+
+<use img/1_downloadIperf-eps-converted-to.pdf>
+Package pdftex.def Info: img/1_downloadIperf-eps-converted-to.pdf used on input line 109.
+(pdftex.def)             Requested size: 276.00105pt x 169.50865pt.
+Package epstopdf Info: Source file: <img/1_table_iperf_dl.eps>
+(epstopdf)                    date: 2016-05-15 15:09:39
+(epstopdf)                    size: 189986 bytes
+(epstopdf)             Output file: <img/1_table_iperf_dl-eps-converted-to.pdf>
+(epstopdf)                    date: 2016-05-15 15:09:41
+(epstopdf)                    size: 6493 bytes
+(epstopdf)             Command: <epstopdf --outfile=img/1_table_iperf_dl-eps-converted-to.pdf img/1_table_iperf_dl.eps>
+(epstopdf)             \includegraphics on input line 118.
+Package epstopdf Info: Output file is already uptodate.
+
+<img/1_table_iperf_dl-eps-converted-to.pdf, id=67, 225.84375pt x 76.285pt>
+File: img/1_table_iperf_dl-eps-converted-to.pdf Graphic file (type pdf)
+
+<use img/1_table_iperf_dl-eps-converted-to.pdf>
+Package pdftex.def Info: img/1_table_iperf_dl-eps-converted-to.pdf used on input line 118.
+(pdftex.def)             Requested size: 276.00105pt x 93.23866pt.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [8 <C:/MihaMraz/Predmeti/ZZRS/ZZRS_2016_17/Vaje/Knjiga_poglavij/img/1_table_iperf_ul-eps-converted-to.pdf> <C:/MihaMraz
+/Predmeti/ZZRS/ZZRS_2016_17/Vaje/Knjiga_poglavij/img/1_downloadIperf-eps-converted-to.pdf>]
+Package epstopdf Info: Source file: <img/1_coremark.eps>
+(epstopdf)                    date: 2016-04-17 11:33:27
+(epstopdf)                    size: 1148576 bytes
+(epstopdf)             Output file: <img/1_coremark-eps-converted-to.pdf>
+(epstopdf)                    date: 2016-04-17 11:35:40
+(epstopdf)                    size: 10884 bytes
+(epstopdf)             Command: <epstopdf --outfile=img/1_coremark-eps-converted-to.pdf img/1_coremark.eps>
+(epstopdf)             \includegraphics on input line 129.
+Package epstopdf Info: Output file is already uptodate.
+ <img/1_coremark-eps-converted-to.pdf, id=77, 423.5825pt x 251.94125pt>
+File: img/1_coremark-eps-converted-to.pdf Graphic file (type pdf)
+
+<use img/1_coremark-eps-converted-to.pdf>
+Package pdftex.def Info: img/1_coremark-eps-converted-to.pdf used on input line 129.
+(pdftex.def)             Requested size: 276.00105pt x 164.16736pt.
+ [9 <C:/MihaMraz/Predmeti/ZZRS/ZZRS_2016_17/Vaje/Knjiga_poglavij/img/1_table_iperf_dl-eps-converted-to.pdf> <C:/MihaMraz
+/Predmeti/ZZRS/ZZRS_2016_17/Vaje/Knjiga_poglavij/img/1_coremark-eps-converted-to.pdf>]
+Package epstopdf Info: Source file: <img/1_table_coremark.eps>
+(epstopdf)                    date: 2016-05-15 15:10:59
+(epstopdf)                    size: 208655 bytes
+(epstopdf)             Output file: <img/1_table_coremark-eps-converted-to.pdf>
+(epstopdf)                    date: 2016-05-15 15:11:00
+(epstopdf)                    size: 7197 bytes
+(epstopdf)             Command: <epstopdf --outfile=img/1_table_coremark-eps-converted-to.pdf img/1_table_coremark.eps>
+(epstopdf)             \includegraphics on input line 138.
+Package epstopdf Info: Output file is already uptodate.
+ <img/1_table_coremark-eps-converted-to.pdf, id=87, 243.91125pt x 77.28876pt>
+File: img/1_table_coremark-eps-converted-to.pdf Graphic file (type pdf)
+
+<use img/1_table_coremark-eps-converted-to.pdf>
+Package pdftex.def Info: img/1_table_coremark-eps-converted-to.pdf used on input line 138.
+(pdftex.def)             Requested size: 276.00105pt x 87.45792pt.
+Package epstopdf Info: Source file: <img/1_povpBranje.eps>
+(epstopdf)                    date: 2016-04-17 16:20:01
+(epstopdf)                    size: 1149962 bytes
+(epstopdf)             Output file: <img/1_povpBranje-eps-converted-to.pdf>
+(epstopdf)                    date: 2016-04-17 16:22:01
+(epstopdf)                    size: 10355 bytes
+(epstopdf)             Command: <epstopdf --outfile=img/1_povpBranje-eps-converted-to.pdf img/1_povpBranje.eps>
+(epstopdf)             \includegraphics on input line 151.
+Package epstopdf Info: Output file is already uptodate.
+
+<img/1_povpBranje-eps-converted-to.pdf, id=88, 423.5825pt x 251.94125pt>
+File: img/1_povpBranje-eps-converted-to.pdf Graphic file (type pdf)
+ <use img/1_povpBranje-eps-converted-to.pdf>
+Package pdftex.def Info: img/1_povpBranje-eps-converted-to.pdf used on input line 151.
+(pdftex.def)             Requested size: 276.00105pt x 164.16736pt.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [10 <C:/MihaMraz/Predmeti/ZZRS/ZZRS_2016_17/Vaje/Knjiga_poglavij/img/1_table_coremark-eps-converted-to.pdf>]
+Package epstopdf Info: Source file: <img/1_povpPisanje.eps>
+(epstopdf)                    date: 2016-04-17 16:20:13
+(epstopdf)                    size: 1130042 bytes
+(epstopdf)             Output file: <img/1_povpPisanje-eps-converted-to.pdf>
+(epstopdf)                    date: 2016-04-17 16:22:03
+(epstopdf)                    size: 10392 bytes
+(epstopdf)             Command: <epstopdf --outfile=img/1_povpPisanje-eps-converted-to.pdf img/1_povpPisanje.eps>
+(epstopdf)             \includegraphics on input line 158.
+Package epstopdf Info: Output file is already uptodate.
+
+<img/1_povpPisanje-eps-converted-to.pdf, id=95, 424.58624pt x 246.9225pt>
+File: img/1_povpPisanje-eps-converted-to.pdf Graphic file (type pdf)
+ <use img/1_povpPisanje-eps-converted-to.pdf>
+Package pdftex.def Info: img/1_povpPisanje-eps-converted-to.pdf used on input line 158.
+(pdftex.def)             Requested size: 276.00105pt x 160.51654pt.
+Package epstopdf Info: Source file: <img/1_AWSvsGCP.eps>
+(epstopdf)                    date: 2016-05-23 13:48:44
+(epstopdf)                    size: 1087187 bytes
+(epstopdf)             Output file: <img/1_AWSvsGCP-eps-converted-to.pdf>
+(epstopdf)                    date: 2016-05-23 13:55:24
+(epstopdf)                    size: 11602 bytes
+(epstopdf)             Command: <epstopdf --outfile=img/1_AWSvsGCP-eps-converted-to.pdf img/1_AWSvsGCP.eps>
+(epstopdf)             \includegraphics on input line 167.
+Package epstopdf Info: Output file is already uptodate.
+
+<img/1_AWSvsGCP-eps-converted-to.pdf, id=96, 432.61626pt x 233.87375pt>
+File: img/1_AWSvsGCP-eps-converted-to.pdf Graphic file (type pdf)
+ <use img/1_AWSvsGCP-eps-converted-to.pdf>
+Package pdftex.def Info: img/1_AWSvsGCP-eps-converted-to.pdf used on input line 167.
+(pdftex.def)             Requested size: 276.00105pt x 149.21118pt.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [11 <C:/MihaMraz/Predmeti/ZZRS/ZZRS_2016_17/Vaje/Knjiga_poglavij/img/1_povpBranje-eps-converted-to.pdf> <C:/MihaMraz/Pr
+edmeti/ZZRS/ZZRS_2016_17/Vaje/Knjiga_poglavij/img/1_povpPisanje-eps-converted-to.pdf>]
+Package epstopdf Info: Source file: <img/1_table_fio_read.eps>
+(epstopdf)                    date: 2016-05-15 15:09:34
+(epstopdf)                    size: 194884 bytes
+(epstopdf)             Output file: <img/1_table_fio_read-eps-converted-to.pdf>
+(epstopdf)                    date: 2016-05-15 15:09:35
+(epstopdf)                    size: 7277 bytes
+(epstopdf)             Command: <epstopdf --outfile=img/1_table_fio_read-eps-converted-to.pdf img/1_table_fio_read.eps>
+(epstopdf)             \includegraphics on input line 176.
+Package epstopdf Info: Output file is already uptodate.
+ <img/1_table_fio_read-eps-converted-to.pdf, id=106, 227.85126pt x 77.28876pt>
+File: img/1_table_fio_read-eps-converted-to.pdf Graphic file (type pdf)
+
+<use img/1_table_fio_read-eps-converted-to.pdf>
+Package pdftex.def Info: img/1_table_fio_read-eps-converted-to.pdf used on input line 176.
+(pdftex.def)             Requested size: 276.00105pt x 93.62344pt.
+Package epstopdf Info: Source file: <img/1_table_fio_write.eps>
+(epstopdf)                    date: 2016-05-15 15:09:36
+(epstopdf)                    size: 193670 bytes
+(epstopdf)             Output file: <img/1_table_fio_write-eps-converted-to.pdf>
+(epstopdf)                    date: 2016-05-15 15:09:38
+(epstopdf)                    size: 7247 bytes
+(epstopdf)             Command: <epstopdf --outfile=img/1_table_fio_write-eps-converted-to.pdf img/1_table_fio_write.eps
+>
+(epstopdf)             \includegraphics on input line 183.
+Package epstopdf Info: Output file is already uptodate.
+
+<img/1_table_fio_write-eps-converted-to.pdf, id=107, 230.8625pt x 76.285pt>
+File: img/1_table_fio_write-eps-converted-to.pdf Graphic file (type pdf)
+
+<use img/1_table_fio_write-eps-converted-to.pdf>
+Package pdftex.def Info: img/1_table_fio_write-eps-converted-to.pdf used on input line 183.
+(pdftex.def)             Requested size: 276.00105pt x 91.20746pt.
+ [12 <C:/MihaMraz/Predmeti/ZZRS/ZZRS_2016_17/Vaje/Knjiga_poglavij/img/1_AWSvsGCP-eps-converted-to.pdf> <C:/MihaMraz/Pred
+meti/ZZRS/ZZRS_2016_17/Vaje/Knjiga_poglavij/img/1_table_fio_read-eps-converted-to.pdf> <C:/MihaMraz/Predmeti/ZZRS/ZZRS_2
+016_17/Vaje/Knjiga_poglavij/img/1_table_fio_write-eps-converted-to.pdf>]
+Package epstopdf Info: Source file: <img/1_readLatency.eps>
+(epstopdf)                    date: 2016-04-17 16:18:51
+(epstopdf)                    size: 1182789 bytes
+(epstopdf)             Output file: <img/1_readLatency-eps-converted-to.pdf>
+(epstopdf)                    date: 2016-04-17 16:22:04
+(epstopdf)                    size: 10469 bytes
+(epstopdf)             Command: <epstopdf --outfile=img/1_readLatency-eps-converted-to.pdf img/1_readLatency.eps>
+(epstopdf)             \includegraphics on input line 192.
+Package epstopdf Info: Output file is already uptodate.
+<img/1_readLatency-eps-converted-to.pdf, id=120, 423.5825pt x 258.9675pt>
+File: img/1_readLatency-eps-converted-to.pdf Graphic file (type pdf)
+ <use img/1_readLatency-eps-converted-to.pdf>
+Package pdftex.def Info: img/1_readLatency-eps-converted-to.pdf used on input line 192.
+(pdftex.def)             Requested size: 276.00105pt x 168.74573pt.
+Package epstopdf Info: Source file: <img/1_writeLatency.eps>
+(epstopdf)                    date: 2016-04-17 16:19:07
+(epstopdf)                    size: 1122640 bytes
+(epstopdf)             Output file: <img/1_writeLatency-eps-converted-to.pdf>
+(epstopdf)                    date: 2016-04-17 16:22:06
+(epstopdf)                    size: 10105 bytes
+(epstopdf)             Command: <epstopdf --outfile=img/1_writeLatency-eps-converted-to.pdf img/1_writeLatency.eps>
+(epstopdf)             \includegraphics on input line 199.
+Package epstopdf Info: Output file is already uptodate.
+
+<img/1_writeLatency-eps-converted-to.pdf, id=121, 423.5825pt x 245.91875pt>
+File: img/1_writeLatency-eps-converted-to.pdf Graphic file (type pdf)
+
+<use img/1_writeLatency-eps-converted-to.pdf>
+Package pdftex.def Info: img/1_writeLatency-eps-converted-to.pdf used on input line 199.
+(pdftex.def)             Requested size: 276.00105pt x 160.24304pt.
+
+Underfull \vbox (badness 1668) has occurred while \output is active []
+
+ [13 <C:/MihaMraz/Predmeti/ZZRS/ZZRS_2016_17/Vaje/Knjiga_poglavij/img/1_readLatency-eps-converted-to.pdf> <C:/MihaMraz/P
+redmeti/ZZRS/ZZRS_2016_17/Vaje/Knjiga_poglavij/img/1_writeLatency-eps-converted-to.pdf>]
+Package epstopdf Info: Source file: <img/1_iopsBranje.eps>
+(epstopdf)                    date: 2016-04-17 16:19:28
+(epstopdf)                    size: 1173868 bytes
+(epstopdf)             Output file: <img/1_iopsBranje-eps-converted-to.pdf>
+(epstopdf)                    date: 2016-04-17 16:22:08
+(epstopdf)                    size: 10407 bytes
+(epstopdf)             Command: <epstopdf --outfile=img/1_iopsBranje-eps-converted-to.pdf img/1_iopsBranje.eps>
+(epstopdf)             \includegraphics on input line 208.
+Package epstopdf Info: Output file is already uptodate.
+ <img/1_iopsBranje-eps-converted-to.pdf, id=132, 423.5825pt x 257.96375pt>
+File: img/1_iopsBranje-eps-converted-to.pdf Graphic file (type pdf)
+
+<use img/1_iopsBranje-eps-converted-to.pdf>
+Package pdftex.def Info: img/1_iopsBranje-eps-converted-to.pdf used on input line 208.
+(pdftex.def)             Requested size: 276.00105pt x 168.09167pt.
+Package epstopdf Info: Source file: <img/1_iopsPisanje.eps>
+(epstopdf)                    date: 2016-04-17 16:19:48
+(epstopdf)                    size: 1169712 bytes
+(epstopdf)             Output file: <img/1_iopsPisanje-eps-converted-to.pdf>
+(epstopdf)                    date: 2016-04-17 16:22:09
+(epstopdf)                    size: 10346 bytes
+(epstopdf)             Command: <epstopdf --outfile=img/1_iopsPisanje-eps-converted-to.pdf img/1_iopsPisanje.eps>
+(epstopdf)             \includegraphics on input line 215.
+Package epstopdf Info: Output file is already uptodate.
+ <img/1_iopsPisanje-eps-converted-to.pdf, id=133, 429.605pt x 252.945pt>
+File: img/1_iopsPisanje-eps-converted-to.pdf Graphic file (type pdf)
+
+<use img/1_iopsPisanje-eps-converted-to.pdf>
+Package pdftex.def Info: img/1_iopsPisanje-eps-converted-to.pdf used on input line 215.
+(pdftex.def)             Requested size: 276.00105pt x 162.50565pt.
+)
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [14 <C:/MihaMraz/Predmeti/ZZRS/ZZRS_2016_17/Vaje/Knjiga_poglavij/img/1_iopsBranje-eps-converted-to.pdf> <C:/MihaMraz/Pr
+edmeti/ZZRS/ZZRS_2016_17/Vaje/Knjiga_poglavij/img/1_iopsPisanje-eps-converted-to.pdf>] [15] [16
+
+
+] (C:\MihaMraz\Predmeti\ZZRS\ZZRS_2016_17\Vaje\Knjiga_poglavij\mro.bbl
+Underfull \hbox (badness 10000) in paragraph at lines 10--12
+[]\T1/cmr/m/n/10 ``Digitalocean: Sim-ple cloud com-pu-ting for de-ve-lo-pers.'' ht-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 14--16
+[]\T1/cmr/m/n/10 ``Amazon web ser-vi-ces (aws) - cloud com-pu-ting ser-vi-ces.'' ht-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 18--20
+[]\T1/cmr/m/n/10 ``Google cloud com-pu-ting, ho-sting ser-vi-ces & apis.'' ht-
+ []
+
+
+Overfull \hbox (34.96399pt too wide) in paragraph at lines 22--24
+[]\T1/cmr/m/n/10 ``Perfkit ben-ch-mar-ker.'' http://googlecloudplatform.github.io/PerfKitBenchmarker/,
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 33--35
+[]\T1/cmr/m/n/10 ``Industry-standard ben-ch-marks for em-bed-ded sy-stems.''
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 37--40
+[]\T1/cmr/m/n/10 ``Fio - fle-xi-ble i/o te-ster syn-the-tic ben-ch-mark.''
+ []
+
+
+Overfull \hbox (21.85608pt too wide) in paragraph at lines 37--40
+\T1/cmr/m/n/10 http://www.storagereview.com/fio_flexible_i_o_tester_synthetic_benchmark,
+ []
+
+)
+No file mro.ind.
+[17
+
+] (C:\MihaMraz\Predmeti\ZZRS\ZZRS_2016_17\Vaje\Knjiga_poglavij\mro.aux
+(C:\MihaMraz\Predmeti\ZZRS\ZZRS_2016_17\Vaje\Knjiga_poglavij\preface.aux)
+(C:\MihaMraz\Predmeti\ZZRS\ZZRS_2016_17\Vaje\Knjiga_poglavij\poglavje01.aux)) ) 
+Here is how much of TeX's memory you used:
+ 24029 strings out of 493921
+ 585188 string characters out of 3147283
+ 734901 words of memory out of 3000000
+ 26800 multiletter control sequences out of 15000+200000
+ 20081 words of font info for 54 fonts, out of 3000000 for 9000
+ 841 hyphenation exceptions out of 8191
+ 55i,11n,77p,1253b,609s stack positions out of 5000i,500n,10000p,200000b,50000s
+ <C:\Users\mrazm\AppData\Local\MiKTeX\2.9
+\fonts\pk\ljfour\jknappen\ec\dpi600\ecbx1200.pk> <C:\Users\mrazm\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dp
+i600\ecbx1440.pk> <C:\Users\mrazm\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ecrm2074.pk> <C:\Users\mra
+zm\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ecbx2074.pk> <C:\Users\mrazm\AppData\Local\MiKTeX\2.9\fon
+ts\pk\ljfour\jknappen\ec\dpi600\ecti1000.pk> <C:\Users\mrazm\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600
+\ecsl1000.pk> <C:\Users\mrazm\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ecbx1000.pk> <C:\Users\mrazm\A
+ppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ecbx2488.pk> <C:\Users\mrazm\AppData\Local\MiKTeX\2.9\fonts\p
+k\ljfour\jknappen\ec\dpi600\ecrm1000.pk> <C:\Users\mrazm\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ecr
+m1200.pk> <C:\Users\mrazm\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ecrm1728.pk>
+Output written on mro.pdf (23 pages, 301937 bytes).
+PDF statistics:
+ 544 PDF objects out of 1000 (max. 8388607)
+ 0 named destinations out of 1000 (max. 500000)
+ 93 words of extra memory for PDF output out of 10000 (max. 10000000)
+
