@@ -58,7 +58,7 @@ function baza_ustvari_tabelo(imeTabele, imeKljuca, tipKljuca, predponaStolpcev,t
   
   if(baza_dela){
     pg.connect(process.env.DATABASE_URL, function(err, client) {
-      client.query(SQL_STRING).on('end', callback(err, SQL_STRING))
+      client.query(SQL_STRING).on('end', () => {callback(err, SQL_STRING)});
     });
   };
   
