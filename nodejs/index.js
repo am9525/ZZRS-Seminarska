@@ -58,7 +58,7 @@ function baza_ustvari_tabelo(imeTabele, imeKljuca, tipKljuca, predponaStolpcev,t
   console.log(SQL_STRING);
   if(baza_dela){
     pg.connect(process.env.DATABASE_URL, function(err, client) {
-      client.query(SQL_STRING).on('end', callback(err2))
+      client.query(SQL_STRING).on('end', callback(err, SQL_STRING))
     });
   };
   
@@ -72,7 +72,12 @@ app.get('/status', function(request, response) {
 });
 
 app.get('/manager/postaviBazo', function(request, response) {
-  baza_ustvari_tabelo("imeTabele", "ID", "int", "st","int", 1000, null);
+  baza_ustvari_tabelo("imeTabele", "ID", "int", "st","int", 1000, function(err, SQL_STRING){
+    console.log(SQL_STRING);
+    if(err) console.log(err);
+
+
+  });
   response.end('To bo za postavitev baze');
 
 });
