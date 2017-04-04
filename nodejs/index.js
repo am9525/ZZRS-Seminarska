@@ -55,7 +55,7 @@ function baza_ustvari_tabelo(imeTabele, imeKljuca, tipKljuca, predponaStolpcev,t
   }
 
   SQL_STRING = SQL_STRING + " " + predponaStolpcev+i+" " + tipStolpcev + ");";
-  console.log(SQL_STRING);
+  
   if(baza_dela){
     pg.connect(process.env.DATABASE_URL, function(err, client) {
       client.query(SQL_STRING).on('end', callback(err, SQL_STRING))
@@ -87,7 +87,7 @@ app.get('/manager/postaviBazo', function(request, response) {
   });
 
 
-    
+
   });
 
   
