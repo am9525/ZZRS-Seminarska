@@ -72,8 +72,9 @@ app.get('/status', function(request, response) {
 });
 
 app.get('/manager/postaviBazo', function(request, response) {
-  baza_ustvari_tabelo("imeTabele", "ID", "int", "st","int", 1000, function(err, SQL_STRING){
-     
+  baza_povezi(function(err2){
+    baza_ustvari_tabelo("imeTabele", "ID", "int", "st","int", 10, function(err, SQL_STRING){
+    console.log();
     if(err) {
       console.log(err);
       response.end("ERROR:\n"+err);
@@ -84,6 +85,12 @@ app.get('/manager/postaviBazo', function(request, response) {
     
 
   });
+
+
+    
+  });
+
+  
   
 });
 
