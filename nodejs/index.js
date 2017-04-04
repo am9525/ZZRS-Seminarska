@@ -6,6 +6,9 @@ var app = express();
 
 //povezava za postgres
 var pg = require('pg');
+var baza_dela = false;
+
+
 pg.defaults.ssl = true;
 
 /*Kkao se konektat:
@@ -40,15 +43,40 @@ function baza_povezi(){
   pg.connect(process.env.DATABASE_URL, function(err, client) {
 	   
 	  console.log('Connected to postgres! Getting schemas...' + err);
+    if(!err) baza_dela = true;
+
   });
 }
 
+function baza_ustvari_tabelo(imeTabele, imeKljuca, tipKljuca, predponaStolpcev,tipStolpcev, stStolpcev, callback){
+  var SQL_STRING = "CRATE TABLE " + imeTabele + "("+imeKljuca+" "+ tipKljuca +",";
+  for(var i = 0; i < stStolpcev-1; i++){
+      SQL_STRING = SQL_STRING + " " + predponaStolpcev+i+" " + tipStolpcev + ",";
+  }
+
+  SQL_STRING = SQL_STRING + " " + predponaStolpcev+i+" " + tipStolpcev + ");";
+  console.log(SQL_STRING);
+  if(baza_dela){
+    pg.connect(process.env.DATABASE_URL, function(err, client) {
+      client.query(SQL_STRING).on('end', callback(err2))
+    });
+  };
+  
+
+}
 
 app.get('/status', function(request, response) {
   baza_povezi();
-  response.end('Status screen');
+  response.end('Status screen\nBaza dostopna: ' + baza_dela);
 
 });
+
+app.get('/manager/postaviBazo', function(request, response) {
+  baza_ustvari_tabelo("imeTabele", "ID", "int", "st","int", 1000, null);
+  response.end('To bo za postavitev baze');
+
+});
+
 
 app.listen(app.get('port'), function() {
   console.log('Node app is running on port', app.get('port'));
