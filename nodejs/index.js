@@ -6,9 +6,16 @@ var app = express();
 
 //povezava za postgres
 var pg = require('pg');
-var baza_dela = false;
+//Spremenljivke za naso bazo.
+//Ob koncanem testiranju bodo bolj urejene
 
 
+var baza_dela = false;  //Ali je baza dostopna?
+
+var baza_steviloStolpcev = 1000;  //stevilo podatkovnih stolpcev v tabeli, brez stolpca za kljuc
+                                  //v resnici je steviloStolpcev + 1 stolpcev
+
+var baza_imeTabele = "Test";   //Ime tabele
 pg.defaults.ssl = true;
 
 /*Kkao se konektat:
@@ -73,25 +80,16 @@ app.get('/status', function(request, response) {
 
 app.get('/manager/postaviBazo', function(request, response) {
   baza_povezi(function(err2){
-    baza_ustvari_tabelo("imeTabele", "ID", "int", "st","int", 10, function(err, SQL_STRING){
-    console.log();
-    if(err) {
-      console.log(err);
-      response.end("ERROR:\n"+err);
+    baza_ustvari_tabelo(baza_imeTabele, "ID", "int", "st","int", baza_steviloStolpcev, function(err, SQL_STRING){
+      if(err) {
+        console.log(err);
+        response.end("ERROR:\n"+err);
 
-    }else{
-      response.end("Postavitev baze z ukazom:\n"+SQL_STRING);
-    }
-    
-
+      }else{
+        response.end("Postavitev baze z ukazom:\n"+SQL_STRING);
+      }
+    });
   });
-
-
-
-  });
-
-  
-  
 });
 
 
