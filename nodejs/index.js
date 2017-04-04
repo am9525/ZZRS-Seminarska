@@ -4,11 +4,9 @@ var express = require('express');
 
 var app = express();
 
-//povezava za postgres
-var pg = require('pg');
 //Spremenljivke za naso bazo.
 //Ob koncanem testiranju bodo bolj urejene
-
+var baza = require('./baza');
 
 var baza_dela = false;  //Ali je baza dostopna?
 
@@ -16,7 +14,6 @@ var baza_steviloStolpcev = 1000;  //stevilo podatkovnih stolpcev v tabeli, brez 
                                   //v resnici je steviloStolpcev + 1 stolpcev
 
 var baza_imeTabele = "Test";   //Ime tabele
-pg.defaults.ssl = true;
 
 /*Kkao se konektat:
 
@@ -46,41 +43,22 @@ app.get('/', function(request, response) {
 
 });
 
-function baza_povezi(callback){
-  pg.connect(process.env.DATABASE_URL, function(err, client) {
-	   
-	  console.log('Connected to postgres! Getting schemas...' + err);
-    if(!err) baza_dela = true;
-    if(callback) callback(err);
-  });
-}
 
-function baza_ustvari_tabelo(imeTabele, imeKljuca, tipKljuca, predponaStolpcev,tipStolpcev, stStolpcev, callback){
-  var SQL_STRING = "CREATE TABLE " + imeTabele + "("+imeKljuca+" "+ tipKljuca +",";
-  for(var i = 0; i < stStolpcev-1; i++){
-      SQL_STRING = SQL_STRING + " " + predponaStolpcev+i+" " + tipStolpcev + ",";
-  }
 
-  SQL_STRING = SQL_STRING + " " + predponaStolpcev+i+" " + tipStolpcev + ");";
-  
-  if(baza_dela){
-    pg.connect(process.env.DATABASE_URL, function(err, client) {
-      client.query(SQL_STRING).on('end', () => {callback(err, SQL_STRING)});
-    });
-  };
-  
-
-}
 
 app.get('/status', function(request, response) {
-  baza_povezi();
-  response.end('Status screen\nBaza dostopna: ' + baza_dela);
+  baza.dela(function(err, dela){
+    baza_dela = dela;
+    response.end('Status screen\nBaza dostopna: ' + baza_dela+ "\nDataUrl: " + process.env.DATABASE_URL);
+
+  });
+  
 
 });
 
 app.get('/manager/postaviBazo', function(request, response) {
-  baza_povezi(function(err2){
-    baza_ustvari_tabelo(baza_imeTabele, "ID", "int", "st","int", baza_steviloStolpcev, function(err, SQL_STRING){
+  baza_povezi(pg,function(err2){
+    baza.ustvariTabelo(pg,baza_imeTabele, "ID", "int", "st","int", baza_steviloStolpcev, function(err, SQL_STRING){
       if(err) {
         console.log(err);
         response.end("ERROR:\n"+err);
