@@ -49,7 +49,7 @@ function baza_povezi(callback){
 }
 
 function baza_ustvari_tabelo(imeTabele, imeKljuca, tipKljuca, predponaStolpcev,tipStolpcev, stStolpcev, callback){
-  var SQL_STRING = "CRATE TABLE " + imeTabele + "("+imeKljuca+" "+ tipKljuca +",";
+  var SQL_STRING = "CREATE TABLE " + imeTabele + "("+imeKljuca+" "+ tipKljuca +",";
   for(var i = 0; i < stStolpcev-1; i++){
       SQL_STRING = SQL_STRING + " " + predponaStolpcev+i+" " + tipStolpcev + ",";
   }
