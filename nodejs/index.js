@@ -39,12 +39,12 @@ app.get('/', function(request, response) {
 
 });
 
-function baza_povezi(){
+function baza_povezi(callback){
   pg.connect(process.env.DATABASE_URL, function(err, client) {
 	   
 	  console.log('Connected to postgres! Getting schemas...' + err);
     if(!err) baza_dela = true;
-
+    if(callback) callback(err);
   });
 }
 
@@ -73,13 +73,18 @@ app.get('/status', function(request, response) {
 
 app.get('/manager/postaviBazo', function(request, response) {
   baza_ustvari_tabelo("imeTabele", "ID", "int", "st","int", 1000, function(err, SQL_STRING){
-    console.log(SQL_STRING);
-    if(err) console.log(err);
+     
+    if(err) {
+      console.log(err);
+      response.end("ERROR:\n"+err);
 
+    }else{
+      response.end("Postavitev baze z ukazom:\n"+SQL_STRING);
+    }
+    
 
   });
-  response.end('To bo za postavitev baze');
-
+  
 });
 
 
