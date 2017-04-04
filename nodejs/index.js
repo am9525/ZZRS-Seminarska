@@ -3,6 +3,9 @@ var express = require('express');
 
 
 var app = express();
+app.set('port', (process.env.PORT || 5000));
+
+//app.use(express.static(__dirname + '/public'));
 
 //Spremenljivke za naso bazo.
 //Ob koncanem testiranju bodo bolj urejene
@@ -15,28 +18,7 @@ var baza_steviloStolpcev = 1000;  //stevilo podatkovnih stolpcev v tabeli, brez 
 
 var baza_imeTabele = "Test";   //Ime tabele
 
-/*Kkao se konektat:
 
-
-pg.connect(process.env.DATABASE_URL, function(err, client) {
-  if (err) throw err;
-  console.log('Connected to postgres! Getting schemas...');
-
-  client
-    .query('SELECT table_schema,table_name FROM information_schema.tables;')
-    .on('row', function(row) {
-      console.log(JSON.stringify(row));
-    });
-});
-*/
-
-app.set('port', (process.env.PORT || 5000));
-
-app.use(express.static(__dirname + '/public'));
-
-// views is directory for all template files
-//app.set('views', __dirname + '/views');
-//app.set('view engine', 'ejs');
 
 app.get('/', function(request, response) {
   response.end('Hello Node.js FFFServer!');
@@ -44,33 +26,36 @@ app.get('/', function(request, response) {
 });
 
 
-
-
+/*
+primer funkcije za prikaz statusa
+*/
 app.get('/status', function(request, response) {
   baza.dela(function(err, dela){
     baza_dela = dela;
     response.end('Status screen\nBaza dostopna: ' + baza_dela+ "\nDataUrl: " + process.env.DATABASE_URL);
 
   });
-  
-
 });
 
+/*
+primer funkcije za postavitev baze in
+(TODO) za generacijo vrstic  
+*/
 app.get('/manager/postaviBazo', function(request, response) {
-  baza_povezi(pg,function(err2){
-    baza.ustvariTabelo(pg,baza_imeTabele, "ID", "int", "st","int", baza_steviloStolpcev, function(err, SQL_STRING){
-      if(err) {
-        console.log(err);
-        response.end("ERROR:\n"+err);
-
-      }else{
+  baza.dela(function(err, dela){
+    try{
+      baza.ustvariTabelo(baza_imeTabele, "ID", "int", "st","int", baza_steviloStolpcev, function(  SQL_STRING){
         response.end("Postavitev baze z ukazom:\n"+SQL_STRING);
-      }
-    });
+      });
+    }catch(err){
+      console.log(err);
+    }
   });
 });
 
-
+/*
+Aktivacija nodeJS
+*/
 app.listen(app.get('port'), function() {
   console.log('Node app is running on port', app.get('port'));
 });
