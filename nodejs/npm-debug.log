@@ -1,0 +1,743 @@
+0 info it worked if it ends with ok
+1 verbose cli [ '/usr/bin/nodejs', '/usr/bin/npm', 'install' ]
+2 info using npm@3.10.10
+3 info using node@v6.10.1
+4 silly loadCurrentTree Starting
+5 silly install loadCurrentTree
+6 silly install readLocalPackageData
+7 silly install normalizeTree
+8 silly loadCurrentTree Finishing
+9 silly loadIdealTree Starting
+10 silly install loadIdealTree
+11 silly cloneCurrentTree Starting
+12 silly install cloneCurrentTreeToIdealTree
+13 silly cloneCurrentTree Finishing
+14 silly loadShrinkwrap Starting
+15 silly install loadShrinkwrap
+16 silly loadShrinkwrap Finishing
+17 silly loadAllDepsIntoIdealTree Starting
+18 silly install loadAllDepsIntoIdealTree
+19 silly fetchNamedPackageData express
+20 silly mapToRegistry name express
+21 silly mapToRegistry using default registry
+22 silly mapToRegistry registry https://registry.npmjs.org/
+23 silly mapToRegistry data Result {
+23 silly mapToRegistry   raw: 'express',
+23 silly mapToRegistry   scope: null,
+23 silly mapToRegistry   escapedName: 'express',
+23 silly mapToRegistry   name: 'express',
+23 silly mapToRegistry   rawSpec: '',
+23 silly mapToRegistry   spec: 'latest',
+23 silly mapToRegistry   type: 'tag' }
+24 silly mapToRegistry uri https://registry.npmjs.org/express
+25 verbose request uri https://registry.npmjs.org/express
+26 verbose request no auth needed
+27 info attempt registry request try #1 at 12:01:48 PM
+28 verbose request id 7886630b8a22168a
+29 verbose etag W/"58e29821-8bb0c"
+30 verbose lastModified Mon, 03 Apr 2017 18:44:49 GMT
+31 http request GET https://registry.npmjs.org/express
+32 http 304 https://registry.npmjs.org/express
+33 verbose headers { date: 'Tue, 04 Apr 2017 10:02:01 GMT',
+33 verbose headers   via: '1.1 varnish',
+33 verbose headers   'cache-control': 'max-age=300',
+33 verbose headers   etag: 'W/"58e29821-8bb0c"',
+33 verbose headers   age: '124',
+33 verbose headers   connection: 'keep-alive',
+33 verbose headers   'x-served-by': 'cache-ams4450-AMS',
+33 verbose headers   'x-cache': 'HIT',
+33 verbose headers   'x-cache-hits': '4',
+33 verbose headers   'x-timer': 'S1491300121.827779,VS0,VE0',
+33 verbose headers   vary: 'Accept-Encoding' }
+34 silly get cb [ 304,
+34 silly get   { date: 'Tue, 04 Apr 2017 10:02:01 GMT',
+34 silly get     via: '1.1 varnish',
+34 silly get     'cache-control': 'max-age=300',
+34 silly get     etag: 'W/"58e29821-8bb0c"',
+34 silly get     age: '124',
+34 silly get     connection: 'keep-alive',
+34 silly get     'x-served-by': 'cache-ams4450-AMS',
+34 silly get     'x-cache': 'HIT',
+34 silly get     'x-cache-hits': '4',
+34 silly get     'x-timer': 'S1491300121.827779,VS0,VE0',
+34 silly get     vary: 'Accept-Encoding' } ]
+35 verbose etag https://registry.npmjs.org/express from cache
+36 verbose get saving express to /home/a/.npm/registry.npmjs.org/express/.cache.json
+37 verbose correctMkdir /home/a/.npm correctMkdir not in flight; initializing
+38 silly resolveWithNewModule express@4.15.2 checking installable status
+39 silly cache add args [ 'express@^4.15.2', null ]
+40 verbose cache add spec express@^4.15.2
+41 silly cache add parsed spec Result {
+41 silly cache add   raw: 'express@^4.15.2',
+41 silly cache add   scope: null,
+41 silly cache add   escapedName: 'express',
+41 silly cache add   name: 'express',
+41 silly cache add   rawSpec: '^4.15.2',
+41 silly cache add   spec: '>=4.15.2 <5.0.0',
+41 silly cache add   type: 'range' }
+42 silly addNamed express@>=4.15.2 <5.0.0
+43 verbose addNamed ">=4.15.2 <5.0.0" is a valid semver range for express
+44 silly addNameRange { name: 'express', range: '>=4.15.2 <5.0.0', hasData: false }
+45 silly mapToRegistry name express
+46 silly mapToRegistry using default registry
+47 silly mapToRegistry registry https://registry.npmjs.org/
+48 silly mapToRegistry data Result {
+48 silly mapToRegistry   raw: 'express',
+48 silly mapToRegistry   scope: null,
+48 silly mapToRegistry   escapedName: 'express',
+48 silly mapToRegistry   name: 'express',
+48 silly mapToRegistry   rawSpec: '',
+48 silly mapToRegistry   spec: 'latest',
+48 silly mapToRegistry   type: 'tag' }
+49 silly mapToRegistry uri https://registry.npmjs.org/express
+50 verbose addNameRange registry:https://registry.npmjs.org/express not in flight; fetching
+51 verbose get https://registry.npmjs.org/express not expired, no request
+52 silly addNameRange number 2 { name: 'express', range: '>=4.15.2 <5.0.0', hasData: true }
+53 silly addNameRange versions [ 'express',
+53 silly addNameRange   [ '0.14.0',
+53 silly addNameRange     '0.14.1',
+53 silly addNameRange     '1.0.0',
+53 silly addNameRange     '1.0.1',
+53 silly addNameRange     '1.0.2',
+53 silly addNameRange     '1.0.3',
+53 silly addNameRange     '1.0.4',
+53 silly addNameRange     '1.0.5',
+53 silly addNameRange     '1.0.6',
+53 silly addNameRange     '1.0.7',
+53 silly addNameRange     '1.0.8',
+53 silly addNameRange     '2.0.0',
+53 silly addNameRange     '2.1.0',
+53 silly addNameRange     '2.1.1',
+53 silly addNameRange     '2.2.0',
+53 silly addNameRange     '2.2.1',
+53 silly addNameRange     '2.2.2',
+53 silly addNameRange     '2.3.0',
+53 silly addNameRange     '2.3.1',
+53 silly addNameRange     '2.3.2',
+53 silly addNameRange     '2.3.3',
+53 silly addNameRange     '2.3.4',
+53 silly addNameRange     '2.3.5',
+53 silly addNameRange     '2.3.6',
+53 silly addNameRange     '2.3.7',
+53 silly addNameRange     '2.3.8',
+53 silly addNameRange     '2.3.9',
+53 silly addNameRange     '2.3.10',
+53 silly addNameRange     '2.3.11',
+53 silly addNameRange     '2.3.12',
+53 silly addNameRange     '2.4.0',
+53 silly addNameRange     '2.4.1',
+53 silly addNameRange     '2.4.2',
+53 silly addNameRange     '2.4.3',
+53 silly addNameRange     '2.4.4',
+53 silly addNameRange     '2.4.5',
+53 silly addNameRange     '2.4.6',
+53 silly addNameRange     '2.4.7',
+53 silly addNameRange     '2.5.0',
+53 silly addNameRange     '2.5.1',
+53 silly addNameRange     '2.5.2',
+53 silly addNameRange     '2.5.3',
+53 silly addNameRange     '2.5.4',
+53 silly addNameRange     '2.5.5',
+53 silly addNameRange     '2.5.6',
+53 silly addNameRange     '2.5.7',
+53 silly addNameRange     '2.5.8',
+53 silly addNameRange     '2.5.9',
+53 silly addNameRange     '2.5.10',
+53 silly addNameRange     '2.5.11',
+53 silly addNameRange     '3.0.0',
+53 silly addNameRange     '3.0.1',
+53 silly addNameRange     '3.0.2',
+53 silly addNameRange     '3.0.3',
+53 silly addNameRange     '3.0.4',
+53 silly addNameRange     '3.0.5',
+53 silly addNameRange     '3.0.6',
+53 silly addNameRange     '3.1.0',
+53 silly addNameRange     '3.1.1',
+53 silly addNameRange     '3.1.2',
+53 silly addNameRange     '3.2.0',
+53 silly addNameRange     '3.2.1',
+53 silly addNameRange     '3.2.2',
+53 silly addNameRange     '3.2.3',
+53 silly addNameRange     '3.2.4',
+53 silly addNameRange     '3.2.5',
+53 silly addNameRange     '3.2.6',
+53 silly addNameRange     '3.3.0',
+53 silly addNameRange     '3.3.1',
+53 silly addNameRange     '3.3.2',
+53 silly addNameRange     '3.3.3',
+53 silly addNameRange     '3.3.4',
+53 silly addNameRange     '3.3.5',
+53 silly addNameRange     '3.3.6',
+53 silly addNameRange     '1.0.0-beta',
+53 silly addNameRange     '1.0.0-beta2',
+53 silly addNameRange     '1.0.0-rc',
+53 silly addNameRange     '1.0.0-rc2',
+53 silly addNameRange     '1.0.0-rc3',
+53 silly addNameRange     '1.0.0-rc4',
+53 silly addNameRange     '2.0.0-beta',
+53 silly addNameRange     '2.0.0-beta2',
+53 silly addNameRange     '2.0.0-beta3',
+53 silly addNameRange     '2.0.0-rc',
+53 silly addNameRange     '2.0.0-rc2',
+53 silly addNameRange     '2.0.0-rc3',
+53 silly addNameRange     '3.0.0-alpha1',
+53 silly addNameRange     '3.0.0-alpha2',
+53 silly addNameRange     '3.0.0-alpha3',
+53 silly addNameRange     '3.0.0-alpha4',
+53 silly addNameRange     '3.0.0-alpha5',
+53 silly addNameRange     '3.0.0-beta1',
+53 silly addNameRange     '3.0.0-beta2',
+53 silly addNameRange     '3.0.0-beta3',
+53 silly addNameRange     '3.0.0-beta4',
+53 silly addNameRange     '3.0.0-beta6',
+53 silly addNameRange     '3.0.0-beta7',
+53 silly addNameRange     '3.0.0-rc1',
+53 silly addNameRange     '3.0.0-rc2',
+53 silly addNameRange     '3.0.0-rc3',
+53 silly addNameRange     ... 151 more items ] ]
+54 silly addNamed express@4.15.2
+55 verbose addNamed "4.15.2" is a plain semver version for express
+56 silly cache afterAdd express@4.15.2
+57 verbose afterAdd /home/a/.npm/express/4.15.2/package/package.json not in flight; writing
+58 verbose correctMkdir /home/a/.npm correctMkdir not in flight; initializing
+59 verbose afterAdd /home/a/.npm/express/4.15.2/package/package.json written
+60 silly fetchNamedPackageData send
+61 silly mapToRegistry name send
+62 silly mapToRegistry using default registry
+63 silly mapToRegistry registry https://registry.npmjs.org/
+64 silly mapToRegistry data Result {
+64 silly mapToRegistry   raw: 'send',
+64 silly mapToRegistry   scope: null,
+64 silly mapToRegistry   escapedName: 'send',
+64 silly mapToRegistry   name: 'send',
+64 silly mapToRegistry   rawSpec: '',
+64 silly mapToRegistry   spec: 'latest',
+64 silly mapToRegistry   type: 'tag' }
+65 silly mapToRegistry uri https://registry.npmjs.org/send
+66 silly fetchNamedPackageData serve-static
+67 silly mapToRegistry name serve-static
+68 silly mapToRegistry using default registry
+69 silly mapToRegistry registry https://registry.npmjs.org/
+70 silly mapToRegistry data Result {
+70 silly mapToRegistry   raw: 'serve-static',
+70 silly mapToRegistry   scope: null,
+70 silly mapToRegistry   escapedName: 'serve-static',
+70 silly mapToRegistry   name: 'serve-static',
+70 silly mapToRegistry   rawSpec: '',
+70 silly mapToRegistry   spec: 'latest',
+70 silly mapToRegistry   type: 'tag' }
+71 silly mapToRegistry uri https://registry.npmjs.org/serve-static
+72 verbose request uri https://registry.npmjs.org/send
+73 verbose request no auth needed
+74 info attempt registry request try #1 at 12:02:01 PM
+75 verbose etag W/"58bb81ae-13d5c"
+76 verbose lastModified Sun, 05 Mar 2017 03:10:38 GMT
+77 http request GET https://registry.npmjs.org/send
+78 verbose request uri https://registry.npmjs.org/serve-static
+79 verbose request no auth needed
+80 info attempt registry request try #1 at 12:02:01 PM
+81 verbose etag W/"58e0c467-14a08"
+82 verbose lastModified Sun, 02 Apr 2017 09:29:11 GMT
+83 http request GET https://registry.npmjs.org/serve-static
+84 http 304 https://registry.npmjs.org/send
+85 verbose headers { date: 'Tue, 04 Apr 2017 10:02:01 GMT',
+85 verbose headers   via: '1.1 varnish',
+85 verbose headers   'cache-control': 'max-age=300',
+85 verbose headers   etag: 'W/"58bb81ae-13d5c"',
+85 verbose headers   age: '296',
+85 verbose headers   connection: 'keep-alive',
+85 verbose headers   'x-served-by': 'cache-ams4450-AMS',
+85 verbose headers   'x-cache': 'HIT',
+85 verbose headers   'x-cache-hits': '9',
+85 verbose headers   'x-timer': 'S1491300121.972205,VS0,VE0',
+85 verbose headers   vary: 'Accept-Encoding' }
+86 silly get cb [ 304,
+86 silly get   { date: 'Tue, 04 Apr 2017 10:02:01 GMT',
+86 silly get     via: '1.1 varnish',
+86 silly get     'cache-control': 'max-age=300',
+86 silly get     etag: 'W/"58bb81ae-13d5c"',
+86 silly get     age: '296',
+86 silly get     connection: 'keep-alive',
+86 silly get     'x-served-by': 'cache-ams4450-AMS',
+86 silly get     'x-cache': 'HIT',
+86 silly get     'x-cache-hits': '9',
+86 silly get     'x-timer': 'S1491300121.972205,VS0,VE0',
+86 silly get     vary: 'Accept-Encoding' } ]
+87 verbose etag https://registry.npmjs.org/send from cache
+88 verbose get saving send to /home/a/.npm/registry.npmjs.org/send/.cache.json
+89 verbose correctMkdir /home/a/.npm correctMkdir not in flight; initializing
+90 silly resolveWithNewModule send@0.15.1 checking installable status
+91 silly cache add args [ 'send@0.15.1', null ]
+92 verbose cache add spec send@0.15.1
+93 silly cache add parsed spec Result {
+93 silly cache add   raw: 'send@0.15.1',
+93 silly cache add   scope: null,
+93 silly cache add   escapedName: 'send',
+93 silly cache add   name: 'send',
+93 silly cache add   rawSpec: '0.15.1',
+93 silly cache add   spec: '0.15.1',
+93 silly cache add   type: 'version' }
+94 silly addNamed send@0.15.1
+95 verbose addNamed "0.15.1" is a plain semver version for send
+96 silly mapToRegistry name send
+97 silly mapToRegistry using default registry
+98 silly mapToRegistry registry https://registry.npmjs.org/
+99 silly mapToRegistry data Result {
+99 silly mapToRegistry   raw: 'send',
+99 silly mapToRegistry   scope: null,
+99 silly mapToRegistry   escapedName: 'send',
+99 silly mapToRegistry   name: 'send',
+99 silly mapToRegistry   rawSpec: '',
+99 silly mapToRegistry   spec: 'latest',
+99 silly mapToRegistry   type: 'tag' }
+100 silly mapToRegistry uri https://registry.npmjs.org/send
+101 verbose addNameVersion registry:https://registry.npmjs.org/send not in flight; fetching
+102 verbose get https://registry.npmjs.org/send not expired, no request
+103 silly cache afterAdd send@0.15.1
+104 verbose afterAdd /home/a/.npm/send/0.15.1/package/package.json not in flight; writing
+105 verbose correctMkdir /home/a/.npm correctMkdir not in flight; initializing
+106 verbose afterAdd /home/a/.npm/send/0.15.1/package/package.json written
+107 http 304 https://registry.npmjs.org/serve-static
+108 verbose headers { date: 'Tue, 04 Apr 2017 10:02:02 GMT',
+108 verbose headers   via: '1.1 varnish',
+108 verbose headers   'cache-control': 'max-age=300',
+108 verbose headers   etag: 'W/"58e0c467-14a08"',
+108 verbose headers   age: '173',
+108 verbose headers   connection: 'keep-alive',
+108 verbose headers   'x-served-by': 'cache-ams4132-AMS',
+108 verbose headers   'x-cache': 'HIT',
+108 verbose headers   'x-cache-hits': '5',
+108 verbose headers   'x-timer': 'S1491300122.043079,VS0,VE0',
+108 verbose headers   vary: 'Accept-Encoding' }
+109 silly get cb [ 304,
+109 silly get   { date: 'Tue, 04 Apr 2017 10:02:02 GMT',
+109 silly get     via: '1.1 varnish',
+109 silly get     'cache-control': 'max-age=300',
+109 silly get     etag: 'W/"58e0c467-14a08"',
+109 silly get     age: '173',
+109 silly get     connection: 'keep-alive',
+109 silly get     'x-served-by': 'cache-ams4132-AMS',
+109 silly get     'x-cache': 'HIT',
+109 silly get     'x-cache-hits': '5',
+109 silly get     'x-timer': 'S1491300122.043079,VS0,VE0',
+109 silly get     vary: 'Accept-Encoding' } ]
+110 verbose etag https://registry.npmjs.org/serve-static from cache
+111 verbose get saving serve-static to /home/a/.npm/registry.npmjs.org/serve-static/.cache.json
+112 verbose correctMkdir /home/a/.npm correctMkdir not in flight; initializing
+113 silly resolveWithNewModule serve-static@1.12.1 checking installable status
+114 silly cache add args [ 'serve-static@1.12.1', null ]
+115 verbose cache add spec serve-static@1.12.1
+116 silly cache add parsed spec Result {
+116 silly cache add   raw: 'serve-static@1.12.1',
+116 silly cache add   scope: null,
+116 silly cache add   escapedName: 'serve-static',
+116 silly cache add   name: 'serve-static',
+116 silly cache add   rawSpec: '1.12.1',
+116 silly cache add   spec: '1.12.1',
+116 silly cache add   type: 'version' }
+117 silly addNamed serve-static@1.12.1
+118 verbose addNamed "1.12.1" is a plain semver version for serve-static
+119 silly mapToRegistry name serve-static
+120 silly mapToRegistry using default registry
+121 silly mapToRegistry registry https://registry.npmjs.org/
+122 silly mapToRegistry data Result {
+122 silly mapToRegistry   raw: 'serve-static',
+122 silly mapToRegistry   scope: null,
+122 silly mapToRegistry   escapedName: 'serve-static',
+122 silly mapToRegistry   name: 'serve-static',
+122 silly mapToRegistry   rawSpec: '',
+122 silly mapToRegistry   spec: 'latest',
+122 silly mapToRegistry   type: 'tag' }
+123 silly mapToRegistry uri https://registry.npmjs.org/serve-static
+124 verbose addNameVersion registry:https://registry.npmjs.org/serve-static not in flight; fetching
+125 verbose get https://registry.npmjs.org/serve-static not expired, no request
+126 silly cache afterAdd serve-static@1.12.1
+127 verbose afterAdd /home/a/.npm/serve-static/1.12.1/package/package.json not in flight; writing
+128 verbose correctMkdir /home/a/.npm correctMkdir not in flight; initializing
+129 verbose afterAdd /home/a/.npm/serve-static/1.12.1/package/package.json written
+130 silly fetchNamedPackageData mime
+131 silly mapToRegistry name mime
+132 silly mapToRegistry using default registry
+133 silly mapToRegistry registry https://registry.npmjs.org/
+134 silly mapToRegistry data Result {
+134 silly mapToRegistry   raw: 'mime',
+134 silly mapToRegistry   scope: null,
+134 silly mapToRegistry   escapedName: 'mime',
+134 silly mapToRegistry   name: 'mime',
+134 silly mapToRegistry   rawSpec: '',
+134 silly mapToRegistry   spec: 'latest',
+134 silly mapToRegistry   type: 'tag' }
+135 silly mapToRegistry uri https://registry.npmjs.org/mime
+136 verbose request uri https://registry.npmjs.org/mime
+137 verbose request no auth needed
+138 info attempt registry request try #1 at 12:02:02 PM
+139 verbose etag W/"58db21d5-510b"
+140 verbose lastModified Wed, 29 Mar 2017 02:54:13 GMT
+141 http request GET https://registry.npmjs.org/mime
+142 http 304 https://registry.npmjs.org/mime
+143 verbose headers { date: 'Tue, 04 Apr 2017 10:02:02 GMT',
+143 verbose headers   via: '1.1 varnish',
+143 verbose headers   'cache-control': 'max-age=300',
+143 verbose headers   etag: 'W/"58db21d5-510b"',
+143 verbose headers   age: '82',
+143 verbose headers   connection: 'keep-alive',
+143 verbose headers   'x-served-by': 'cache-ams4450-AMS',
+143 verbose headers   'x-cache': 'HIT',
+143 verbose headers   'x-cache-hits': '2',
+143 verbose headers   'x-timer': 'S1491300122.116794,VS0,VE0',
+143 verbose headers   vary: 'Accept-Encoding' }
+144 silly get cb [ 304,
+144 silly get   { date: 'Tue, 04 Apr 2017 10:02:02 GMT',
+144 silly get     via: '1.1 varnish',
+144 silly get     'cache-control': 'max-age=300',
+144 silly get     etag: 'W/"58db21d5-510b"',
+144 silly get     age: '82',
+144 silly get     connection: 'keep-alive',
+144 silly get     'x-served-by': 'cache-ams4450-AMS',
+144 silly get     'x-cache': 'HIT',
+144 silly get     'x-cache-hits': '2',
+144 silly get     'x-timer': 'S1491300122.116794,VS0,VE0',
+144 silly get     vary: 'Accept-Encoding' } ]
+145 verbose etag https://registry.npmjs.org/mime from cache
+146 verbose get saving mime to /home/a/.npm/registry.npmjs.org/mime/.cache.json
+147 verbose correctMkdir /home/a/.npm correctMkdir not in flight; initializing
+148 silly resolveWithNewModule mime@1.3.4 checking installable status
+149 silly cache add args [ 'mime@1.3.4', null ]
+150 verbose cache add spec mime@1.3.4
+151 silly cache add parsed spec Result {
+151 silly cache add   raw: 'mime@1.3.4',
+151 silly cache add   scope: null,
+151 silly cache add   escapedName: 'mime',
+151 silly cache add   name: 'mime',
+151 silly cache add   rawSpec: '1.3.4',
+151 silly cache add   spec: '1.3.4',
+151 silly cache add   type: 'version' }
+152 silly addNamed mime@1.3.4
+153 verbose addNamed "1.3.4" is a plain semver version for mime
+154 silly mapToRegistry name mime
+155 silly mapToRegistry using default registry
+156 silly mapToRegistry registry https://registry.npmjs.org/
+157 silly mapToRegistry data Result {
+157 silly mapToRegistry   raw: 'mime',
+157 silly mapToRegistry   scope: null,
+157 silly mapToRegistry   escapedName: 'mime',
+157 silly mapToRegistry   name: 'mime',
+157 silly mapToRegistry   rawSpec: '',
+157 silly mapToRegistry   spec: 'latest',
+157 silly mapToRegistry   type: 'tag' }
+158 silly mapToRegistry uri https://registry.npmjs.org/mime
+159 verbose addNameVersion registry:https://registry.npmjs.org/mime not in flight; fetching
+160 verbose get https://registry.npmjs.org/mime not expired, no request
+161 silly cache afterAdd mime@1.3.4
+162 verbose afterAdd /home/a/.npm/mime/1.3.4/package/package.json not in flight; writing
+163 verbose correctMkdir /home/a/.npm correctMkdir not in flight; initializing
+164 verbose afterAdd /home/a/.npm/mime/1.3.4/package/package.json written
+165 silly loadAllDepsIntoIdealTree Finishing
+166 silly loadIdealTree Finishing
+167 silly currentTree static@1.0.0
+167 silly currentTree ├── accepts@1.3.3
+167 silly currentTree ├── array-flatten@1.1.1
+167 silly currentTree ├── content-disposition@0.5.2
+167 silly currentTree ├── content-type@1.0.2
+167 silly currentTree ├── cookie-signature@1.0.6
+167 silly currentTree ├── cookie@0.3.1
+167 silly currentTree ├── debug@2.6.1
+167 silly currentTree ├── depd@1.1.0
+167 silly currentTree ├── destroy@1.0.4
+167 silly currentTree ├── ee-first@1.1.1
+167 silly currentTree ├── encodeurl@1.0.1
+167 silly currentTree ├── escape-html@1.0.3
+167 silly currentTree ├── etag@1.8.0
+167 silly currentTree ├─┬ finalhandler@1.0.1
+167 silly currentTree │ └── debug@2.6.3
+167 silly currentTree ├── forwarded@0.1.0
+167 silly currentTree ├── fresh@0.5.0
+167 silly currentTree ├── http-errors@1.6.1
+167 silly currentTree ├── inherits@2.0.3
+167 silly currentTree ├── ipaddr.js@1.3.0
+167 silly currentTree ├── media-typer@0.3.0
+167 silly currentTree ├── merge-descriptors@1.0.1
+167 silly currentTree ├── methods@1.1.2
+167 silly currentTree ├── mime-db@1.27.0
+167 silly currentTree ├── mime-types@2.1.15
+167 silly currentTree ├── ms@0.7.2
+167 silly currentTree ├── negotiator@0.6.1
+167 silly currentTree ├── on-finished@2.3.0
+167 silly currentTree ├── parseurl@1.3.1
+167 silly currentTree ├── path-to-regexp@0.1.7
+167 silly currentTree ├── proxy-addr@1.1.4
+167 silly currentTree ├── qs@6.4.0
+167 silly currentTree ├── range-parser@1.2.0
+167 silly currentTree ├── setprototypeof@1.0.3
+167 silly currentTree ├── statuses@1.3.1
+167 silly currentTree ├── type-is@1.6.15
+167 silly currentTree ├── unpipe@1.0.0
+167 silly currentTree ├── utils-merge@1.0.0
+167 silly currentTree └── vary@1.1.1
+168 silly idealTree static@1.0.0
+168 silly idealTree ├── accepts@1.3.3
+168 silly idealTree ├── array-flatten@1.1.1
+168 silly idealTree ├── content-disposition@0.5.2
+168 silly idealTree ├── content-type@1.0.2
+168 silly idealTree ├── cookie-signature@1.0.6
+168 silly idealTree ├── cookie@0.3.1
+168 silly idealTree ├── debug@2.6.1
+168 silly idealTree ├── depd@1.1.0
+168 silly idealTree ├── destroy@1.0.4
+168 silly idealTree ├── ee-first@1.1.1
+168 silly idealTree ├── encodeurl@1.0.1
+168 silly idealTree ├── escape-html@1.0.3
+168 silly idealTree ├── etag@1.8.0
+168 silly idealTree ├── express@4.15.2
+168 silly idealTree ├─┬ finalhandler@1.0.1
+168 silly idealTree │ └── debug@2.6.3
+168 silly idealTree ├── forwarded@0.1.0
+168 silly idealTree ├── fresh@0.5.0
+168 silly idealTree ├── http-errors@1.6.1
+168 silly idealTree ├── inherits@2.0.3
+168 silly idealTree ├── ipaddr.js@1.3.0
+168 silly idealTree ├── media-typer@0.3.0
+168 silly idealTree ├── merge-descriptors@1.0.1
+168 silly idealTree ├── methods@1.1.2
+168 silly idealTree ├── mime-db@1.27.0
+168 silly idealTree ├── mime-types@2.1.15
+168 silly idealTree ├── mime@1.3.4
+168 silly idealTree ├── ms@0.7.2
+168 silly idealTree ├── negotiator@0.6.1
+168 silly idealTree ├── on-finished@2.3.0
+168 silly idealTree ├── parseurl@1.3.1
+168 silly idealTree ├── path-to-regexp@0.1.7
+168 silly idealTree ├── proxy-addr@1.1.4
+168 silly idealTree ├── qs@6.4.0
+168 silly idealTree ├── range-parser@1.2.0
+168 silly idealTree ├── send@0.15.1
+168 silly idealTree ├── serve-static@1.12.1
+168 silly idealTree ├── setprototypeof@1.0.3
+168 silly idealTree ├── statuses@1.3.1
+168 silly idealTree ├── type-is@1.6.15
+168 silly idealTree ├── unpipe@1.0.0
+168 silly idealTree ├── utils-merge@1.0.0
+168 silly idealTree └── vary@1.1.1
+169 silly generateActionsToTake Starting
+170 silly install generateActionsToTake
+171 silly generateActionsToTake Finishing
+172 silly diffTrees action count 4
+173 silly diffTrees add mime@1.3.4
+174 silly diffTrees add send@0.15.1
+175 silly diffTrees add serve-static@1.12.1
+176 silly diffTrees add express@4.15.2
+177 silly decomposeActions action count 32
+178 silly decomposeActions fetch mime@1.3.4
+179 silly decomposeActions extract mime@1.3.4
+180 silly decomposeActions test mime@1.3.4
+181 silly decomposeActions preinstall mime@1.3.4
+182 silly decomposeActions build mime@1.3.4
+183 silly decomposeActions install mime@1.3.4
+184 silly decomposeActions postinstall mime@1.3.4
+185 silly decomposeActions finalize mime@1.3.4
+186 silly decomposeActions fetch send@0.15.1
+187 silly decomposeActions extract send@0.15.1
+188 silly decomposeActions test send@0.15.1
+189 silly decomposeActions preinstall send@0.15.1
+190 silly decomposeActions build send@0.15.1
+191 silly decomposeActions install send@0.15.1
+192 silly decomposeActions postinstall send@0.15.1
+193 silly decomposeActions finalize send@0.15.1
+194 silly decomposeActions fetch serve-static@1.12.1
+195 silly decomposeActions extract serve-static@1.12.1
+196 silly decomposeActions test serve-static@1.12.1
+197 silly decomposeActions preinstall serve-static@1.12.1
+198 silly decomposeActions build serve-static@1.12.1
+199 silly decomposeActions install serve-static@1.12.1
+200 silly decomposeActions postinstall serve-static@1.12.1
+201 silly decomposeActions finalize serve-static@1.12.1
+202 silly decomposeActions fetch express@4.15.2
+203 silly decomposeActions extract express@4.15.2
+204 silly decomposeActions test express@4.15.2
+205 silly decomposeActions preinstall express@4.15.2
+206 silly decomposeActions build express@4.15.2
+207 silly decomposeActions install express@4.15.2
+208 silly decomposeActions postinstall express@4.15.2
+209 silly decomposeActions finalize express@4.15.2
+210 silly runTopLevelLifecycles Starting
+211 silly install runPreinstallTopLevelLifecycles
+212 silly preinstall static@1.0.0 /media/a/MOBISD/ss2/we2/zzrs/nodejs/static-d0b37165
+213 info lifecycle static@1.0.0~preinstall: static@1.0.0
+214 silly lifecycle static@1.0.0~preinstall: no script for preinstall, continuing
+215 silly executeActions Starting
+216 silly install executeActions
+217 silly doSerial global-install 0
+218 silly doParallel fetch 4
+219 verbose correctMkdir /home/a/.npm/_locks correctMkdir not in flight; initializing
+220 verbose lock using /home/a/.npm/_locks/staging-4b7482fdd5a5bf91.lock for /media/a/MOBISD/ss2/we2/zzrs/nodejs/node_modules/.staging
+221 silly doParallel extract 4
+222 silly extract mime@1.3.4
+223 silly extract send@0.15.1
+224 silly extract serve-static@1.12.1
+225 silly extract express@4.15.2
+226 verbose unbuild node_modules/.staging/serve-static-1031fecc
+227 verbose unbuild node_modules/.staging/send-5d0146d5
+228 verbose unbuild node_modules/.staging/express-a5c3f829
+229 verbose unbuild node_modules/.staging/mime-21be907b
+230 silly gentlyRm /media/a/MOBISD/ss2/we2/zzrs/nodejs/node_modules/.staging/serve-static-1031fecc is being purged from base /media/a/MOBISD/ss2/we2/zzrs/nodejs
+231 verbose gentlyRm don't care about contents; nuking /media/a/MOBISD/ss2/we2/zzrs/nodejs/node_modules/.staging/serve-static-1031fecc
+232 silly gentlyRm /media/a/MOBISD/ss2/we2/zzrs/nodejs/node_modules/.staging/send-5d0146d5 is being purged from base /media/a/MOBISD/ss2/we2/zzrs/nodejs
+233 verbose gentlyRm don't care about contents; nuking /media/a/MOBISD/ss2/we2/zzrs/nodejs/node_modules/.staging/send-5d0146d5
+234 silly gentlyRm /media/a/MOBISD/ss2/we2/zzrs/nodejs/node_modules/.staging/express-a5c3f829 is being purged from base /media/a/MOBISD/ss2/we2/zzrs/nodejs
+235 verbose gentlyRm don't care about contents; nuking /media/a/MOBISD/ss2/we2/zzrs/nodejs/node_modules/.staging/express-a5c3f829
+236 silly gentlyRm /media/a/MOBISD/ss2/we2/zzrs/nodejs/node_modules/.staging/mime-21be907b is being purged from base /media/a/MOBISD/ss2/we2/zzrs/nodejs
+237 verbose gentlyRm don't care about contents; nuking /media/a/MOBISD/ss2/we2/zzrs/nodejs/node_modules/.staging/mime-21be907b
+238 verbose tar unpack /home/a/.npm/serve-static/1.12.1/package.tgz
+239 verbose tar unpacking to /media/a/MOBISD/ss2/we2/zzrs/nodejs/node_modules/.staging/serve-static-1031fecc
+240 silly gentlyRm /media/a/MOBISD/ss2/we2/zzrs/nodejs/node_modules/.staging/serve-static-1031fecc is being purged
+241 verbose gentlyRm don't care about contents; nuking /media/a/MOBISD/ss2/we2/zzrs/nodejs/node_modules/.staging/serve-static-1031fecc
+242 verbose tar unpack /home/a/.npm/send/0.15.1/package.tgz
+243 verbose tar unpacking to /media/a/MOBISD/ss2/we2/zzrs/nodejs/node_modules/.staging/send-5d0146d5
+244 silly gentlyRm /media/a/MOBISD/ss2/we2/zzrs/nodejs/node_modules/.staging/send-5d0146d5 is being purged
+245 verbose gentlyRm don't care about contents; nuking /media/a/MOBISD/ss2/we2/zzrs/nodejs/node_modules/.staging/send-5d0146d5
+246 verbose tar unpack /home/a/.npm/express/4.15.2/package.tgz
+247 verbose tar unpacking to /media/a/MOBISD/ss2/we2/zzrs/nodejs/node_modules/.staging/express-a5c3f829
+248 silly gentlyRm /media/a/MOBISD/ss2/we2/zzrs/nodejs/node_modules/.staging/express-a5c3f829 is being purged
+249 verbose gentlyRm don't care about contents; nuking /media/a/MOBISD/ss2/we2/zzrs/nodejs/node_modules/.staging/express-a5c3f829
+250 verbose tar unpack /home/a/.npm/mime/1.3.4/package.tgz
+251 verbose tar unpacking to /media/a/MOBISD/ss2/we2/zzrs/nodejs/node_modules/.staging/mime-21be907b
+252 silly gentlyRm /media/a/MOBISD/ss2/we2/zzrs/nodejs/node_modules/.staging/mime-21be907b is being purged
+253 verbose gentlyRm don't care about contents; nuking /media/a/MOBISD/ss2/we2/zzrs/nodejs/node_modules/.staging/mime-21be907b
+254 silly gunzTarPerm modes [ '755', '644' ]
+255 silly gunzTarPerm modes [ '755', '644' ]
+256 silly gunzTarPerm modes [ '755', '644' ]
+257 silly gunzTarPerm modes [ '755', '644' ]
+258 silly gunzTarPerm extractEntry package.json
+259 silly gunzTarPerm modified mode [ 'package.json', 438, 420 ]
+260 silly gunzTarPerm extractEntry package.json
+261 silly gunzTarPerm modified mode [ 'package.json', 438, 420 ]
+262 silly gunzTarPerm extractEntry package.json
+263 silly gunzTarPerm modified mode [ 'package.json', 438, 420 ]
+264 silly gunzTarPerm extractEntry package.json
+265 silly gunzTarPerm extractEntry README.md
+266 silly gunzTarPerm modified mode [ 'README.md', 438, 420 ]
+267 silly gunzTarPerm extractEntry LICENSE
+268 silly gunzTarPerm modified mode [ 'LICENSE', 438, 420 ]
+269 silly gunzTarPerm extractEntry README.md
+270 silly gunzTarPerm modified mode [ 'README.md', 438, 420 ]
+271 silly gunzTarPerm extractEntry LICENSE
+272 silly gunzTarPerm modified mode [ 'LICENSE', 438, 420 ]
+273 silly gunzTarPerm extractEntry LICENSE
+274 silly gunzTarPerm modified mode [ 'LICENSE', 438, 420 ]
+275 silly gunzTarPerm extractEntry index.js
+276 silly gunzTarPerm modified mode [ 'index.js', 438, 420 ]
+277 silly gunzTarPerm extractEntry .npmignore
+278 silly gunzTarPerm extractEntry README.md
+279 silly gunzTarPerm extractEntry LICENSE
+280 silly gunzTarPerm extractEntry cli.js
+281 silly gunzTarPerm extractEntry History.md
+282 silly gunzTarPerm modified mode [ 'History.md', 438, 420 ]
+283 silly gunzTarPerm extractEntry Readme.md
+284 silly gunzTarPerm modified mode [ 'Readme.md', 438, 420 ]
+285 silly gunzTarPerm extractEntry lib/application.js
+286 silly gunzTarPerm modified mode [ 'lib/application.js', 438, 420 ]
+287 silly gunzTarPerm extractEntry lib/express.js
+288 silly gunzTarPerm modified mode [ 'lib/express.js', 438, 420 ]
+289 silly gunzTarPerm extractEntry lib/request.js
+290 silly gunzTarPerm modified mode [ 'lib/request.js', 438, 420 ]
+291 silly gunzTarPerm extractEntry lib/response.js
+292 silly gunzTarPerm modified mode [ 'lib/response.js', 438, 420 ]
+293 silly gunzTarPerm extractEntry lib/utils.js
+294 silly gunzTarPerm modified mode [ 'lib/utils.js', 438, 420 ]
+295 silly gunzTarPerm extractEntry lib/view.js
+296 silly gunzTarPerm modified mode [ 'lib/view.js', 438, 420 ]
+297 silly gunzTarPerm extractEntry lib/middleware/init.js
+298 silly gunzTarPerm modified mode [ 'lib/middleware/init.js', 438, 420 ]
+299 silly gunzTarPerm extractEntry lib/middleware/query.js
+300 silly gunzTarPerm modified mode [ 'lib/middleware/query.js', 438, 420 ]
+301 silly gunzTarPerm extractEntry lib/router/index.js
+302 silly gunzTarPerm modified mode [ 'lib/router/index.js', 438, 420 ]
+303 silly gunzTarPerm extractEntry lib/router/layer.js
+304 silly gunzTarPerm modified mode [ 'lib/router/layer.js', 438, 420 ]
+305 silly gunzTarPerm extractEntry lib/router/route.js
+306 silly gunzTarPerm modified mode [ 'lib/router/route.js', 438, 420 ]
+307 silly gunzTarPerm extractEntry index.js
+308 silly gunzTarPerm modified mode [ 'index.js', 438, 420 ]
+309 silly gunzTarPerm extractEntry HISTORY.md
+310 silly gunzTarPerm modified mode [ 'HISTORY.md', 438, 420 ]
+311 silly gunzTarPerm extractEntry index.js
+312 silly gunzTarPerm modified mode [ 'index.js', 438, 420 ]
+313 silly gunzTarPerm extractEntry HISTORY.md
+314 silly gunzTarPerm modified mode [ 'HISTORY.md', 438, 420 ]
+315 silly gunzTarPerm extractEntry mime.js
+316 silly gunzTarPerm extractEntry build/build.js
+317 silly gunzTarPerm extractEntry build/test.js
+318 silly gunzTarPerm extractEntry types.json
+319 silly gentlyRm /media/a/MOBISD/ss2/we2/zzrs/nodejs/node_modules/.staging/send-5d0146d5/node_modules is being purged
+320 verbose gentlyRm don't care about contents; nuking /media/a/MOBISD/ss2/we2/zzrs/nodejs/node_modules/.staging/send-5d0146d5/node_modules
+321 silly gentlyRm /media/a/MOBISD/ss2/we2/zzrs/nodejs/node_modules/.staging/serve-static-1031fecc/node_modules is being purged
+322 verbose gentlyRm don't care about contents; nuking /media/a/MOBISD/ss2/we2/zzrs/nodejs/node_modules/.staging/serve-static-1031fecc/node_modules
+323 silly gentlyRm /media/a/MOBISD/ss2/we2/zzrs/nodejs/node_modules/.staging/mime-21be907b/node_modules is being purged
+324 verbose gentlyRm don't care about contents; nuking /media/a/MOBISD/ss2/we2/zzrs/nodejs/node_modules/.staging/mime-21be907b/node_modules
+325 silly gentlyRm /media/a/MOBISD/ss2/we2/zzrs/nodejs/node_modules/.staging/express-a5c3f829/node_modules is being purged
+326 verbose gentlyRm don't care about contents; nuking /media/a/MOBISD/ss2/we2/zzrs/nodejs/node_modules/.staging/express-a5c3f829/node_modules
+327 silly doParallel preinstall 4
+328 silly preinstall mime@1.3.4 /media/a/MOBISD/ss2/we2/zzrs/nodejs/node_modules/.staging/mime-21be907b
+329 info lifecycle mime@1.3.4~preinstall: mime@1.3.4
+330 silly preinstall send@0.15.1 /media/a/MOBISD/ss2/we2/zzrs/nodejs/node_modules/.staging/send-5d0146d5
+331 info lifecycle send@0.15.1~preinstall: send@0.15.1
+332 silly preinstall serve-static@1.12.1 /media/a/MOBISD/ss2/we2/zzrs/nodejs/node_modules/.staging/serve-static-1031fecc
+333 info lifecycle serve-static@1.12.1~preinstall: serve-static@1.12.1
+334 silly preinstall express@4.15.2 /media/a/MOBISD/ss2/we2/zzrs/nodejs/node_modules/.staging/express-a5c3f829
+335 info lifecycle express@4.15.2~preinstall: express@4.15.2
+336 silly lifecycle mime@1.3.4~preinstall: no script for preinstall, continuing
+337 silly lifecycle send@0.15.1~preinstall: no script for preinstall, continuing
+338 silly lifecycle serve-static@1.12.1~preinstall: no script for preinstall, continuing
+339 silly lifecycle express@4.15.2~preinstall: no script for preinstall, continuing
+340 silly doReverseSerial remove 0
+341 silly doSerial move 0
+342 silly doSerial finalize 4
+343 silly finalize /media/a/MOBISD/ss2/we2/zzrs/nodejs/node_modules/mime
+344 silly finalize /media/a/MOBISD/ss2/we2/zzrs/nodejs/node_modules/send
+345 silly finalize /media/a/MOBISD/ss2/we2/zzrs/nodejs/node_modules/serve-static
+346 silly finalize /media/a/MOBISD/ss2/we2/zzrs/nodejs/node_modules/express
+347 silly doSerial build 4
+348 silly build mime@1.3.4
+349 info linkStuff mime@1.3.4
+350 silly linkStuff mime@1.3.4 has /media/a/MOBISD/ss2/we2/zzrs/nodejs/node_modules as its parent node_modules
+351 verbose linkBins mime@1.3.4
+352 verbose link bins [ { mime: 'cli.js' },
+352 verbose link bins   '/media/a/MOBISD/ss2/we2/zzrs/nodejs/node_modules/.bin',
+352 verbose link bins   false ]
+353 verbose linkMans mime@1.3.4
+354 silly gentlyRm /media/a/MOBISD/ss2/we2/zzrs/nodejs/node_modules/.bin/mime is being purged
+355 verbose gentlyRm don't care about contents; nuking /media/a/MOBISD/ss2/we2/zzrs/nodejs/node_modules/.bin/mime
+356 verbose unlock done using /home/a/.npm/_locks/staging-4b7482fdd5a5bf91.lock for /media/a/MOBISD/ss2/we2/zzrs/nodejs/node_modules/.staging
+357 silly rollbackFailedOptional Starting
+358 silly rollbackFailedOptional Finishing
+359 silly runTopLevelLifecycles Finishing
+360 silly install printInstalled
+361 warn static@1.0.0 No description
+362 verbose If you need help, you may report this error at:
+362 verbose     <https://github.com/npm/npm/issues>
+363 warn static@1.0.0 No repository field.
+364 verbose If you need help, you may report this error at:
+364 verbose     <https://github.com/npm/npm/issues>
+365 verbose stack Error: EPERM: operation not permitted, symlink '../mime/cli.js' -> '/media/a/MOBISD/ss2/we2/zzrs/nodejs/node_modules/.bin/mime'
+365 verbose stack     at Error (native)
+366 verbose cwd /media/a/MOBISD/ss2/we2/zzrs/nodejs
+367 error Linux 3.16.0-38-generic
+368 error argv "/usr/bin/nodejs" "/usr/bin/npm" "install"
+369 error node v6.10.1
+370 error npm  v3.10.10
+371 error path ../mime/cli.js
+372 error code EPERM
+373 error errno -1
+374 error syscall symlink
+375 error Error: EPERM: operation not permitted, symlink '../mime/cli.js' -> '/media/a/MOBISD/ss2/we2/zzrs/nodejs/node_modules/.bin/mime'
+375 error     at Error (native)
+375 error  { Error: EPERM: operation not permitted, symlink '../mime/cli.js' -> '/media/a/MOBISD/ss2/we2/zzrs/nodejs/node_modules/.bin/mime'
+375 error     at Error (native)
+375 error   errno: -1,
+375 error   code: 'EPERM',
+375 error   syscall: 'symlink',
+375 error   path: '../mime/cli.js',
+375 error   dest: '/media/a/MOBISD/ss2/we2/zzrs/nodejs/node_modules/.bin/mime',
+375 error   parent: 'static' }
+376 error Please try running this command again as root/Administrator.
+377 verbose exit [ -1, true ]
