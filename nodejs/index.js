@@ -41,7 +41,7 @@ app.get('/status', function(request, response) {
 
 /*
 primer funkcije za postavitev baze in
-(TODO) za generacijo vrstic  
+Dostopno je na: /manager/postaviBazo
 */
 app.get('/manager/postaviBazo', function(request, response) {
   baza.dela(function(err, dela){
