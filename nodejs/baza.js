@@ -12,6 +12,8 @@ in njen management
 var database = require('pg');
 database.defaults.ssl = true;
 
+tabele={};
+ 
 
 /*
 	deinicija funkcij za export v druge skripte
@@ -32,7 +34,7 @@ module.exports = {
 		if(baza_dela){
 			database.connect(process.env.DATABASE_URL, function(err, client) {
 					  client.query(SQL_STRING)
-					  .on('end', () => {callback( SQL_STRING)})
+					  .on('end', () => {tabele[imeTabele] = true; callback( SQL_STRING, tabele)})
 					   
 			});
 				
@@ -57,19 +59,28 @@ module.exports = {
 	*/
 	generateRows: function(imeTabele, steviloVrstic, imeKljuca, predponaStolpcev, stStolpcev, callback){
 		//generira 
-		var SQL_STRING = "INSERT TABLE IF NOT EXISTS " + imeTabele +"("+imeKljuca+" "+ tipKljuca +",";
+		var row = 0;
+
+		var SQL_STRING = "INSERT INTO " + imeTabele +"("+imeKljuca+" "+ tipKljuca +",";
 		for(var i = 0; i < stStolpcev-1; i++){
 		  SQL_STRING = SQL_STRING + " " + predponaStolpcev+i+" " + tipStolpcev + ",";
 		}
 
-		SQL_STRING = SQL_STRING + " " + predponaStolpcev+i+" " + tipStolpcev + ");";
+		SQL_STRING = SQL_STRING + " " + predponaStolpcev+i+" " + tipStolpcev + ") VALUES";
 		/*
 				TODO: generacija vrstic z INSERT
 		*/
 
-	}
-
-
+	},
+	/*
+		Administratorska funkcija za drop tabele
+	*/
+	dropTable: function(imeTabele){
+		/*
+				TODO: Naredi drop tabele
+		*/
+	},
+	seznamTabel: function() {return tabele;}                            
 }
 
  
