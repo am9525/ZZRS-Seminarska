@@ -59,14 +59,50 @@ module.exports = {
 	*/
 	generateRows: function(imeTabele, steviloVrstic, imeKljuca, predponaStolpcev, stStolpcev, callback){
 		//generira 
-		var row = 0;
+		var SQL_STRING = "";
+		 
 
-		var SQL_STRING = "INSERT INTO " + imeTabele +"("+imeKljuca+" "+ tipKljuca +",";
+		//generacija stolpcev za klicanje
+		var stolpci = "";
+		var values = "";
 		for(var i = 0; i < stStolpcev-1; i++){
-		  SQL_STRING = SQL_STRING + " " + predponaStolpcev+i+" " + tipStolpcev + ",";
-		}
+			stolpci=stolpci.concat(" " + predponaStolpcev+i+" = 0,");
+		    values=values.concat(" 0,");
 
-		SQL_STRING = SQL_STRING + " " + predponaStolpcev+i+" " + tipStolpcev + ") VALUES";
+		}
+		 stolpci= stolpci.concat(" " + predponaStolpcev+i +"= 0");
+		 values= values.concat(" 0");
+		  //console.log(stolpci);
+		 //console.log(values);
+ 
+		for(var row = 0; row < steviloVrstic; row++){
+ 
+			SQL_STRING = SQL_STRING +("INSERT INTO " + imeTabele+ " ("+imeKljuca+ ") VALUES ("+ row +  "); ");
+ 
+		}
+		
+
+		database.connect(process.env.DATABASE_URL, function(err, client) {
+			 var copy2 = SQL_STRING;
+			 console.log("copy2: "+ copy2+"\n\n")
+			client.query(copy2)
+			.on('end', () => {
+				console.log("Done!"); 
+
+				setTimeout(function(){
+			 		SQL_UPDATE = "UPDATE "+imeTabele+" SET " + stolpci;
+			 		console.log("\n\n\n"+SQL_UPDATE);
+			 		database.connect(process.env.DATABASE_URL, function(err, client) {
+						client.query(SQL_UPDATE)
+						.on('end', () => {
+							console.log("Done! UPDATE"); 
+						});
+			 		});
+			 	}, 1000); 
+			});
+ 		});
+	 	
+		if(callback)	callback();
 		/*
 				TODO: generacija vrstic z INSERT
 		*/
@@ -75,16 +111,25 @@ module.exports = {
 	/*
 		Administratorska funkcija za drop tabele
 	*/
-	dropTable: function(imeTabele){
+ 	dropTable: function(imeTabele){
 		/*
 				TODO: Naredi drop tabele
 		*/
 	},
-	seznamTabel: function() {return tabele;}                            
+	seznamTabel: function() {
+		console.log("[f:seznamTabel]: " + JSON.stringify(tabele));
+		return tabele;
+	}                            
 }
 
  
-
+function w(){
+	for(var r = 0; r < steviloVrstic; r++){
+		okej = okej && ok[r];
+	};
+	console.log("okej: " +okej)
+	return okej
+}
 
 
 

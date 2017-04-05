@@ -32,7 +32,9 @@ primer funkcije za prikaz statusa
 app.get('/status', function(request, response) {
   baza.dela(function(err, dela){
     baza_dela = dela;
-    response.end('Status screen\nBaza dostopna: ' + baza_dela+ "\nDataUrl: " + process.env.DATABASE_URL);
+    RESPONSE='Status screen\nBaza dostopna: ' + baza_dela+ "\nDataUrl: " + process.env.DATABASE_URL;
+    if(dela) RESPONSE = RESPONSE + "\nSeznam tabel:\n"+ Object.keys(baza.seznamTabel());
+    response.end(RESPONSE);
 
   });
 });
@@ -44,8 +46,11 @@ primer funkcije za postavitev baze in
 app.get('/manager/postaviBazo', function(request, response) {
   baza.dela(function(err, dela){
     try{
-      baza.ustvariTabelo(baza_imeTabele, "ID", "int", "st","int", baza_steviloStolpcev, function(  SQL_STRING){
-        response.end("Postavitev baze z ukazom:\n"+SQL_STRING);
+        baza.ustvariTabelo(baza_imeTabele, "ID", "int", "st","int", baza_steviloStolpcev, function(  SQL_STRING){
+          baza.generateRows(baza_imeTabele, 1000, "ID", "st", baza_steviloStolpcev, function(){
+          response.end("Postavitev baze z ukazom:\n"+SQL_STRING);
+
+        });
       });
     }catch(err){
       console.log(err);
