@@ -54,44 +54,32 @@ module.exports = {
 	},
 
 
-	/*WIP
+	/*
 		Ta funkcija zgenerira vrstice v tabelo. 
 	*/
 	generateRows: function(imeTabele, steviloVrstic, imeKljuca, predponaStolpcev, stStolpcev, callback){
 		//generira 
 		var SQL_STRING = "";
-		 
 
 		//generacija stolpcev za klicanje
 		var stolpci = "";
 		var values = "";
 		for(var i = 0; i < stStolpcev-1; i++){
 			stolpci=stolpci.concat(" " + predponaStolpcev+i+" = 0,");
-		    values=values.concat(" 0,");
-
 		}
 		 stolpci= stolpci.concat(" " + predponaStolpcev+i +"= 0");
 		 values= values.concat(" 0");
-		  //console.log(stolpci);
-		 //console.log(values);
- 
+		SQL_STRING_FRONT = "INSERT INTO " + imeTabele+ " ("+imeKljuca+ ") VALUES (";
+		//Generacija INSERT vrstic
 		for(var row = 0; row < steviloVrstic; row++){
- 
-			SQL_STRING = SQL_STRING +("INSERT INTO " + imeTabele+ " ("+imeKljuca+ ") VALUES ("+ row +  "); ");
- 
+			SQL_STRING = SQL_STRING + SQL_STRING_FRONT + row +  "); " ;
 		}
-		
-
+		//Aktivacija ukaza SQL
 		database.connect(process.env.DATABASE_URL, function(err, client) {
-			 var copy2 = SQL_STRING;
-			 console.log("copy2: "+ copy2+"\n\n")
-			client.query(copy2)
-			.on('end', () => {
-				console.log("Done!"); 
-
+ 			client.query(SQL_STRING).on('end', () => {
+				console.log("Done! INSERT"); 
 				setTimeout(function(){
-			 		SQL_UPDATE = "UPDATE "+imeTabele+" SET " + stolpci;
-			 		console.log("\n\n\n"+SQL_UPDATE);
+			 		SQL_UPDATE = "UPDATE "+imeTabele+" SET " + stolpci; 
 			 		database.connect(process.env.DATABASE_URL, function(err, client) {
 						client.query(SQL_UPDATE)
 						.on('end', () => {
@@ -104,7 +92,7 @@ module.exports = {
 	 	
 		if(callback)	callback();
 		/*
-				TODO: generacija vrstic z INSERT
+				TODO: Polepšaj kodo in dodaj komentarje
 		*/
 
 	},
@@ -121,16 +109,6 @@ module.exports = {
 		return tabele;
 	}                            
 }
-
- 
-function w(){
-	for(var r = 0; r < steviloVrstic; r++){
-		okej = okej && ok[r];
-	};
-	console.log("okej: " +okej)
-	return okej
-}
-
 
 
 /*Kkao se konektat:
