@@ -97,6 +97,29 @@ module.exports = {
 
 	},
 	/*
+		nadgradi en zapis v podatkovni bazi
+	*/
+	updateOne:function(imeTabele,imeKljuca,predponaStolpcev,stStolpcev,id,data,okCallback,errorCallback){
+		var vrstica = Math.floor(id/stStolpcev);
+		var stolpec = id%stStolpcev;
+		var SQLSTAVEK = "UPDATE " + imeTabele + " SET " + predponaStolpcev+stolpec+" WHERE " + imeKljuca+" = "+vrstica;
+
+		database.connect(process.env.DATABASE_URL, function(err, client) {
+			if(!err){
+				client.query(SQLSTAVEK)
+					.on('end', () => {okCallback();})
+					.on('error', () => {errorCallback(err);});
+
+
+			}else{
+				errorCallback(err);
+			}
+	         
+		});
+
+
+	},
+	/*WIP
 		Administratorska funkcija za drop tabele
 	*/
  	dropTable: function(imeTabele){
