@@ -73,7 +73,7 @@ app.listen(app.get('port'), function() {
 
 app.post('/update', function(request, response) {
   console.log("ID: " + request.body.id+"\nData: " + request.body.data);
-  baza.updateOne(baza_imeTabele,"ID","st",baza_steviloStolpcev,request.body.id,request.body.data,function(){},function(err){});
+  baza.updateOne(baza_imeTabele,"ID","st",baza_steviloStolpcev,request.body.id,request.body.data,function(){ǒnsole.log(ok);},function(err){console.log(err);});
   //response.end();
 
 });

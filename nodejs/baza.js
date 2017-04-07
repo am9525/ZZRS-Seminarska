@@ -102,6 +102,7 @@ module.exports = {
 	updateOne:function(imeTabele,imeKljuca,predponaStolpcev,stStolpcev,id,data,okCallback,errorCallback){
 		var vrstica = Math.floor(id/stStolpcev);
 		var stolpec = id%stStolpcev;
+		console.log("vrstica: " + vrstica +" stolpec: "+ stolpec)
 		var SQLSTAVEK = "UPDATE " + imeTabele + " SET " + predponaStolpcev+stolpec+" WHERE " + imeKljuca+" = "+vrstica+";";
 
 		database.connect(process.env.DATABASE_URL, function(err, client) {
