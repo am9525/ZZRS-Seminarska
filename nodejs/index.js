@@ -8,7 +8,7 @@ app.use( bodyParser.json() );       // to support JSON-encoded bodies
 app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
   extended: true
 })); 
- 
+
 app.set('port', (process.env.PORT || 5000));
 
 //app.use(express.static(__dirname + '/public'));
@@ -72,9 +72,9 @@ app.listen(app.get('port'), function() {
 });
 
 app.post('/update', function(request, response) {
-  console.log("ID: " + request.id+"\nData: " + request.data);
+  console.log("ID: " + request.body.id+"\nData: " + request.body.data);
 
-  response.end("ID: " + request.id+"\nData: " + request.data);
+  response.end("ID: " + request.body.id+"\nData: " + request.body.data);
 
 });
 /*	Uporabiti bo lažje express, se mi zdi 
