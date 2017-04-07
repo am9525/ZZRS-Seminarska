@@ -86,8 +86,8 @@ module.exports = {
 							console.log("Done! UPDATE"); 
 						});
 			 		});
-			 	}, 1000); 
-			});
+			 	}, 1000);
+ 			});
  		});
 	 	
 		if(callback)	callback();
@@ -102,13 +102,13 @@ module.exports = {
 	updateOne:function(imeTabele,imeKljuca,predponaStolpcev,stStolpcev,id,data,okCallback,errorCallback){
 		var vrstica = Math.floor(id/stStolpcev);
 		var stolpec = id%stStolpcev;
-		var SQLSTAVEK = "UPDATE " + imeTabele + " SET " + predponaStolpcev+stolpec+" WHERE " + imeKljuca+" = "+vrstica;
+		var SQLSTAVEK = "UPDATE " + imeTabele + " SET " + predponaStolpcev+stolpec+" WHERE " + imeKljuca+" = "+vrstica+";";
 
 		database.connect(process.env.DATABASE_URL, function(err, client) {
 			if(!err){
 				client.query(SQLSTAVEK)
 					.on('end', () => {okCallback();})
-					.on('error', () => {errorCallback(err);});
+					.on('error',( ) => {errorCallback(err);});
 
 
 			}else{
