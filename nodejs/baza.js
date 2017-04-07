@@ -109,7 +109,7 @@ module.exports = {
 			if(!err){
 				client.query(SQLSTAVEK)
 					.on('end', () => {okCallback();})
-					.on('error',( ) => {errorCallback(err);});
+					.on('error',(err2) => {errorCallback(err2);});
 
 
 			}else{
