@@ -104,7 +104,7 @@ module.exports = {
 		var stolpec = id%stStolpcev;
 		console.log("vrstica: " + vrstica +" stolpec: "+ stolpec)
 		var SQLSTAVEK = "UPDATE " + imeTabele + " SET " + predponaStolpcev+stolpec+" WHERE " + imeKljuca+" = "+vrstica+";";
-
+		console.log("STAVEK: \n" + SQLSTAVEK);
 		database.connect(process.env.DATABASE_URL, function(err, client) {
 			if(!err){
 				client.query(SQLSTAVEK)
