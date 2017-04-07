@@ -74,7 +74,7 @@ app.listen(app.get('port'), function() {
 app.post('/update', function(request, response) {
   console.log("ID: " + request.body.id+"\nData: " + request.body.data);
 
-  response.end("ID: " + request.body.id+"\nData: " + request.body.data);
+  //response.end("");
 
 });
 /*	Uporabiti bo lažje express, se mi zdi 
