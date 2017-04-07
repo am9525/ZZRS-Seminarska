@@ -65,7 +65,7 @@ app.listen(app.get('port'), function() {
   console.log('Node app is running on port', app.get('port'));
 });
 
-app.get('/update', function(request, response) {
+app.post('/update', function(request, response) {
   console.log("ID: " + request.body.id+"\nData: " + request.body.data);
   response.end("ID: " + request.body.id+"\nData: " + request.body.data);
 
