@@ -103,7 +103,7 @@ module.exports = {
 		var vrstica = Math.floor(id/stStolpcev);
 		var stolpec = id%stStolpcev;
 		console.log("vrstica: " + vrstica +" stolpec: "+ stolpec)
-		var SQLSTAVEK = "UPDATE " + imeTabele + " SET " + predponaStolpcev+stolpec+" WHERE " + imeKljuca+" = "+vrstica+";";
+		var SQLSTAVEK = "UPDATE " + imeTabele + " SET " + predponaStolpcev+stolpec+"="+data+" WHERE " + imeKljuca+" = "+vrstica+";";
 		console.log("STAVEK: \n" + SQLSTAVEK);
 		database.connect(process.env.DATABASE_URL, function(err, client) {
 			if(!err){
