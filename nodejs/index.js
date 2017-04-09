@@ -64,7 +64,9 @@ app.get('/manager/postaviBazo', function(request, response) {
   });
 });
 app.get('/manager/uniciTabelo', function(request, response){
-  baza.dropTable(baza_imeTabele);
+  baza.dropTable(baza_imeTabele, function(err, droppedTable){
+    response.end("Drop tabele: "+droppedTable);
+  });
 });
 /*
 Aktivacija nodeJS
