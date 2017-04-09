@@ -63,17 +63,36 @@ app.get('/manager/postaviBazo', function(request, response) {
     }
   });
 });
-
+app.get('/manager/uniciTabelo', function(request, response){
+  baza.dropTable(baza_imeTabele);
+});
 /*
 Aktivacija nodeJS
 */
 app.listen(app.get('port'), function() {
   console.log('Node app is running on port', app.get('port'));
 });
+var stASenz = 10;     //število aktivnih senzorjev
+var stSprej = 0;      //število prejetih stanj senzorjev
+
+var casZadnji = 0     //čas zadnjega obdelanega
+var datum = new Date();
+
 
 app.post('/update', function(request, response) {
   console.log("ID: " + request.body.id+"\nData: " + request.body.data);
-  baza.updateOne(baza_imeTabele,"ID","st",baza_steviloStolpcev,request.body.id,request.body.data,function(){console.log("ok");},function(err){console.log(err);});
+  baza.updateOne(baza_imeTabele,"ID","st",baza_steviloStolpcev,request.body.id,request.body.data,function(vrstica, stolpec, id,data){
+    console.log("vrstica: " + vrstica +" stolpec: "+ stolpec);
+    stSprej++;
+    if(stSprej == stASenz) {
+      //aplikacija je prejela podatke za vse senzorje
+      //shrani se čas zadnjega obdelanega
+      casZadnji = datum.getTime();
+    }
+
+    console.log("ok");
+
+  },function(err){console.log(err);});
   //response.end();
 
 });

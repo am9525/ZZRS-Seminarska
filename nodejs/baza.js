@@ -102,13 +102,13 @@ module.exports = {
 	updateOne:function(imeTabele,imeKljuca,predponaStolpcev,stStolpcev,id,data,okCallback,errorCallback){
 		var vrstica = Math.floor(id/stStolpcev);
 		var stolpec = id%stStolpcev;
-		console.log("vrstica: " + vrstica +" stolpec: "+ stolpec)
+		
 		var SQLSTAVEK = "UPDATE " + imeTabele + " SET " + predponaStolpcev+stolpec+"="+data+" WHERE " + imeKljuca+" = "+vrstica+";";
-		console.log("STAVEK: \n" + SQLSTAVEK);
+		//console.log("STAVEK: \n" + SQLSTAVEK);
 		database.connect(process.env.DATABASE_URL, function(err, client) {
 			if(!err){
 				client.query(SQLSTAVEK)
-					.on('end', () => {okCallback();})
+					.on('end', () => {okCallback(vrstica, stolpec, id,data);})
 					.on('error',(err2) => {errorCallback(err2);});
 
 
@@ -120,14 +120,29 @@ module.exports = {
 
 
 	},
-	/*WIP
+	/* 
 		Administratorska funkcija za drop tabele
 	*/
- 	dropTable: function(imeTabele){
-		/*
-				TODO: Naredi drop tabele
-		*/
+ 	dropTable: function(imeTabele, callback){
+				 
+		database.connect(process.env.DATABASE_URL, function(err, client) {
+			if(!err){
+				client.query("DROP TABLE " + imeTabele)
+					.on('end', () => {
+						delete tabele[imeTabele];
+						callback(false,imeTabele);
+					})
+					.on('error',(err2) => {callback(err2 , imeTabele);});
+			}else{
+				callback(err2, imeTabele);
+			}
+	         
+		});
+
+
 	},
+
+
 	seznamTabel: function() {
 		console.log("[f:seznamTabel]: " + JSON.stringify(tabele));
 		return tabele;
