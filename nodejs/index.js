@@ -10,7 +10,9 @@ app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
 })); 
 
 app.set('port', (process.env.PORT || 5000));
-
+ /*
+    
+ */
 //app.use(express.static(__dirname + '/public'));
 
 //Spremenljivke za naso bazo.

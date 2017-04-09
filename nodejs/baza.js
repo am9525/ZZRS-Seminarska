@@ -16,30 +16,11 @@ tabele={};
  
 
 /*
-	deinicija funkcij za export v druge skripte
+	Definicije funkcij za export v druge skripte.
+	Urejene so po abecednem vrstnem redu
 */
 module.exports = {
-	/*
-		Ta funkcija ustvari tabelo, če tabela z istim imenom še ne obstaja obstaja
-	*/
-	ustvariTabelo: function (imeTabele, imeKljuca, tipKljuca, predponaStolpcev,tipStolpcev, stStolpcev, callback) {
-	    // whatever
-		var SQL_STRING = "CREATE TABLE IF NOT EXISTS " + imeTabele +"("+imeKljuca+" "+ tipKljuca +",";
-		for(var i = 0; i < stStolpcev-1; i++){
-		  SQL_STRING = SQL_STRING + " " + predponaStolpcev+i+" " + tipStolpcev + ",";
-		}
 
-		SQL_STRING = SQL_STRING + " " + predponaStolpcev+i+" " + tipStolpcev + ");";
-
-		if(baza_dela){
-			database.connect(process.env.DATABASE_URL, function(err, client) {
-					  client.query(SQL_STRING)
-					  .on('end', () => {tabele[imeTabele] = true; callback( SQL_STRING, tabele)})
-					   
-			});
-				
-		};
-	},
 	/*
 		Na hitro se preveri če podatkovna baza obstaja
 	*/
@@ -50,10 +31,25 @@ module.exports = {
 
 		    if(callback) callback(err, baza_dela);
 		});
-
 	},
-
-
+	/* 
+		Administratorska funkcija za drop tabele
+	*/
+ 	dropTable: function(imeTabele, callback){		 
+		database.connect(process.env.DATABASE_URL, function(err, client) {
+			if(!err){
+				client.query("DROP TABLE " + imeTabele)
+					.on('end', () => {
+						delete tabele[imeTabele];
+						callback(false,imeTabele);
+					})
+					.on('error',(err2) => {callback(err2 , imeTabele);});
+			}else{
+				callback(err2, imeTabele);
+			}
+	         
+		});
+	},
 	/*
 		Ta funkcija zgenerira vrstice v tabelo. 
 	*/
@@ -94,7 +90,11 @@ module.exports = {
 		/*
 				TODO: Polepšaj kodo in dodaj komentarje
 		*/
+	},
 
+	seznamTabel: function() {
+		console.log("[f:seznamTabel]: " + JSON.stringify(tabele));
+		return tabele;
 	},
 	/*
 		nadgradi en zapis v podatkovni bazi
@@ -117,36 +117,38 @@ module.exports = {
 			}
 	         
 		});
-
-
 	},
-	/* 
-		Administratorska funkcija za drop tabele
+	/*
+		Ta funkcija ustvari tabelo, če tabela z istim imenom še ne obstaja obstaja
 	*/
- 	dropTable: function(imeTabele, callback){
-				 
-		database.connect(process.env.DATABASE_URL, function(err, client) {
-			if(!err){
-				client.query("DROP TABLE " + imeTabele)
-					.on('end', () => {
-						delete tabele[imeTabele];
-						callback(false,imeTabele);
-					})
-					.on('error',(err2) => {callback(err2 , imeTabele);});
-			}else{
-				callback(err2, imeTabele);
-			}
-	         
-		});
+	ustvariTabelo: function (imeTabele, imeKljuca, tipKljuca, predponaStolpcev,tipStolpcev, stStolpcev, callback) {
+	    // whatever
+		var SQL_STRING = "CREATE TABLE IF NOT EXISTS " + imeTabele +"("+imeKljuca+" "+ tipKljuca +",";
+		for(var i = 0; i < stStolpcev-1; i++){
+		  SQL_STRING = SQL_STRING + " " + predponaStolpcev+i+" " + tipStolpcev + ",";
+		}
 
+		SQL_STRING = SQL_STRING + " " + predponaStolpcev+i+" " + tipStolpcev + ");";
 
+		if(baza_dela){
+			database.connect(process.env.DATABASE_URL, function(err, client) {
+					  client.query(SQL_STRING)
+					  .on('end', () => {tabele[imeTabele] = true; callback( SQL_STRING, tabele)})
+					   
+			});
+				
+		};
 	},
-
-
-	seznamTabel: function() {
-		console.log("[f:seznamTabel]: " + JSON.stringify(tabele));
-		return tabele;
-	}                            
+	/*
+		Pridobi vrstico in stolpec iz id-ja
+	*/
+	vrsticaStolpec: function(id, stStolpcev){ 
+		var VrSt = {};
+		VrSt.stolpec = id%stStolpcev
+		VrSt.vrstica = Math.floor(id/stStolpcev);
+		return VrSt
+	}
+                           
 }
 
 
