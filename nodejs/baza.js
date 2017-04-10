@@ -116,7 +116,7 @@ module.exports = {
 						}
 						
 						
-					   console.log(row.id);
+					    
 					})
 					.on('end', () => {
 						senzorji["lastRead"] =  new Date().getTime();
