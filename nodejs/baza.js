@@ -12,9 +12,11 @@ in njen management
 var database = require('pg');
 database.defaults.ssl = true;
 
-tabele={};
+var tabele={};
  
-
+var senzorji={};
+ senzorji["lastUpdate"] = -1;
+ senzorji["lastRead"] = -1;
 /*
 	Definicije funkcij za export v druge skripte.
 	Urejene so po abecednem vrstnem redu
@@ -91,6 +93,45 @@ module.exports = {
 				TODO: Polepšaj kodo in dodaj komentarje
 		*/
 	},
+	/*WIP
+		prebere podatke iz baze
+	*/
+	preberiSenzorje: function(imeTabele,stStolpcev, predponaStolpcev,callback){
+		database.connect(process.env.DATABASE_URL, function(err, client) {
+			  if (err) {callback(err )}
+			  else{
+				var raben = 0;
+				if((senzorji["lastUpdate"] > senzorji["lastRead"]) || senzorji["lastRead"] < 0 ){
+					console.log("reading senzor data ...");
+					client
+					.query('SELECT * FROM ' + imeTabele)
+					.on('row', function(row) {
+						if(raben == 0){
+							//console.log(Object.getOwnPropertyNames(row).sort())
+							raben++;
+						}
+						var dodatek = (row.id) *1000;
+						for(var st = 0; st < stStolpcev; st++){
+							senzorji[(st)+dodatek] = row[predponaStolpcev+st];
+						}
+						
+						
+					   console.log(row.id);
+					})
+					.on('end', () => {
+						senzorji["lastRead"] =  new Date().getTime();
+						if( senzorji["lastUpdate"] < 0){
+							 senzorji["lastUpdate"] = senzorji["lastRead"] ;
+						}
+						callback(false, senzorji);
+					});
+				}else {
+					console.log("data already present");
+					callback(false, senzorji)
+				}
+			}	
+		});
+	},
 
 	seznamTabel: function() {
 		console.log("[f:seznamTabel]: " + JSON.stringify(tabele));
@@ -155,7 +196,7 @@ module.exports = {
 /*Kkao se konektat:
 
 
-pg.connect(process.env.DATABASE_URL, function(err, client) {
+database.connect(process.env.DATABASE_URL, function(err, client) {
   if (err) throw err;
   console.log('Connected to postgres! Getting schemas...');
 

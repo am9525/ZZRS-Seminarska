@@ -65,6 +65,24 @@ app.get('/manager/postaviBazo', function(request, response) {
     }
   });
 });
+
+app.get('/senzorji', function(request, response) {
+  baza.dela(function(err, dela){
+    if(dela && !err){
+      baza.preberiSenzorje(baza_imeTabele,baza_steviloStolpcev,"st", function(err, data){
+        
+        response.end(""+JSON.stringify(data));
+      })
+    }else{
+      response.end(""+err);
+    }
+     
+
+  });
+});
+
+
+
 app.get('/manager/uniciTabelo', function(request, response){
   baza.dropTable(baza_imeTabele, function(err, droppedTable){
     response.end("Drop tabele: "+droppedTable);
@@ -76,12 +94,14 @@ Aktivacija nodeJS
 app.listen(app.get('port'), function() {
   console.log('Node app is running on port', app.get('port'));
 });
+
+
+
 var stASenz = 10;     //število aktivnih senzorjev
 var stSprej = 0;      //število prejetih stanj senzorjev
 
 var casZadnji = 0     //čas zadnjega obdelanega
-var datum = new Date();
-
+ 
 
 app.post('/update', function(request, response) {
   console.log("ID: " + request.body.id+"\nData: " + request.body.data);
@@ -91,7 +111,7 @@ app.post('/update', function(request, response) {
     if(stSprej == stASenz) {
       //aplikacija je prejela podatke za vse senzorje
       //shrani se čas zadnjega obdelanega
-      casZadnji = datum.getTime();
+      casZadnji = new Date().getTime();
     }
 
     console.log("ok");
