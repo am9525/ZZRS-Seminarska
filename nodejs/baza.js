@@ -12,8 +12,11 @@ in njen management
 var database = require('pg');
 database.defaults.ssl = true;
 
+//hrani key : value vrednost, key = imeTabele, value = true/false, ali tabela obstaja ali ne
+//ce tabela ze obstaja jo funkcija ustvariTabelo ne gre postavljat
 var tabele={};
  
+//hranimo stevilo prebranih in posodobljenih senzorjev
 var senzorji={};
  senzorji["lastUpdate"] = -1;
  senzorji["lastRead"] = -1;
@@ -53,42 +56,46 @@ module.exports = {
 		});
 	},
 	/*
-		Ta funkcija zgenerira vrstice v tabelo. 
+		Ta funkcija zgenerira vrstice in jih vstavi v tabelo. 
 	*/
 	generateRows: function(imeTabele, steviloVrstic, imeKljuca, predponaStolpcev, stStolpcev, callback){
-		//generira 
+		//SQL stavek za kasnejso uporabo
 		var SQL_STRING = "";
 
-		//generacija stolpcev za klicanje
-		var stolpci = "";
-		var values = "";
-		for(var i = 0; i < stStolpcev-1; i++){
-			stolpci=stolpci.concat(" " + predponaStolpcev+i+" = 0,");
-		}
-		 stolpci= stolpci.concat(" " + predponaStolpcev+i +"= 0");
-		 values= values.concat(" 0");
+		//generairanej vrstic 
+		//SQL ukaz oblike INSERT INTO imeTabele (imeKljuca) VALUES(0);INSERT INTO imeTabele (imeKljuca) VALUES(1);...
 		SQL_STRING_FRONT = "INSERT INTO " + imeTabele+ " ("+imeKljuca+ ") VALUES (";
 		//Generacija INSERT vrstic
 		for(var row = 0; row < steviloVrstic; row++){
 			SQL_STRING = SQL_STRING + SQL_STRING_FRONT + row +  "); " ;
 		}
+		//generiramo vrednost stolpcev 
+		//SQL ukaz je oblike UPDATE imeTabele SET predponaStolpcev = 0
+		var stolpci = "";
+		for(var i = 0; i < stStolpcev-1; i++){
+			stolpci=stolpci.concat(" " + predponaStolpcev+i+" = 0,");
+		}
+		 stolpci= stolpci.concat(" " + predponaStolpcev+i +"= 0");
+
 		//Aktivacija ukaza SQL
 		database.connect(process.env.DATABASE_URL, function(err, client) {
- 			client.query(SQL_STRING).on('end', () => {
-				console.log("Done! INSERT"); 
+ 			//Izvedemo INSERT SQL ukaz ki smo ga prej generirali
+			 client.query(SQL_STRING).on('end', () => {
+				console.log("Done! Created "+steviloVrstic+" rows from ID:0 to ID:",steviloVrstic); 
 				setTimeout(function(){
+					//Izvedemo UDPATE SQL ukaz 1000x(se mi zdi), ki smo ga prej generirali
 			 		SQL_UPDATE = "UPDATE "+imeTabele+" SET " + stolpci; 
 			 		database.connect(process.env.DATABASE_URL, function(err, client) {
 						client.query(SQL_UPDATE)
 						.on('end', () => {
-							console.log("Done! UPDATE"); 
+							console.log("Done! Filled all entries with value 0"); 
 						});
 			 		});
 			 	}, 1000);
  			});
  		});
 	 	
-		if(callback)	callback();
+		if(callback)callback();
 		/*
 				TODO: Polepšaj kodo in dodaj komentarje
 		*/
@@ -105,18 +112,16 @@ module.exports = {
 					console.log("reading senzor data ...");
 					client
 					.query('SELECT * FROM ' + imeTabele)
-					.on('row', function(row) {
+					.on('row', function(row) { // za izvede za vsako vrstico ki nam vrne SELECT
 						if(raben == 0){
 							//console.log(Object.getOwnPropertyNames(row).sort())
 							raben++;
 						}
-						var dodatek = (row.id) *1000;
+						// ID = 0 imamo senozrje od 0 -999 ID =1 od 1000-1999 zato rabim dodatek
+						var dodatek = (row.id) *1000; 
 						for(var st = 0; st < stStolpcev; st++){
 							senzorji[(st)+dodatek] = row[predponaStolpcev+st];
 						}
-						
-						
-					    
 					})
 					.on('end', () => {
 						senzorji["lastRead"] =  new Date().getTime();
@@ -140,20 +145,21 @@ module.exports = {
 	/*
 		nadgradi en zapis v podatkovni bazi
 	*/
-	updateOne:function(imeTabele,imeKljuca,predponaStolpcev,stStolpcev,id,data,okCallback,errorCallback){
-		var vrstica = Math.floor(id/stStolpcev);
-		var stolpec = id%stStolpcev;
+	updateOne:function(imeTabele,imeKljuca,predponaStolpcev,stStolpcev,senzorId,data,okCallback,errorCallback){
+		var vrsticaId = Math.floor(senzorId/stStolpcev);
+		var stolpecId = senzorId%stStolpcev;
 		
-		var SQLSTAVEK = "UPDATE " + imeTabele + " SET " + predponaStolpcev+stolpec+"="+data+" WHERE " + imeKljuca+" = "+vrstica+";";
-		//console.log("STAVEK: \n" + SQLSTAVEK);
+		var SQLSTAVEK = "UPDATE " + imeTabele + " SET " + predponaStolpcev+stolpecId+"="+data+" WHERE " + imeKljuca+" = "+vrsticaId+";";
+		console.log("Updating sensor with ID = "+senzorId+" value")
 		database.connect(process.env.DATABASE_URL, function(err, client) {
 			if(!err){
 				client.query(SQLSTAVEK)
-					.on('end', () => {okCallback(vrstica, stolpec, id,data);})
-					.on('error',(err2) => {errorCallback(err2);});
+					.on('end', () => {okCallback(vrsticaId, stolpecId, senzorId,data);})
+					.on('error',(err2) => {console.log("updateOne error");errorCallback(err2);});
 
 
 			}else{
+				console.log("updateOne error2");
 				errorCallback(err);
 			}
 	         
@@ -163,19 +169,20 @@ module.exports = {
 		Ta funkcija ustvari tabelo, če tabela z istim imenom še ne obstaja obstaja
 	*/
 	ustvariTabelo: function (imeTabele, imeKljuca, tipKljuca, predponaStolpcev,tipStolpcev, stStolpcev, callback) {
-	    // whatever
+	    //zgeneriramo SQL stavek ki ustvari tabelo z 1000 + 1 stolpci, ker je 1 stolpec id
 		var SQL_STRING = "CREATE TABLE IF NOT EXISTS " + imeTabele +"("+imeKljuca+" "+ tipKljuca +",";
 		for(var i = 0; i < stStolpcev-1; i++){
 		  SQL_STRING = SQL_STRING + " " + predponaStolpcev+i+" " + tipStolpcev + ",";
 		}
-
 		SQL_STRING = SQL_STRING + " " + predponaStolpcev+i+" " + tipStolpcev + ");";
 
 		if(baza_dela){
 			database.connect(process.env.DATABASE_URL, function(err, client) {
 					  client.query(SQL_STRING)
-					  .on('end', () => {tabele[imeTabele] = true; callback( SQL_STRING, tabele)})
-					   
+					  .on('end', () => {
+						  tabele[imeTabele] = true; 
+						  callback( SQL_STRING, tabele)
+						})
 			});
 				
 		};
