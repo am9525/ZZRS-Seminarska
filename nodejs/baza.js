@@ -31,6 +31,7 @@ module.exports = {
 	*/
 	dela: function(callback){
 		database.connect(process.env.DATABASE_URL, function(err, client) {
+			console.log("from dela");
 	        if(!err && process.env.DATABASE_URL) baza_dela = true;
 	        else baza_dela = false;
 
@@ -105,7 +106,7 @@ module.exports = {
 	*/
 	preberiSenzorje: function(imeTabele,stStolpcev, predponaStolpcev,callback){
 		database.connect(process.env.DATABASE_URL, function(err, client) {
-			  if (err) {callback(err )}
+			  if (err) {console.log("preberiSeonzorje somethign went wrong");callback(err )}
 			  else{
 				var raben = 0;
 				if((senzorji["lastUpdate"] > senzorji["lastRead"]) || senzorji["lastRead"] < 0 ){

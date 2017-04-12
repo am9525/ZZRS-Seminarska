@@ -1,9 +1,9 @@
 var request = require('request');
 
-var numSensors = 10;
+var numSensors = 5;
 var sensors = [];
 var refreshRate = 10000; //ms
-var sendDelay = 50; //ms, delay between request from each sensor
+var sendDelay = 100; //ms, delay between request from each sensor
 //create initial sensor array
 for(var i = 0; i < numSensors; i++){
     sensors.push({id : i, data: 0})
@@ -29,6 +29,6 @@ setInterval(function(){
         setTimeout(function(){
             request.post('http://localhost:5000/update').form(sensors[sensorID]);
             sensorID++
-        },1);
+        },sendDelay);
     }
 },refreshRate)

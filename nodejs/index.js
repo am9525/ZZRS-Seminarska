@@ -65,6 +65,7 @@ app.get('/manager/postaviBazo', function(request, response) {
 });
 
 app.get('/senzorji', function(request, response) {
+  console.log("recieved /seonzorji request");
   baza.dela(function(err, dela){
     if(dela && !err){
       baza.preberiSenzorje(baza_imeTabele,baza_steviloStolpcev,"st", function(err, data){
@@ -72,6 +73,7 @@ app.get('/senzorji', function(request, response) {
         response.end(""+JSON.stringify(data));
       })
     }else{
+      console.log("DB is not working");
       response.end(""+err);
     }
      
