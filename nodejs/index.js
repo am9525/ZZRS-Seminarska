@@ -1,4 +1,3 @@
-
 var express = require('express');
 
 
@@ -26,6 +25,12 @@ var baza_steviloStolpcev = 1000;  //stevilo podatkovnih stolpcev v tabeli, brez 
 
 var baza_imeTabele = "Test";   //Ime tabele
 
+//parametri za sentorje
+var stASenz = 5;     //število aktivnih senzorjev
+var stSprej = 0;      //število prejetih stanj senzorjev
+var casZadnji = 0     //čas zadnjega obdelanega
+var casPrvi = 0;      //cas prvega obdelanega paketa
+var timeDiffms = 0; //time difference between first and last request
 
 
 app.get('/', function(request, response) {
@@ -41,7 +46,12 @@ app.get('/status', function(request, response) {
     baza_dela = dela;
     RESPONSE='Status screen\nBaza dostopna: ' + baza_dela + "\nDataUrl: " + process.env.DATABASE_URL;
     if(dela) RESPONSE = RESPONSE + "\nSeznam tabel:\n"+ Object.keys(baza.seznamTabel());
-    response.end(RESPONSE);
+    var jsonResponse = JSON.stringify({ 
+    DBAccessible: true, 
+    DataURL: process.env.DATABASE_URL, 
+    TableList: Object.keys(baza.seznamTabel()),
+  });
+    response.end(jsonResponse);
   });
 });
 
@@ -99,36 +109,39 @@ app.listen(app.get('port'), function() {
   console.log('Node app is running on port', app.get('port'));
 });
 
-var stASenz = 5;     //število aktivnih senzorjev
-var stSprej = 0;      //število prejetih stanj senzorjev
-
-var casZadnji = 0     //čas zadnjega obdelanega
- 
-
 app.post('/update', function(request, response) {
   console.log("ID: " + request.body.id+"\nData: " + request.body.data);
   baza.updateOne(baza_imeTabele,"ID","st",baza_steviloStolpcev,request.body.id,request.body.data,function(vrstica, stolpec, id,data){
     console.log("vrstica: " + vrstica +" stolpec: "+ stolpec + " Value: " + data + " OK" );
+    
+
+    //zapomnimo obdelave prve zahteve
+    if(stSprej === 0){
+      casPrvi = new Date().getTime();
+    }
     stSprej++;
     if(stSprej == stASenz) {
       //aplikacija je prejela podatke za vse senzorje
       //shrani se čas zadnjega obdelanega
-      
-      
-
       casZadnji = new Date().getTime();
       baza.setUpdateTime(casZadnji);
       console.log("Prejel " + stSprej + " zahtev" );
-      stSprej = 0;
+      timeDiffms = casZadnji-casPrvi;
+      var timeDiff = new Date(timeDiffms);
       
+      console.log("time took -> "+ timeDiffms+ "ms -> "+ timeDiff.getMinutes()+"min, "+timeDiff.getSeconds()+"sec");
+      stSprej = 0;
     }
-
-   
-
   },function(err){
     console.log(err);
   });
-  //response.end();
+  //zato da nas clienti ne cakajo na repoonse
+  response.end();
+});
+app.post('/manager/setNumSensors', function(request, response) {
+  stASenz = request.body.numSenz
+  console.log("Set the number of sensors to: "+stASenz)
+  response.end("Set the number of sensors to: "+stASenz);
 
 });
 /*	Uporabiti bo lažje express, se mi zdi 
