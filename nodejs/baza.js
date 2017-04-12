@@ -20,6 +20,17 @@ var tabele={};
 var senzorji={};
  senzorji["lastUpdate"] = -1;
  senzorji["lastRead"] = -1;
+
+//Hramba za clienta, ki v postgres kliče UPDATE
+var HerokuClient = new database.Client(process.env.DATABASE_URL);
+HerokuClient.connect();
+//Tale client naj bi bil za metodo prberiSenzorje; ampak iz nekega razloga vedno naredi novo povezavo.
+//mogoče produkt SQL ukaza SELECT ??
+var HerokuSelectClient = new database.Client(process.env.DATABASE_URL);
+HerokuSelectClient.connect();
+//
+
+
 /*
 	Definicije funkcij za export v druge skripte.
 	Urejene so po abecednem vrstnem redu
@@ -46,10 +57,11 @@ module.exports = {
 			if(!err){
 				client.query("DROP TABLE " + imeTabele)
 					.on('end', () => {
+						client.end();
 						delete tabele[imeTabele];
 						callback(false,imeTabele);
 					})
-					.on('error',(err2) => {callback(err2 , imeTabele);});
+					.on('error',(err2) => {client.end(); callback(err2 , imeTabele);});
 			}else{
 				callback(err2, imeTabele);
 			}
@@ -82,6 +94,7 @@ module.exports = {
 		database.connect(process.env.DATABASE_URL, function(err, client) {
  			//Izvedemo INSERT SQL ukaz ki smo ga prej generirali
 			 client.query(SQL_STRING).on('end', () => {
+			 	client.end();
 				console.log("Done! Created "+steviloVrstic+" rows from ID:0 to ID:",steviloVrstic); 
 				setTimeout(function(){
 					//Izvedemo UDPATE SQL ukaz 1000x(se mi zdi), ki smo ga prej generirali
@@ -89,6 +102,7 @@ module.exports = {
 			 		database.connect(process.env.DATABASE_URL, function(err, client) {
 						client.query(SQL_UPDATE)
 						.on('end', () => {
+							client.end();
 							console.log("Done! Filled all entries with value 0"); 
 						});
 			 		});
@@ -102,43 +116,44 @@ module.exports = {
 		*/
 	},
 	/*WIP
-		prebere podatke iz baze
+		prebere podatke iz baze. Samo za Debugging!!!
 	*/
 	preberiSenzorje: function(imeTabele,stStolpcev, predponaStolpcev,callback){
-		database.connect(process.env.DATABASE_URL, function(err, client) {
-			  if (err) {console.log("preberiSeonzorje somethign went wrong");callback(err )}
-			  else{
-				var raben = 0;
-				if((senzorji["lastUpdate"] > senzorji["lastRead"]) || senzorji["lastRead"] < 0 ){
-					console.log("reading senzor data ...");
-					client
-					.query('SELECT * FROM ' + imeTabele)
-					.on('row', function(row) { // za izvede za vsako vrstico ki nam vrne SELECT
-						if(raben == 0){
-							//console.log(Object.getOwnPropertyNames(row).sort())
-							raben++;
-						}
-						// ID = 0 imamo senozrje od 0 -999 ID =1 od 1000-1999 zato rabim dodatek
-						var dodatek = (row.id) *1000; 
-						for(var st = 0; st < stStolpcev; st++){
-							senzorji[(st)+dodatek] = row[predponaStolpcev+st];
-						}
-					})
-					.on('end', () => {
-						senzorji["lastRead"] =  new Date().getTime();
-						if( senzorji["lastUpdate"] < 0){
-							 senzorji["lastUpdate"] = senzorji["lastRead"] ;
-						}
-						callback(false, senzorji);
-					});
-				}else {
-					console.log("data already present");
-					callback(false, senzorji)
-				}
-			}	
-		});
-	},
+		if((senzorji["lastUpdate"] > senzorji["lastRead"]) || senzorji["lastRead"] < 0 ){
+		 	
+			var query = HerokuSelectClient.query('SELECT * FROM ' + imeTabele);
+			query
+				.on('row', (row) => {
+					var dodatek = (row.id) *stStolpcev; 
+					for(var st = 0; st < stStolpcev; st++){
+						senzorji[(st)+dodatek] = row[predponaStolpcev+st];
+					}
 
+				})
+				.on('end', () => {
+					 //HerokuSelectClient.end();
+					senzorji["lastRead"] =  new Date().getTime();
+					if( senzorji["lastUpdate"] < 0){
+						 senzorji["lastUpdate"] = senzorji["lastRead"] ;
+					}
+					callback(false, senzorji);
+				})
+				.on('error',(err2) => {
+					 // HerokuSelectClient.end();
+					 callback(err2,senzorji);
+				});
+
+		}else{
+			console.log("data already present");
+			callback(false, senzorji);
+		}
+	},
+	/*
+		nastavi senzorji["lastUpdate"] na čas, ki je shranjen v argumentu time
+	*/
+	setUpdateTime: function(time){
+		senzorji["lastUpdate"] = time;
+	},
 	seznamTabel: function() {
 		console.log("[f:seznamTabel]: " + JSON.stringify(tabele));
 		return tabele;
@@ -151,41 +166,35 @@ module.exports = {
 		var stolpecId = senzorId%stStolpcev;
 		
 		var SQLSTAVEK = "UPDATE " + imeTabele + " SET " + predponaStolpcev+stolpecId+"="+data+" WHERE " + imeKljuca+" = "+vrsticaId+";";
-		console.log("Updating sensor with ID = "+senzorId+" value")
-		database.connect(process.env.DATABASE_URL, function(err, client) {
-			if(!err){
-				client.query(SQLSTAVEK)
-					.on('end', () => {okCallback(vrsticaId, stolpecId, senzorId,data);})
-					.on('error',(err2) => {console.log("updateOne error");errorCallback(err2);});
-
-
-			}else{
-				console.log("updateOne error2");
-				errorCallback(err);
-			}
-	         
-		});
+		 
+		var query = HerokuClient.query(SQLSTAVEK);
+		query.on('end', () => { okCallback(vrsticaId, stolpecId, senzorId,data);})
+			 .on('error',(err2) => { console.log("updateOne error");errorCallback(err2);});
 	},
 	/*
 		Ta funkcija ustvari tabelo, če tabela z istim imenom še ne obstaja obstaja
 	*/
 	ustvariTabelo: function (imeTabele, imeKljuca, tipKljuca, predponaStolpcev,tipStolpcev, stStolpcev, callback) {
 	    //zgeneriramo SQL stavek ki ustvari tabelo z 1000 + 1 stolpci, ker je 1 stolpec id
-		var SQL_STRING = "CREATE TABLE IF NOT EXISTS " + imeTabele +"("+imeKljuca+" "+ tipKljuca +",";
+		var SQL_STRING = "CREATE TABLE IF NOT EXISTS " + imeTabele +"("+imeKljuca+" "+ tipKljuca +" PRIMARY KEY,";
 		for(var i = 0; i < stStolpcev-1; i++){
 		  SQL_STRING = SQL_STRING + " " + predponaStolpcev+i+" " + tipStolpcev + ",";
 		}
 		SQL_STRING = SQL_STRING + " " + predponaStolpcev+i+" " + tipStolpcev + ");";
 
-		if(baza_dela){
+		if(baza_dela && tabele[imeTabele] != true){
 			database.connect(process.env.DATABASE_URL, function(err, client) {
 					  client.query(SQL_STRING)
 					  .on('end', () => {
+					  	  client.end();
 						  tabele[imeTabele] = true; 
-						  callback( SQL_STRING, tabele)
+						  callback(false, SQL_STRING, tabele)
 						})
+					  .on('error', (err2) => {client.end(); callback(err, SQL_STRING, tabele)});
 			});
 				
+		}else{
+			callback("Baza ne dela ali je že postavljena", "Baza ne dela ali je že postavljena", tabele);
 		};
 	},
 	/*
@@ -215,3 +224,4 @@ database.connect(process.env.DATABASE_URL, function(err, client) {
     });
 });
 */
+ 

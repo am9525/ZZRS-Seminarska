@@ -52,14 +52,20 @@ Dostopno je na: /manager/postaviBazo
 app.get('/manager/postaviBazo', function(request, response) {
   baza.dela(function(err, dela){
     try{
-        baza.ustvariTabelo(baza_imeTabele, "ID", "int", "st","int", baza_steviloStolpcev, function(SQL_STRING){
-          baza.generateRows(baza_imeTabele, 1000, "ID", "st", baza_steviloStolpcev, function(){
-          response.end("Postavitev baze z ukazom:\n"+SQL_STRING);
 
-        });
+        baza.ustvariTabelo(baza_imeTabele, "ID", "int", "st","int", baza_steviloStolpcev, function(err, SQL_STRING, tabele){
+          if(err) {
+            response.end("Napaka: " + err); 
+          }
+          else{
+            baza.generateRows(baza_imeTabele, 1000, "ID", "st", baza_steviloStolpcev, function(){
+              response.end("Postavitev baze z ukazom:\n"+SQL_STRING); 
+            });
+          }
+          
       });
     }catch(err){
-      console.log(err);
+      console.log("tryCatch"+err);
     }
   });
 });
@@ -93,7 +99,7 @@ app.listen(app.get('port'), function() {
   console.log('Node app is running on port', app.get('port'));
 });
 
-var stASenz = 10;     //število aktivnih senzorjev
+var stASenz = 5;     //število aktivnih senzorjev
 var stSprej = 0;      //število prejetih stanj senzorjev
 
 var casZadnji = 0     //čas zadnjega obdelanega
@@ -102,17 +108,26 @@ var casZadnji = 0     //čas zadnjega obdelanega
 app.post('/update', function(request, response) {
   console.log("ID: " + request.body.id+"\nData: " + request.body.data);
   baza.updateOne(baza_imeTabele,"ID","st",baza_steviloStolpcev,request.body.id,request.body.data,function(vrstica, stolpec, id,data){
-    console.log("vrstica: " + vrstica +" stolpec: "+ stolpec);
+    console.log("vrstica: " + vrstica +" stolpec: "+ stolpec + " Value: " + data + " OK" );
     stSprej++;
     if(stSprej == stASenz) {
       //aplikacija je prejela podatke za vse senzorje
       //shrani se čas zadnjega obdelanega
+      
+      
+
       casZadnji = new Date().getTime();
+      baza.setUpdateTime(casZadnji);
+      console.log("Prejel " + stSprej + " zahtev" );
+      stSprej = 0;
+      
     }
 
-    console.log("ok");
+   
 
-  },function(err){console.log(err);});
+  },function(err){
+    console.log(err);
+  });
   //response.end();
 
 });
