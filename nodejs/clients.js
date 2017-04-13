@@ -6,7 +6,7 @@ const sendDelay = 1; //ms, delay between request from each sensor
 var sensors = []; // sensor ID and value array
 var executeOnce = 1; //flag to choose if you want continuous execution or not
 var primeDB = 0; //flag to choose if you want to fill the DB with 0 for each sensor
-
+document.write();
 /*
 request.get('http://localhost:5000/status').on('response',(response)=>{
     var test = JSON.parse(JSON.stringify(response));
@@ -16,7 +16,7 @@ request.get('http://localhost:5000/status').on('response',(response)=>{
 //preverjamo ali je baza dostopna
 
 //send numSensors to server
-var response = request.post('http://localhost:5000/manager/setNumSensors').form({numSenz : numSensors});
+request.post('http://localhost:5000/manager/setNumSensors').form({numSenz : numSensors});
 //create initial sensor array
 for(var i = 0; i < numSensors; i++){
     sensors.push({id : i, data: 0})
