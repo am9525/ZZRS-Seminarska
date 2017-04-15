@@ -9,6 +9,15 @@ app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
   extended: true
 })); 
 
+
+app.use(express.static(__dirname + '/view/css'));
+
+// views is directory for all template files
+app.set('views', __dirname + '/view/ejs');
+app.set('view engine', 'ejs');
+
+
+
 app.set('port', (process.env.PORT || 5000));
  /*
     
@@ -29,7 +38,7 @@ var baza_imeTabele = "Test";   //Ime tabele
 
 
 app.get('/', function(request, response) {
-  response.end('Hello Node.js FFFServer!');
+  response.render('index');
 });
 
 
