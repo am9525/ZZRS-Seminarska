@@ -1,19 +1,41 @@
-<!doctype >
+<!DOCTYPE >
 <html>
-<head>
-	<meta charset="UTF-8" />
-	<title>Kontrolna plo&scaron;ča</title>
-	<link href="style.css" rel="stylesheet" type="text/css">
-</head>
-<body>
-<div id="naslovniDel">
-	<h1>Kontrolna plošča</h1>
-</div>
-<div id="status">
-	<h3>Status plošča</h3>
-</div>
-<div id="kontroleTabele">
-	<h3>Kontrola baze</h3>
-</div>
-</body>
+  <head>
+    <meta content="text/html; charset=UTF-8" http-equiv="content-type">
+    <meta http-equiv="refresh" content="5">
+    <title>Kontrolna plošča</title>
+    <!--<link href="../css/style.css" rel="stylesheet" type="text/css">-->
+    <link href="style.css" rel="stylesheet" type="text/css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+  </head>
+  <body  >
+    <div id="naslovniDel">
+      <h1 class="padd10">Kontrolna plošča</h1>
+    </div>
+    <div id="status"> <span>
+        <div id="statusInnards1" class="internalSection  borderbox">
+          <h3>Status plošča</h3>
+          <p>adwd</p>
+        </div>
+        <div id="statusInnards2" class="internalSection  padd10l borderbox">
+          <h3>Kontrola testov:</h3>
+          <p class="inline">število aktivnih senzorjev:</p>  <input type="text" name="stASenz" class="inline">
+          <br>
+          <p class="inline">Tip testa:</p><seldiv><select id="izbiraTesta" class="inline"></select></seldiv>
+          <br>
+          <p class="inline">Število zapordnih testov:</p> <input type="text" name="stZapTest" class="inline">
+          <br>
+          <input type="submit" value="Zaženi test" name="btZazTest">
+          <br>
+          <p>Čas potreben za končanje zadnjega testa:</p>
+          <p>Časi posameznega vnosa:</p> 
+          <p>Najmanjši čas:</p> 
+          <p>Največji čas:</p> 
+          <p>Povprečni čas:</p> 
+        </div>
+      </span> </div>
+    <div id="kontroleTabele">
+      <h3>Kontrola baze</h3>
+    </div>
+  </body>
 </html>

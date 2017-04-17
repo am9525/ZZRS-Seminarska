@@ -1,0 +1,31 @@
+<!DOCTYPE >
+<html>
+  <head>
+    <meta content="text/html; charset=UTF-8" http-equiv="content-type">
+    <meta http-equiv="refresh" content="5">
+    <title>Kontrolna plošča</title>
+    <link href="../css/style.css" rel="stylesheet" type="text/css">
+    <link href="style.css" rel="stylesheet" type="text/css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+  </head>
+  <body width="100%">
+    <div id="naslovniDel">
+      <h1 class="padd10">Kontrolna plošča</h1>
+    </div>
+    <div id="status"> <span width="100%">
+        <div id="statusInnards1" class=" halfWidth internalSection">
+          <h3>Status plošča</h3>
+          <p>adwd</p>
+        </div>
+        <div id="statusInnards2" class=" 40Width internalSection">
+          <h3>Kontrola testov:</h3>
+          <p>število aktivnih senzorjev: </p>
+          <p>Začni test posamičnega vnašanja podatkov vbazo:</p>
+          <p>Čas potreben za končanje testa:</p>
+        </div>
+      </span> </div>
+    <div id="kontroleTabele">
+      <h3>Kontrola baze</h3>
+    </div>
+  </body>
+</html>
