@@ -1,4 +1,3 @@
-
 #heading{
     color: dimgrey;
     text-align: center;/* align the heading at the center*/
@@ -12,20 +11,31 @@
     border: 2px solid dodgerblue;
     padding: 5px; /*how bug is the input field, inside*/
     text-align: center; /* align labels at the center of inputs fields*/
-    width: 40%
-    /*
     width: 200px;
-    height: 150px; */
+}
+.urlField{
+    border-radius: 25px; /* for curved inputs fields*/
+    border: 2px solid dodgerblue;
+    padding: 5px; /*how bug is the input field, inside*/
+    text-align: center; /* align labels at the center of inputs fields*/
+    width: 200px;
 }
 body{
     display: flex;
 }
+ul{
+    width: 200px;
+    height: 60px;
+    margin: auto;
+    color: red;
+}
 #pageBorder{
-    border: 2px solid lightskyblue;
+    border: 2px solid dodgerblue;
     border-radius: 15px;
     width: 500px;
     margin: auto; /* da se postavi na sredino */
     padding-bottom: 20px;
+    background-color:  #f2f2f2
 }
 .flex {
     display: flex;
@@ -67,27 +77,43 @@ label{
     width: 90px;
     border-radius: 25px;
 }
-#start:hover {
+.buttonDisabled {
+    margin: 5px auto; /* use this to align buttons at center*/
+    background-color:  darkgrey;
+    border: 2px solid dodgerblue;
+    color: dimgrey;
+    padding: 16px 25px;
+    text-align: center;
+    font-family: 'Rubik', sans-serif;
+    color: dimgrey;
+    -webkit-transition-duration: 0.4s;
+    transition-duration: 0.4s;
+    width: 90px;
+    border-radius: 25px; 
+}
+.button#start:hover {
     background-color: limegreen;
     border-color: limegreen;
     color: white;
 }
-#stop:hover {
+.button#stop:hover {
     background-color: red;
     border-color: red;
     color: white;
 }
-/* The switch - the box araound the dlier*/
+/* The switch - the box araound the sldier*/
 .switch {
     position: relative;
     display: inline-block;
     width: 60px;
     height: 34px;
     margin-right: 0px;
+    
 }
 /* hides the default HTML checkbox*/
 .switch input {
     display: none;
+    
 }
 /* slider backround *preparation* */
 .slider {
@@ -98,7 +124,7 @@ label{
     right: 0;
     bottom: 0;
     border: 2px solid dodgerblue;
-    background-color: ghostwhite;
+    background-color: white;
     -webkit-transition: .4s;
     transition: .4s;
 }
@@ -175,7 +201,7 @@ input:checked + .slider:before {
     right: 0;
     bottom: 0;
     border: 2px solid dodgerblue;
-    background-color: ghostwhite;
+    background-color: white;
     -webkit-transition: .4s;
     transition: .4s;
 }

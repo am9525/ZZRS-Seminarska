@@ -4,46 +4,45 @@ var sendDelay = 1; //ms, delay between request from each sensor
 var sensors = []; // sensor ID and value array
 var executeOnce = 1; //flag to choose if you want continuous execution or not
 var primeDB = 0; //flag to choose if you want to fill the DB with 0 for each sensor
+var baseUrl = 'http://localhost:5000/';
 var setIntervalRet = null;
 
 $(document).ready(function(){
-    try{
+    //ping server first time
+    $.get(baseUrl+'status',(response)=>{}).done(()=>{
         $("#serverStatus").prop("checked", true);
-        $.get('http://localhost:5000/status',(response)=>{}).fail(()=>{
-            $("#clientStatus").text("Server is not rechable");
-            $("#serverStatus").prop("checked", false);
-            $.("#start").attr("disabled", true);
-        });
-    }catch(e){
-        console.log("Server is no reachable")
-    }
+        console.log("Server is availible");
+    }).fail(()=>{
+        $("#serverStatus").prop("checked", false);
+        console.log("Server is not availible");
+    });
     //ping server every min for avalability
     setInterval(function(){
-        try{
+        $.get(baseUrl+'status',(response)=>{}).done(()=>{
             $("#serverStatus").prop("checked", true);
-            $.get('http://localhost:5000/status',(response)=>{}).fail(()=>{
-                $("#clientStatus").text("Server is not rechable");
-                $("#serverStatus").prop("checked", false);
-            });
-        }catch(e){
-            console.log("Server is no reachable")
-        }
+            console.log("Server is availible");
+        }).fail(()=>{
+            $("#serverStatus").prop("checked", false);
+            console.log("Server is not availible");
+        });
+        
     }, 10000);
-    //get data from form
+
+    $(".inputField").keyup(()=>{
+        checkKeys();
+    });
+
     $("#start").click(function(){
-        
-        if(!$.isNumeric($('#numSensors').val()) )
-            alert("numSensors is not numeric");
-        else
+        if(!checkKeys()){
+            baseUrl = $('#baseUrl').val();
             numSensors = $('#numSensors').val();
-        
-        refreshRate = $('#refreshRate').val();
-        sendDelay = $('#sendDelay').val();
+            refreshRate = $('#refreshRate').val();
+            sendDelay = $('#sendDelay').val();
+        }
         executeOnce = $('#sendOnce').is(':checked');
         primeDB = $('#primeDB').is(':checked');
-
         //send numSensors to server
-        $.post('http://localhost:5000/manager/setNumSensors',{numSenz : numSensors},(data, status)=>{
+        $.post(baseUrl+'manager/setNumSensors',{numSenz : numSensors},(data, status)=>{
             console.log("Data: " + data + "\nStatus: " + status);
         });
         //create initial sensor array
@@ -58,15 +57,15 @@ $(document).ready(function(){
             for(var i = 0; i < numSensors; i++){
                 setTimeout(function(){
                     //request.post('http://localhost:5000/update').form(sensors[sensorID]);
-                    $.post('http://localhost:5000/update',{id: sensorID, data: 0},(data, status)=>{
+                    $.post(baseUrl+'update',{id: sensorID, data: 0},(data, status)=>{
                         console.log("Status: " + status);
                     });
-                    console.log('asdasdasd');
                     sensorID++
                 },sendDelay);
             }
         }
         if(executeOnce == false){
+            $("#clientStatus").prop("checked", true);
             $("#clientStatus").text('Clients are working'); 
             //update sensors every n ms
             setIntervalRet = setInterval(function(){
@@ -78,6 +77,7 @@ $(document).ready(function(){
         }
     });
     $("#stop").click(function(){
+        $("#clientStatus").prop("checked", false);
         $("#clientStatus").text('Clients are not working'); 
         clearInterval(setIntervalRet);
     });
@@ -103,9 +103,44 @@ var sendSensorData = function(){
     //send request in random order
     for(var i = 0; i < numSensors; i++){
         setTimeout(function(){
-            $.post('http://localhost:5000/update',sensors[alreadyPicked.pop()],(data, status)=>{
+            $.post(baseUrl+'update',sensors[alreadyPicked.pop()],(data, status)=>{
                 console.log("Status: " + status);
             });
         },sendDelay);    
     }  
+}
+
+var checkKeys = function(){
+    var isValid = true;
+    var allEmpty = true;
+    $(".inputField").each(function() { // iterate through all elemnts with same class
+
+    if ($(this).val() == "" || !$.isNumeric($(this).val())){
+        isValid = false;
+        previousValid = isValid;
+        $(this).css({"border": "2px solid red"});
+    }
+    else
+        $(this).css({"border": "2px solid dodgerblue"});
+    
+    if ($(this).val() == "")
+        allEmpty &= true;
+    else
+        allEmpty &= false;
+    });
+    if(isValid == true || allEmpty == true){
+        $("#start").attr("disabled", false).removeClass("buttonDisabled").addClass("button");
+        $(".inputField").each(function() {
+            $(this).css({"border": "2px solid dodgerblue"});
+        });
+        $("#inputError").remove();
+    }
+    else {
+        $("#start").attr("disabled", true).removeClass("button").addClass("buttonDisabled");
+        if($("li").length == 0)
+             $("ul").append("<li id=\"inputError\">One or more input fields contain illegal values</li>");
+        console.log($("li").length );
+        
+    }
+    return allEmpty;
 }

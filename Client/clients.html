@@ -11,8 +11,11 @@
   <div id="pageBorder">
     <h1 id="heading">Simple Client Configurator</h1>
     <div class = "sensor-form">
+       <label class="fieldLabel"  for="baseUrl">Server base URL:</label>
+       <input class="urlField" id = "baseUrl" type="text" placeholder="http://localhost:5000/">
+
       <label class="fieldLabel"  for="numSensors">Number of sensors:</label>
-      <input class="inputField" id = "numSensors" type="text" name="numSensors" placeholder="1000">
+      <input class="inputField" id = "numSensors" type="text" name="numSensors" placeholder="10">
 
       <label class="fieldLabel" for="refreshRate">Refresh rate:</label>
       <input class="inputField" id = "refreshRate" type="text" name="refreshRate" placeholder="10000">
@@ -25,8 +28,6 @@
         <div class="labelButton">
           
           <label class="buttonLabel" >Send Once:</label>
-          
-          
           <label class="switch">
             <input id="sendOnce" type="checkbox" checked>
             <div class="slider round"></div>
@@ -40,20 +41,31 @@
             <div class="slider round"></div>
           </label>
         </div>
+
         <div class="labelButton">
           <label class="buttonLabel">Server availability:</label>
           <label class="ledAround">
-            <input id="serverStatus"type="checkbox">
+            <input id="serverStatus"type="checkbox" disabled>
             <div class="led round"></div>
           </label>
         </div>
+
+        <div class="labelButton">
+          <label class="buttonLabel">Clients are working:</label>
+          <label class="ledAround">
+            <input id="clientStatus"type="checkbox" disabled>
+            <div class="led round"></div>
+          </label>
+        </div>
+
       </div>
 
       <div class="buttons">
-        <input class="button" id ="start" type="button" value = "Send">
+        <input class="button" id ="start" type="button" value = "Start">
         <input class="button" id ="stop" type="button" value = "Stop">
       </div>
-      
+      <ul>
+      </ul>
       
     </div>
   </div>
