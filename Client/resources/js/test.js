@@ -34,11 +34,13 @@ $(document).ready(function(){
 
     $("#start").click(function(){
         if(!checkKeys()){
-            baseUrl = $('#baseUrl').val();
             numSensors = $('#numSensors').val();
             refreshRate = $('#refreshRate').val();
             sendDelay = $('#sendDelay').val();
         }
+        if($('#baseUrl').val() != "")
+            baseUrl = $('#baseUrl').val();
+        
         executeOnce = $('#sendOnce').is(':checked');
         primeDB = $('#primeDB').is(':checked');
         //send numSensors to server
