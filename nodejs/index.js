@@ -68,8 +68,9 @@ app.get('/manager/postaviBazo', function(request, response) {
             response.end("Napaka: " + err); 
           }
           else{
-            baza.generateRows(baza_imeTabele, 1000, "ID", "st", baza_steviloStolpcev, function(){
-              response.end("Postavitev baze z ukazom:\n"+SQL_STRING); 
+            baza.generateRows(baza_imeTabele, 1000, "ID", "st", baza_steviloStolpcev, function(err){
+              if(err) response.end("Generacija vrstic ni uspela, ker: " + err); 
+              else response.end("Postavitev baze z ukazom:\n"+SQL_STRING); 
             });
           }
           
