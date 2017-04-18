@@ -1,0 +1,74 @@
+<html>
+  <head>
+    <title>Client configurator</title>
+    <meta content="Simple client configurator" charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="resources/css/main.css">
+    <link href="https://fonts.googleapis.com/css?family=Rubik" rel="stylesheet">
+    <script src="resources/js/node_modules/jquery/dist/jquery.js"></script>
+    <script src="resources/js/test.js"></script>
+  </head>
+<body>
+  <div id="pageBorder">
+    <h1 id="heading">Simple Client Configurator</h1>
+    <div class = "sensor-form">
+       <label class="fieldLabel"  for="baseUrl">Server base URL:</label>
+       <input class="urlField" id = "baseUrl" type="text" placeholder="http://localhost:5000/">
+
+      <label class="fieldLabel"  for="numSensors">Number of sensors:</label>
+      <input class="inputField" id = "numSensors" type="text" name="numSensors" placeholder="10">
+
+      <label class="fieldLabel" for="refreshRate">Refresh rate:</label>
+      <input class="inputField" id = "refreshRate" type="text" name="refreshRate" placeholder="10000">
+
+      <label class="fieldLabel" for="sendDelay">Send delay:</label>
+      <input class="inputField" id = "sendDelay" type="text" name="refreshRate" placeholder="1">
+      
+
+      <div class = "buttonContainer">
+        <div class="labelButton">
+          
+          <label class="buttonLabel" >Send Once:</label>
+          <label class="switch">
+            <input id="sendOnce" type="checkbox" checked>
+            <div class="slider round"></div>
+          </label>
+          
+        </div>
+        <div class="labelButton">
+          <label class="buttonLabel">Prime DB:</label>
+          <label class="switch">
+            <input id="primeDB"type="checkbox">
+            <div class="slider round"></div>
+          </label>
+        </div>
+
+        <div class="labelButton">
+          <label class="buttonLabel">Server availability:</label>
+          <label class="ledAround">
+            <input id="serverStatus"type="checkbox" disabled>
+            <div class="led round"></div>
+          </label>
+        </div>
+
+        <div class="labelButton">
+          <label class="buttonLabel">Clients are working:</label>
+          <label class="ledAround">
+            <input id="clientStatus"type="checkbox" disabled>
+            <div class="led round"></div>
+          </label>
+        </div>
+
+      </div>
+
+      <div class="buttons">
+        <input class="button" id ="start" type="button" value = "Start">
+        <input class="button" id ="stop" type="button" value = "Stop">
+      </div>
+      <ul>
+      </ul>
+      
+    </div>
+  </div>
+</body>
+
+</html>
