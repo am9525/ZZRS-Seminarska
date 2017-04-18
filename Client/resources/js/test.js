@@ -7,10 +7,32 @@ var primeDB = 0; //flag to choose if you want to fill the DB with 0 for each sen
 var setIntervalRet = null;
 
 $(document).ready(function(){
+    try{
+        $("#serverStatus").prop("checked", true);
+        $.get('http://localhost:5000/status',(response)=>{}).fail(()=>{
+            $("#clientStatus").text("Server is not rechable");
+            $("#serverStatus").prop("checked", false);
+            $.("#start").attr("disabled", true);
+        });
+    }catch(e){
+        console.log("Server is no reachable")
+    }
+    //ping server every min for avalability
+    setInterval(function(){
+        try{
+            $("#serverStatus").prop("checked", true);
+            $.get('http://localhost:5000/status',(response)=>{}).fail(()=>{
+                $("#clientStatus").text("Server is not rechable");
+                $("#serverStatus").prop("checked", false);
+            });
+        }catch(e){
+            console.log("Server is no reachable")
+        }
+    }, 10000);
     //get data from form
-    $("#test").click(function(){
+    $("#start").click(function(){
         
-        if(!$.isNumeric($('#numSensors').val()))
+        if(!$.isNumeric($('#numSensors').val()) )
             alert("numSensors is not numeric");
         else
             numSensors = $('#numSensors').val();
@@ -30,14 +52,16 @@ $(document).ready(function(){
         }
         //fill DB with zeroes 
         if(primeDB == true){
+        console.log("Priming DB");
         var sensorID = 0;
             //send initial information
             for(var i = 0; i < numSensors; i++){
                 setTimeout(function(){
                     //request.post('http://localhost:5000/update').form(sensors[sensorID]);
-                    $.post('http://localhost:5000/update',sensors[sensorID],(data, status)=>{
+                    $.post('http://localhost:5000/update',{id: sensorID, data: 0},(data, status)=>{
                         console.log("Status: " + status);
                     });
+                    console.log('asdasdasd');
                     sensorID++
                 },sendDelay);
             }
@@ -75,10 +99,10 @@ var sendSensorData = function(){
         }
     }while(alreadyPicked.length != numSensors);
     console.log("picked order", alreadyPicked);
+
     //send request in random order
     for(var i = 0; i < numSensors; i++){
         setTimeout(function(){
-            //request.post('http://localhost:5000/update').form(sensors[alreadyPicked.pop()]);
             $.post('http://localhost:5000/update',sensors[alreadyPicked.pop()],(data, status)=>{
                 console.log("Status: " + status);
             });

@@ -2,31 +2,61 @@
   <head>
     <title>Client configurator</title>
     <meta content="Simple client configurator" charset="UTF-8">
-    <script src="node_modules/jquery/dist/jquery.js"></script>
-    <script src="test.js"></script>
+    <link rel="stylesheet" type="text/css" href="resources/css/main.css">
+    <link href="https://fonts.googleapis.com/css?family=Rubik" rel="stylesheet">
+    <script src="resources/js/node_modules/jquery/dist/jquery.js"></script>
+    <script src="resources/js/test.js"></script>
   </head>
 <body>
+  <div id="pageBorder">
+    <h1 id="heading">Simple Client Configurator</h1>
+    <div class = "sensor-form">
+      <label class="fieldLabel"  for="numSensors">Number of sensors:</label>
+      <input class="inputField" id = "numSensors" type="text" name="numSensors" placeholder="1000">
 
-  <form>
-    Num Sensors:<br>
-    <input id = "numSensors" type="text" name="numSensors"><br>
-    Refresh Rate:<br>
-    <input id = "refreshRate" type="text" name="refreshRate">
-    Send delay:<br>
-    <input id = "sendDelay" type="text" name="refreshRate">
-    <br>Send once:
-    <input id = "sendOnce" type="checkbox" name="sendOnce" value="Once">
-    <br>Prime DB:
-    <input id = "primeDB" type="checkbox" name="primeDB" value="Prime">
-    <br>
-    <input id ="test" type="button" value = "send">
-    <br>
-    <input id ="stop" type="button" value = "stop">
-    <br>
-    <p id="clientStatus"></p>
-    <br>
-  </form>
+      <label class="fieldLabel" for="refreshRate">Refresh rate:</label>
+      <input class="inputField" id = "refreshRate" type="text" name="refreshRate" placeholder="10000">
 
+      <label class="fieldLabel" for="sendDelay">Send delay:</label>
+      <input class="inputField" id = "sendDelay" type="text" name="refreshRate" placeholder="1">
+      
+
+      <div class = "buttonContainer">
+        <div class="labelButton">
+          
+          <label class="buttonLabel" >Send Once:</label>
+          
+          
+          <label class="switch">
+            <input id="sendOnce" type="checkbox" checked>
+            <div class="slider round"></div>
+          </label>
+          
+        </div>
+        <div class="labelButton">
+          <label class="buttonLabel">Prime DB:</label>
+          <label class="switch">
+            <input id="primeDB"type="checkbox">
+            <div class="slider round"></div>
+          </label>
+        </div>
+        <div class="labelButton">
+          <label class="buttonLabel">Server availability:</label>
+          <label class="ledAround">
+            <input id="serverStatus"type="checkbox">
+            <div class="led round"></div>
+          </label>
+        </div>
+      </div>
+
+      <div class="buttons">
+        <input class="button" id ="start" type="button" value = "Send">
+        <input class="button" id ="stop" type="button" value = "Stop">
+      </div>
+      
+      
+    </div>
+  </div>
 </body>
 
 </html>
