@@ -161,13 +161,14 @@ updateRows[2] = {
 var SenzorDataRow ={};
 
 var activeRow = 0;
-
+var bool_newSet = true;
 
 updateFunctions[1] = function(request){
 	//Sestavi UpdateRow string in ko je "zapolnjen" kliči baza.update1000
 	
 	var stolpecId = request.body.id%baza_steviloStolpcev;
-	if(stSprej === 0){//tu se stSprej uporablja drugače, kot števec sprejetih requestov
+	if(bool_newSet == true){//tu se stSprej uporablja drugače, kot števec sprejetih requestov
+		bool_newSet =false;
 	    var vrsticaId = Math.floor(request.body.id/baza_steviloStolpcev);
 	    SenzorDataRow.row = vrsticaId; 	//predpostavljamo, da bodo vsi podatki za v isto
 	    								//vrstico v bazi
@@ -178,11 +179,17 @@ updateFunctions[1] = function(request){
 	stSprej++;
 
 	
-	if(stSprej === 1000){
-		baza.update1000(baza_imeTabele,"ID","st",baza_steviloStolpcev, SenzorDataRow, okCallback,errorCallback)
+	if(stSprej%1000 === 0){
+
+		//prejeli smo 1000 zahtev
+		baza.update1000(baza_imeTabele,"ID","st",baza_steviloStolpcev, SenzorDataRow.row,,SenzorDataRow.string, okCallback,errorCallback)
+		bool_newSet =true;
 	}
 
-	
+	if(stSprej  == stASenz){ //predpostavimo, da bo št aktivnih senzorjev deljivo z 1000
+		stSprej = 0;
+		bool_newSet =true;
+	}
 }
 
 var selectedUpdateFuncton = 0;

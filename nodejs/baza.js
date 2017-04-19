@@ -197,14 +197,14 @@ module.exports = {
 	/*
 		funkcija za nadgradnjo 1000  vpisov (1 vrstica tabele)
 	*/
-	update1000: function(imeTabele,imeKljuca,predponaStolpcev,stStolpcev, SenzorDataRow, okCallback,errorCallback){
-		var vrsticaId = SenzorDataRow.row;
+	update1000: function(imeTabele,imeKljuca,predponaStolpcev,stStolpcev, vrstica, SQL_VALUES  , okCallback,errorCallback){
+		var vrsticaId = vrstica;
 
-		//SenzorDataRow.string <-- vnaprej zgenerian SQL stringa po "šabloni" predponaStolpcev+I = data,
-		var SQLSTAVEK = "UPDATE " + imeTabele + " SET " + SenzorDataRow.string +" WHERE " + imeKljuca+" = "+vrsticaId+";"
+		//SQL_VALUES <-- vnaprej zgenerian SQL stringa po "šabloni" predponaStolpcev+I = data,
+		var SQLSTAVEK = "UPDATE " + imeTabele + " SET " + SSQL_VALUES +" WHERE " + imeKljuca+" = "+vrsticaId+";"
 		
 		DBQuery(process.env.DATABASE_URL,SQLSTAVEK,function(){
-			okCallback(vrsticaId, SenzorDataRow);
+			okCallback(vrsticaId, SQL_VALUES,vrstica);
 		},function(DBerror){
 			console.log("updateOne error"); errorCallback(DBerror);
 		});
