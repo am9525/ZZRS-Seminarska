@@ -119,41 +119,90 @@ app.listen(app.get('port'), function() {
   console.log('Node app is running on port', app.get('port'));
 });
 
+
+var updateFunctions = {};
+updateFunctions[0] = function(request){
+	baza.updateOne(baza_imeTabele,"ID","st",baza_steviloStolpcev,request.body.id,request.body.data,function(vrstica, stolpec, id,data){
+	    console.log("vrstica: " + vrstica +" stolpec: "+ stolpec + " Value: " + data + " OK" );
+	    //zapomnimo obdelave prve zahteve
+	    if(stSprej === 0){
+	      casPrvi = new Date().getTime();
+	    }
+	    stSprej++;
+	    if(stSprej == stASenz) {
+	      //aplikacija je prejela podatke za vse senzorje
+	      //shrani se čas zadnjega obdelanega
+	      casZadnji = new Date().getTime();
+	      baza.setUpdateTime(casZadnji);
+	      console.log("Prejel " + stSprej + " zahtev" );
+	      timeDiffms = casZadnji-casPrvi;
+	      var timeDiff = new Date(timeDiffms);
+	      
+	      console.log("time took -> "+ timeDiffms+ "ms -> "+ timeDiff.getMinutes()+"min, "+timeDiff.getSeconds()+"sec");
+	      stSprej = 0;
+	    }
+	  },function(err){
+	    console.log(err);
+	  });
+
+}
+
+var updateRows = {};
+updateRows[0] = {
+
+};
+updateRows[1] = {
+
+};
+updateRows[2] = {
+
+};
+
+var SenzorDataRow ={};
+
+var activeRow = 0;
+
+
+updateFunctions[1] = function(request){
+	//Sestavi UpdateRow string in ko je "zapolnjen" kliči baza.update1000
+	
+	var stolpecId = request.body.id%baza_steviloStolpcev;
+	if(stSprej === 0){//tu se stSprej uporablja drugače, kot števec sprejetih requestov
+	    var vrsticaId = Math.floor(request.body.id/baza_steviloStolpcev);
+	    SenzorDataRow.row = vrsticaId; 	//predpostavljamo, da bodo vsi podatki za v isto
+	    								//vrstico v bazi
+		SenzorDataRow.string = "";
+    }
+    //SenzorDataRow.string <-- vnaprej zgenerian SQL stringa po "šabloni" predponaStolpcev+I = data,
+	SenzorDataRow.string =  SenzorDataRow.string + " st"+  stolpecId +"="+request.body.data+", ";
+	stSprej++;
+
+	
+	if(stSprej === 1000){
+		baza.update1000(baza_imeTabele,"ID","st",baza_steviloStolpcev, SenzorDataRow, okCallback,errorCallback)
+	}
+
+	
+}
+
+var selectedUpdateFuncton = 0;
+
+
 app.post('/update', function(request, response) {
   console.log("ID: " + request.body.id+"\nData: " + request.body.data);
-  baza.updateOne(baza_imeTabele,"ID","st",baza_steviloStolpcev,request.body.id,request.body.data,function(vrstica, stolpec, id,data){
-    console.log("vrstica: " + vrstica +" stolpec: "+ stolpec + " Value: " + data + " OK" );
-    
+  updateFunctions[selectedUpdateFuncton](request);
 
-    //zapomnimo obdelave prve zahteve
-    if(stSprej === 0){
-      casPrvi = new Date().getTime();
-    }
-    stSprej++;
-    if(stSprej == stASenz) {
-      //aplikacija je prejela podatke za vse senzorje
-      //shrani se čas zadnjega obdelanega
-      casZadnji = new Date().getTime();
-      baza.setUpdateTime(casZadnji);
-      console.log("Prejel " + stSprej + " zahtev" );
-      timeDiffms = casZadnji-casPrvi;
-      var timeDiff = new Date(timeDiffms);
-      
-      console.log("time took -> "+ timeDiffms+ "ms -> "+ timeDiff.getMinutes()+"min, "+timeDiff.getSeconds()+"sec");
-      stSprej = 0;
-    }
-  },function(err){
-    console.log(err);
-  });
   //zato da nas clienti ne cakajo na repoonse
   response.end();
 });
+
 app.post('/manager/setNumSensors', function(request, response) {
   stASenz = request.body.numSenz
   console.log("Set the number of sensors to: "+stASenz)
   response.end("Set the number of sensors to: "+stASenz);
 
 });
+
 /*	Uporabiti bo lažje express, se mi zdi 
 
 const http = require('http')  

@@ -195,9 +195,41 @@ module.exports = {
 		return tabele;
 	},
 	/*
+		funkcija za nadgradnjo 1000  vpisov (1 vrstica tabele)
+	*/
+	update1000: function(imeTabele,imeKljuca,predponaStolpcev,stStolpcev, SenzorDataRow, okCallback,errorCallback){
+		var vrsticaId = SenzorDataRow.row;
+
+		//SenzorDataRow.string <-- vnaprej zgenerian SQL stringa po "šabloni" predponaStolpcev+I = data,
+		var SQLSTAVEK = "UPDATE " + imeTabele + " SET " + SenzorDataRow.string +" WHERE " + imeKljuca+" = "+vrsticaId+";"
+		
+		DBQuery(process.env.DATABASE_URL,SQLSTAVEK,function(){
+			okCallback(vrsticaId, SenzorDataRow);
+		},function(DBerror){
+			console.log("updateOne error"); errorCallback(DBerror);
+		});
+		
+	},
+	/*
 		nadgradi en zapis v podatkovni bazi
 	*/
 	updateOne:function(imeTabele,imeKljuca,predponaStolpcev,stStolpcev,senzorId,data,okCallback,errorCallback){
+		var vrsticaId = Math.floor(senzorId/stStolpcev);
+		var stolpecId = senzorId%stStolpcev;
+		
+		var SQLSTAVEK = "UPDATE " + imeTabele + " SET " + predponaStolpcev+stolpecId+"="+data+" WHERE " + imeKljuca+" = "+vrsticaId+";";
+		
+		DBQuery(process.env.DATABASE_URL,SQLSTAVEK,function(){
+			okCallback(vrsticaId, stolpecId, senzorId,data);
+		},function(DBerror){
+			console.log("updateOne error"); errorCallback(DBerror);
+		});
+ 
+	},
+	/*STARA FUNKCIJA
+		nadgradi en zapis v podatkovni bazi
+	*/
+	updateOneOld:function(imeTabele,imeKljuca,predponaStolpcev,stStolpcev,senzorId,data,okCallback,errorCallback){
 		var vrsticaId = Math.floor(senzorId/stStolpcev);
 		var stolpecId = senzorId%stStolpcev;
 		
@@ -245,6 +277,22 @@ module.exports = {
 	}
                            
 }
+
+/*
+	Funkcija za zagon SQL stavka. Je vidna samo znotraj te datoteke
+*/
+function DBQuery(DB_URL,SQL_QUERY,endFunction,errorFunction){
+	database.connect(DB_URL, function(err, client) {
+	  if (err) return false; 
+	  client
+	    .query(SQL_QUERY)
+		.on('end', endFunction())
+	    .on('error', errorFunction(err2))
+	    ;
+	});
+}
+
+
 
 
 /*Kkao se konektat:
