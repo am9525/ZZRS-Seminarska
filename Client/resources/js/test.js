@@ -42,7 +42,7 @@ $(document).ready(function(){
         });
         //create initial sensor array
         for(var i = 0; i < numSensors; i++){
-            sensors.push({id : i, data: 0})
+            sensors.push({id : i, data: 0, time: 0})
         }
         //fill DB with zeroes 
         if(primeDB == true){
@@ -51,8 +51,7 @@ $(document).ready(function(){
             //send initial information
             for(var i = 0; i < numSensors; i++){
                 setTimeout(function(){
-                    //request.post('http://localhost:5000/update').form(sensors[sensorID]);
-                    $.post(baseUrl+'update',{id: sensorID, data: 0},(data, status)=>{
+                    $.post(baseUrl+'update',{id: sensorID, data: 0, time: new Date().getTime()},(data, status)=>{
                         console.log("Status: " + status);
                     });
                     sensorID++
@@ -98,13 +97,15 @@ var sendSensorData = function(){
     //send request in random order
     for(var i = 0; i < numSensors; i++){
         setTimeout(function(){
-            $.post(baseUrl+'update',sensors[alreadyPicked.pop()],(data, status)=>{
+            var tmpSensor = sensors[alreadyPicked.pop()];
+            tmpSensor.time = new Date().getTime();
+            $.post(baseUrl+'update',tmpSensor,(data, status)=>{
                 console.log("Status: " + status);
             });
         },sendDelay);    
     }  
 }
-var checkServer = function(){
+var checkServer = function(){/*
     $.get(baseUrl+'time', (response)=>{
         var responseObj = JSON.parse(response);
         var serverTime = new Date(responseObj.serverTime);
@@ -112,22 +113,27 @@ var checkServer = function(){
         var timeDiffms = Math.abs(serverTime-clientTime);
         var timeDiff = new Date(timeDiffms);
         console.log("time took -> "+ timeDiffms+ "ms -> "+ timeDiff.getMinutes()+"min, "+timeDiff.getSeconds()+"sec");
-    });
+        console.log(serverTime + " | " +clientTime);    
+    });*/
     $.get(baseUrl+'status',(response)=>{
         var responseObj = JSON.parse(response);
-        console.log("DB is accessible at:"+responseObj.DataURL);
-        if(responseObj.DBAccessible)
-            $("#DBStatus").prop("checked", true);
-        else
-            $("#DBStatus").prop("checked", false);
-
-    }).done(()=>{
+        console.log("Server: "+responseObj.status);
         $("#serverStatus").prop("checked", true);
-        console.log("Server is availible");
-    }).fail(()=>{
+    })
+    .fail(()=>{
         $("#serverStatus").prop("checked", false);
+        console.log("Server: offline");
+    });
+    $.get(baseUrl+'statusBaza',(response)=>{
+        var responseObj = JSON.parse(response);
+        console.log("DB status:"+responseObj.DBAccessible);
+        if(responseObj.DBAccessible){
+            //console.log("DB is accessible at:"+responseObj.DataURL);
+            $("#DBStatus").prop("checked", true);
+        }
+    }).fail(()=>{
+        console.log("DB status: offline")
         $("#DBStatus").prop("checked", false);
-        console.log("Server is not availible");
     });
 }
 var checkKeys = function(){
