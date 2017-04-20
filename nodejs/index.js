@@ -45,8 +45,11 @@ var timeDiffms = 0; //time difference between first and last request
 app.get('/', function(request, response) {
   response.render('index');
 });
-
-
+app.get('/time', function(request, response) {
+  var time = new Date();
+  var jsonResponse = JSON.stringify({serverTime: time});
+  response.end(jsonResponse);
+});
 /*
 primer funkcije za prikaz statusa
 */

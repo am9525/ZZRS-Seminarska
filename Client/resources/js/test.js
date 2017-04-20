@@ -6,30 +6,23 @@ var executeOnce = 1; //flag to choose if you want continuous execution or not
 var primeDB = 0; //flag to choose if you want to fill the DB with 0 for each sensor
 var baseUrl = 'http://localhost:5000/';
 var setIntervalRet = null;
+var serverTimeOffset = 0;
 
 $(document).ready(function(){
     //ping server first time
-    $.get(baseUrl+'status',(response)=>{}).done(()=>{
-        $("#serverStatus").prop("checked", true);
-        console.log("Server is availible");
-    }).fail(()=>{
-        $("#serverStatus").prop("checked", false);
-        console.log("Server is not availible");
-    });
+    checkServer();
+
     //ping server every min for avalability
     setInterval(function(){
-        $.get(baseUrl+'status',(response)=>{}).done(()=>{
-            $("#serverStatus").prop("checked", true);
-            console.log("Server is availible");
-        }).fail(()=>{
-            $("#serverStatus").prop("checked", false);
-            console.log("Server is not availible");
-        });
-        
+        checkServer();    
     }, 10000);
 
     $(".inputField").keyup(()=>{
         checkKeys();
+    });
+
+    $("#change").click(()=>{
+        baseUrl = baseUrl = $('#baseUrl').val();
     });
 
     $("#start").click(function(){
@@ -111,7 +104,32 @@ var sendSensorData = function(){
         },sendDelay);    
     }  
 }
+var checkServer = function(){
+    $.get(baseUrl+'time', (response)=>{
+        var responseObj = JSON.parse(response);
+        var serverTime = new Date(responseObj.serverTime);
+        var clientTime = new Date();
+        var timeDiffms = Math.abs(serverTime-clientTime);
+        var timeDiff = new Date(timeDiffms);
+        console.log("time took -> "+ timeDiffms+ "ms -> "+ timeDiff.getMinutes()+"min, "+timeDiff.getSeconds()+"sec");
+    });
+    $.get(baseUrl+'status',(response)=>{
+        var responseObj = JSON.parse(response);
+        console.log("DB is accessible at:"+responseObj.DataURL);
+        if(responseObj.DBAccessible)
+            $("#DBStatus").prop("checked", true);
+        else
+            $("#DBStatus").prop("checked", false);
 
+    }).done(()=>{
+        $("#serverStatus").prop("checked", true);
+        console.log("Server is availible");
+    }).fail(()=>{
+        $("#serverStatus").prop("checked", false);
+        $("#DBStatus").prop("checked", false);
+        console.log("Server is not availible");
+    });
+}
 var checkKeys = function(){
     var isValid = true;
     var allEmpty = true;
