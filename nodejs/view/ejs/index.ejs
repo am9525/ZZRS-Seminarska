@@ -14,28 +14,35 @@
     </div>
     <div id="status"> <span>
         <div id="statusInnards1" class="internalSection  borderbox">
-          <h3>Status plošča</h3>
+          <h3>Status plošča (WIP)</h3>
           <p>adwd</p>
         </div>
         <div id="statusInnards2" class="internalSection  padd10l borderbox">
-          <h3>Kontrola testov:</h3>
-          <p class="inline">število aktivnih senzorjev:</p>  <input type="text" name="stASenz" class="inline">
+          <h3>Kontrola testov: (WIP)</h3>
+          <p class="inline">število aktivnih senzorjev:</p>  <input id="tfStAktSenz" type="text" name="stASenz" class="inline">
           <br>
           <p class="inline">Tip testa:</p><seldiv><select id="izbiraTesta" class="inline"></select></seldiv>
           <br>
-          <p class="inline">Število zapordnih testov:</p> <input type="text" name="stZapTest" class="inline">
+          <p class="inline">Število zaporednih testov:</p> <input id="tfStZapTest" type="text" name="stZapTest" class="inline">
           <br>
-          <input type="submit" value="Zaženi test" name="btZazTest">
+          <input id="btZacTest" type="submit" value="Zaženi test" name="btZazTest">
           <br>
           <p>Čas potreben za končanje zadnjega testa:</p>
           <p>Časi posameznega vnosa:</p> 
           <p>Najmanjši čas:</p> 
           <p>Največji čas:</p> 
           <p>Povprečni čas:</p> 
+          <script>
+            $("#tfStAktSenz").attr("disabled", true);
+            $("#btZacTest").attr("disabled", true);
+            $("#tfStZapTest").attr("disabled", true);
+            $("#izbiraTesta").attr("disabled", true);
+            
+          </script>
         </div>
       </span> </div>
     <div id="kontroleTabele">
-      <h3>Kontrola baze</h3>
+      <h3>Kontrola baze (WIP)</h3>
     </div>
   </body>
 </html>
