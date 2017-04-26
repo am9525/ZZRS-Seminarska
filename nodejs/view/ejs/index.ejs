@@ -19,13 +19,15 @@
         </div>
         <div id="statusInnards2" class="internalSection  padd10l borderbox">
           <h3>Kontrola testov: (WIP)</h3>
+          <form method="post" action="/ZacniTestiranje">
           <p class="inline">število aktivnih senzorjev:</p>  <input id="tfStAktSenz" type="text" name="stASenz" class="inline">
           <br>
-          <p class="inline">Tip testa:</p><seldiv><select id="izbiraTesta" class="inline"></select></seldiv>
+          <p class="inline">Tip testa:</p><seldiv><select id="izbiraTesta" class="inline" name="izbTesta"></select></seldiv>
           <br>
           <p class="inline">Število zaporednih testov:</p> <input id="tfStZapTest" type="text" name="stZapTest" class="inline">
           <br>
           <input id="btZacTest" type="submit" value="Zaženi test" name="btZazTest">
+          </form>
           <br>
           <p>Čas potreben za končanje zadnjega testa:</p>
           <p>Časi posameznega vnosa:</p> 
@@ -33,8 +35,8 @@
           <p>Največji čas:</p> 
           <p>Povprečni čas:</p> 
           <script>
-            $("#tfStAktSenz").attr("disabled", true);
-            $("#btZacTest").attr("disabled", true);
+            $("#tfStAktSenz").attr("disabled", false);
+            $("#btZacTest").attr("disabled", false);
             $("#tfStZapTest").attr("disabled", true);
             $("#izbiraTesta").attr("disabled", true);
             
