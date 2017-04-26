@@ -19,14 +19,16 @@
         </div>
         <div id="statusInnards2" class="internalSection  padd10l borderbox">
           <h3>Kontrola testov: (WIP)</h3>
-          <form method="post" action="/ZacniTestiranje">
-          <p class="inline">število aktivnih senzorjev:</p>  <input id="tfStAktSenz" type="text" name="stASenz" class="inline">
+          <form method="post" action="/manager/zacniTestiranje">
+          <p class="inline">število aktivnih senzorjev:</p>  <input id="tfStAktSenz" type="text" name="aktSenzorji" class="inline">
           <br>
-          <p class="inline">Tip testa:</p><seldiv><select id="izbiraTesta" class="inline" name="izbTesta"></select></seldiv>
+          <p class="inline">Tip testa:</p><seldiv><select id="izbiraTesta" class="inline" name="izbiraTesta">
+              <option value="TestniVnos">TestniVnos</option>
+          </select></seldiv>
           <br>
-          <p class="inline">Število zaporednih testov:</p> <input id="tfStZapTest" type="text" name="stZapTest" class="inline">
+          <p class="inline">Število zaporednih testov:</p> <input id="tfStZapTest" type="text" name="stZaporedTestov" class="inline">
           <br>
-          <input id="btZacTest" type="submit" value="Zaženi test" name="btZazTest">
+          <input id="btZacTest" type="submit" value="Zaženi test" name="btZazeniTest">
           </form>
           <br>
           <p>Čas potreben za končanje zadnjega testa:</p>
@@ -35,16 +37,26 @@
           <p>Največji čas:</p> 
           <p>Povprečni čas:</p> 
           <script>
-            $("#tfStAktSenz").attr("disabled", false);
-            $("#btZacTest").attr("disabled", false);
+          <% if(testSeIzvaja){ %>
+            $("#tfStAktSenz").attr("disabled", true);
+            $("#btZacTest").attr("disabled", true);
             $("#tfStZapTest").attr("disabled", true);
             $("#izbiraTesta").attr("disabled", true);
-            
+          <% } else { %>
+            $("#tfStAktSenz").attr("disabled", false);
+            $("#btZacTest").attr("disabled", false);
+            $("#tfStZapTest").attr("disabled", false);
+            $("#izbiraTesta").attr("disabled", false);
+          <%}%> 
+          $("#tfStAktSenz").val("<%= stAktivnihSenzorjev %>") 
           </script>
         </div>
       </span> </div>
     <div id="kontroleTabele">
       <h3>Kontrola baze (WIP)</h3>
+      
+
+      
     </div>
   </body>
 </html>
