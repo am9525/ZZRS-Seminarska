@@ -28,7 +28,7 @@ app.set('port', (process.env.PORT || 5000));
 var baza = require('./baza');
 
 var baza_dela = baza.dela(function(err, dela){
-	if(err) console.log("[baza_dela error]: " + err);
+	
 	baza_dela = dela;
 
 });  //Ali je baza dostopna?
