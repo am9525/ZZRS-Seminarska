@@ -33,6 +33,7 @@ var baza_steviloStolpcev = 1000;  //stevilo podatkovnih stolpcev v tabeli, brez 
                                   //v resnici je steviloStolpcev + 1 stolpcev
 
 var baza_imeTabele = "Test";   //Ime tabele
+var testSeIzvaja = false; //boolean, ki pove ali se izvaja test
 
 //parametri za sentorje
 var stASenz = 5;     //število aktivnih senzorjev
@@ -43,8 +44,11 @@ var casPrvi = 0;      //cas prvega obdelanega paketa
 var timeDiffms = 0; //time difference between first and last request
 var senzorPing = 0;
 
+
 app.get('/', function(request, response) {
-  response.render('index');
+  response.render('index',{
+
+  });
 });
 app.post('/time', function(request, response) {
   var time = new Date();
@@ -124,6 +128,7 @@ app.get('/manager/uniciTabelo', function(request, response){
 Aktivacija nodeJS
 */
 app.listen(app.get('port'), function() {
+
   console.log('Node app is running on port', app.get('port'));
 });
 
@@ -173,6 +178,16 @@ app.post('/manager/setNumSensors', function(request, response) {
   response.end("Set the number of sensors to: "+stASenz);
 
 });
+app.post('/manager/zacniTestiranje', function(request, response){
+	/*
+		To se sproži, ko kliknemo gumb na index.ejs strani
+	*/
+
+});
+
+
+
+
 /*	Uporabiti bo lažje express, se mi zdi 
 
 const http = require('http')  
