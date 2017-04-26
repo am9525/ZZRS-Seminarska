@@ -188,6 +188,8 @@ app.post('/manager/zacniTestiranje', function(request, response){
  		'izbiraTesta',			tip testa, ki se bo izvajal (še ne naredi nič)
 	   	'stZaporedTestov',		kolikokrat se bo test ponovil (še ne naredi nič)	
  		'btZazeniTest'			ime gumba, ki se uporabi za aktivacijo testa
+ 		'RefreshRate'			v clientu za čas med pošiljanji
+ 		'SendDelay'				v clientu za čas med posameznim podatkom
 
 	*/
 	if(!testSeIzvaja){
