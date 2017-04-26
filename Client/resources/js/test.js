@@ -52,7 +52,7 @@ $(document).ready(function(){
             for(var i = 0; i < numSensors; i++){
                 setTimeout(function(){
                     $.post(baseUrl+'update',{id: sensorID, data: 0, time: new Date().getTime()},(data, status)=>{
-                        console.log("Status: " + status);
+                        console.log("Status: " + status+ "\nData:"+data);
                     });
                     sensorID++
                 },sendDelay);
@@ -100,7 +100,7 @@ var sendSensorData = function(){
             var tmpSensor = sensors[alreadyPicked.pop()];
             tmpSensor.time = new Date().getTime();
             $.post(baseUrl+'update',tmpSensor,(data, status)=>{
-                console.log("Status: " + status);
+                console.log("Status: " + status+ "\nData:"+data);
             });
         },sendDelay);    
     }  
