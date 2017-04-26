@@ -13,9 +13,9 @@
       <h1 class="padd10">Kontrolna plošča</h1>
     </div>
     <div id="status"> <span>
-        <div id="statusInnards1" class="internalSection  borderbox">
+        <div id="statusInnards1" class="internalSection padd10l  borderbox">
           <h3>Status plošča (WIP)</h3>
-          <p>adwd</p>
+          <p class="alertText"> <% if(testSeIzvaja) {%> TEST SE ŽE IZVAJA! <%} else {}%></p>
         </div>
         <div id="statusInnards2" class="internalSection  padd10l borderbox">
           <h3>Kontrola testov: (WIP)</h3>
@@ -38,7 +38,7 @@
         </div>
       </span> </div>
     <div id="kontroleTabele">
-      <div id="kontrlinnards" class="internalSection">
+      <div id="kontrlinnards" class="internalSection padd10l">
         <h3>Kontrola baze (WIP)</h3>
         <form method="post" action="/manager/test">
           <input id="btPostTabelo" type="submit" value="Postavi tabelo" >

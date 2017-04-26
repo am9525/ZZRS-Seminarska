@@ -53,7 +53,9 @@ seldiv{
 	border-style: inset;
 	border-radius: 5px;
 }
-
+.alertText{
+	color: #FF0000;
+}
 #status{
 	background-color: ##87963c;
 	border-color: #242810;
