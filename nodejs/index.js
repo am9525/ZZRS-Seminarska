@@ -46,9 +46,10 @@ var senzorPing = 0;
 
 
 app.get('/', function(request, response) {
-  response.render('index',{
-
-  });
+  	response.render('index',{
+  		stAktivnihSenzorjev: stASenz,
+  		testSeIzvaja: testSeIzvaja,
+	});
 });
 app.post('/time', function(request, response) {
   var time = new Date();
