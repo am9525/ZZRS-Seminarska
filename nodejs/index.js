@@ -47,7 +47,8 @@ var casZadnji = 0     //čas zadnjega obdelanega
 var casPrvi = 0;      //cas prvega obdelanega paketa
 var timeDiffms = 0; //time difference between first and last request
 var senzorPing = 0;
-
+var casPrispelPrvi = 0;
+var casPrispelZadnji = 0;
 
 app.get('/', function(request, response) {
 	response.render('index',{
@@ -139,7 +140,7 @@ app.listen(app.get('port'), function() {
 });
 
 app.post('/update', function(request, response) {
-  console.log("ID: " + request.body.id+"\nData: " + request.body.data);
+  /*console.log("ID: " + request.body.id+"\nData: " + request.body.data);
   var senzorTime = request.body.time;
   var serverTime = new Date().getTime();
   senzorPing += Math.abs(serverTime - senzorTime);
@@ -149,8 +150,24 @@ app.post('/update', function(request, response) {
     console.log("time took -> "+ senzorPing+ "ms");
     stPrispel = 0;
     senzorPing = 0;
+  }*/
+  //zahteva za vstavljanje je prispela
+  if(stPrispel == 0){
+      //zapomnimo si cas prve prejete zahteve
+      casPrispelPrvi = new Date().getTime();
+      response.end();
   }
-  
+  else if (stPrispel < stASenz-1){
+    response.end();
+  }
+  stPrispel++;
+  if(stPrispel == stASenz){
+    casPrispelZadnji = new Date().getTime();
+    senzorPing = casPrispelZadnji - casPrispelPrvi;
+    senzorPing /= stASenz;
+    stPrispel = 0;
+    console.log("aprox ping: "+senzorPing);
+  }
   //vstavljanje v bazo
   baza.updateOne(baza_imeTabele,"ID","st",baza_steviloStolpcev,request.body.id,request.body.data,function(vrstica, stolpec, id,data){
     console.log("vrstica: " + vrstica +" stolpec: "+ stolpec + " Value: " + data + " OK" );
@@ -170,13 +187,15 @@ app.post('/update', function(request, response) {
       var timeDiff = new Date(timeDiffms);
       
       console.log("time took -> "+ timeDiffms+ "ms -> "+ timeDiff.getMinutes()+"min, "+timeDiff.getSeconds()+"sec");
+      var jsonResponse = JSON.stringify({ping: senzorPing, DBTime: timeDiffms});
+      response.end(jsonResponse);
       stSprej = 0;
     }
   },function(err){
     console.log(err);
   });
   //zato da nas clienti ne cakajo na repoonse
-  response.end();
+  
 });
 app.post('/manager/setNumSensors', function(request, response) {
   stASenz = request.body.numSenz
