@@ -46,6 +46,12 @@ module.exports = {
 	 	if(lastDBCheck === 0 || (new Date().getTime() - lastDBCheck) > 60000 ){
 	 		database.connect(process.env.DATABASE_URL, function(err, client) {
 				//console.log("from dela");
+				if(err) {
+					databaseOK = false;
+					console.log("[baza.dela() error]: " + err);
+					if(callback)callback(err, databaseOK );
+					return databaseOK;
+				}
 		        var rows = 0;
 		        client.query("select table_name from information_schema.tables where table_schema= 'public';")
 		        .on('row',()=> {rows++})
@@ -60,6 +66,7 @@ module.exports = {
 		        })
 		        .on('error',(err2)=>{
 		        	databaseOK = false;
+		        	console.log("[baza.dela() error]: " + err2);
 		        	if(callback)callback(err2, databaseOK );
 		        });
 
