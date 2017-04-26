@@ -69,7 +69,7 @@ module.exports = {
 			});
 
 	 	}else {
-	 		
+	 		if(callback) callback(err, databaseOK);
 	 		return databaseOK;
 	 	}
 		
