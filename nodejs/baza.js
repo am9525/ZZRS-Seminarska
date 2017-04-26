@@ -31,7 +31,8 @@ var HerokuSelectClient = new database.Client(process.env.DATABASE_URL);
 HerokuSelectClient.connect();
 //
 
-
+var databaseOK = false;
+var lastDBCheck = 0;
 /*
 	Definicije funkcij za export v druge skripte.
 	Urejene so po abecednem vrstnem redu
@@ -42,6 +43,38 @@ module.exports = {
 		Na hitro se preveri če podatkovna baza obstaja
 	*/
 	dela: function(callback){
+	 	if(lastDBCheck === 0 || (new Date().getTime() - lastDBCheck) > 60000 ){
+	 		database.connect(process.env.DATABASE_URL, function(err, client) {
+				//console.log("from dela");
+		        var rows = 0;
+		        client.query("select table_name from information_schema.tables where table_schema= 'public';")
+		        .on('row',()=> {rows++})
+		        .on('end', ()=> {
+
+		        	if(rows > 0){
+		        		databaseOK = true;
+		        	} else {
+		        		databaseOK = false;
+		        	}
+		        	if(callback)callback(err, databaseOK );
+		        })
+		        .on('error',(err2)=>{
+		        	databaseOK = false;
+		        	if(callback)callback(err2, databaseOK );
+		        });
+
+
+		        lastDBCheck = new Date().getTime();
+			    if(callback) callback(err, databaseOK);
+			});
+
+	 	}else {
+	 		
+	 		return databaseOK;
+	 	}
+		
+	},
+	delaOld: function(callback){
 		database.connect(process.env.DATABASE_URL, function(err, client) {
 			//console.log("from dela");
 	        if(!err && process.env.DATABASE_URL) baza_dela = true;
