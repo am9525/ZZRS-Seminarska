@@ -182,8 +182,20 @@ app.post('/manager/setNumSensors', function(request, response) {
 app.post('/manager/zacniTestiranje', function(request, response){
 	/*
 		To se sproži, ko kliknemo gumb na index.ejs strani
-	*/
+		===
+		request.body lastnosti:
+		'aktSenzorji', 			število koliko senzorjev naj bo aktivnih zatest
+ 		'izbiraTesta',			tip testa, ki se bo izvajal (še ne naredi nič)
+	   	'stZaporedTestov',		kolikokrat se bo test ponovil (še ne naredi nič)	
+ 		'btZazeniTest'			ime gumba, ki se uporabi za aktivacijo testa
 
+	*/
+	if(!testSeIzvaja){
+		testSeIzvaja=true;
+	} 
+
+	console.log(Object.getOwnPropertyNames(request.body) );
+	response.redirect("/");
 });
 
 
