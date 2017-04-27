@@ -1,11 +1,12 @@
 var minNumSensors = 5;
 var numSensors = 0
-var maxNumSensors = 8;
+var maxNumSensors = 100;
 var sendDelay = 1; //ms, delay between request from each sensor
 var sensors = []; // sensor ID and value array
 var baseUrl = 'http://localhost:5000/';
 var finished = true;
 var times = [];
+
 $(document).ready(function(){
     //ping server first time
     checkServer();
@@ -61,25 +62,25 @@ $(document).ready(function(){
 });
 
 var sendSensorData = function(){
-
-    //generate random variables for data
-    for(var i = 0; i < numSensors; i++){
-        sensors[i] = {id : i, data: Math.floor(Math.random()*1000)}
-    }
-    var alreadyPicked = [];
-    //randomize which sensor gets to send first
-    console.log("numSensors:",numSensors);
-    do{
-        var whichIsNext = Math.floor(Math.random()*numSensors);
-        if(alreadyPicked.indexOf(whichIsNext) === -1){
-            alreadyPicked.push(whichIsNext);
-        }
-    }while(alreadyPicked.length != numSensors);
-    console.log("picked order", alreadyPicked);
-
-    //send request in random order
     if(numSensors < maxNumSensors){
-    for(var i = 0; i < numSensors; i++){
+        //generate random variables for data
+        for(var i = 0; i < numSensors; i++){
+            sensors[i] = {id : i, data: Math.floor(Math.random()*1000)}
+        }
+        var alreadyPicked = [];
+        //randomize which sensor gets to send first
+        console.log("numSensors:",numSensors);
+        do{
+            var whichIsNext = Math.floor(Math.random()*numSensors);
+            if(alreadyPicked.indexOf(whichIsNext) === -1){
+                alreadyPicked.push(whichIsNext);
+            }
+        }while(alreadyPicked.length != numSensors);
+        
+        console.log("picked order", alreadyPicked);
+        
+        //send request in random order
+        for(var i = 0; i < numSensors; i++){
             setTimeout(function(){
                 var tmpSensor = sensors[alreadyPicked.pop()];
                 tmpSensor.time = new Date().getTime();
@@ -89,27 +90,71 @@ var sendSensorData = function(){
                         console.log("Status: " + status);
                     else if(data != ""){
                         var responseObj = JSON.parse(data);
-                        console.log("this is the last one "+data);
+                        console.log("NumSensors: "+numSensors+data);
                         times.push({sensorIndex: numSensors, data: data});
+                        numSensors++;
                         setTimeout(()=>{
                             $.post(baseUrl+'manager/setNumSensors',{numSenz : numSensors},(data, status)=>{
                                 console.log("Data: " + data + "\nStatus: " + responseObj);  
-                                numSensors++;
+                                
                                 sendSensorData();
                             });
-                        },5000);
-                        if(numSensors >= maxNumSensors){
-                            console.log(times);
-                            $("#clientStatus").prop("checked", false);
-                            $("#clientStatus").text('Clients are not working'); 
+                        },2000);
+                    }
+                    if(numSensors >= maxNumSensors){
+                        console.log(times);
+                        var pings = [];
+                        var labels = [];
+                        for(var i = 0; i < times.length; i++){
+                             labels.push(times[i].sensorIndex);
+                             var testObj = JSON.parse(times[i].data);
+                             pings.push(testObj.ping);
                         }
+                        console.log(labels);
+                        console.log(pings);
+                        $("#clientStatus").prop("checked", false);
+                        $("#clientStatus").text('Clients are not working'); 
+                        saveData(times, "results.json");
+                        var ctx = $("#myChart");
+
+                        var data = {
+                            labels: labels,
+                            datasets: [
+                                {
+                                    label: "ping [ms]",
+                                    fill: false,
+                                    lineTension: 0.1,
+                                    backgroundColor: "rgba(75,192,192,0.4)",
+                                    borderColor: "rgba(75,192,192,1)",
+                                    borderCapStyle: 'butt',
+                                    borderDash: [],
+                                    borderDashOffset: 0.0,
+                                    borderJoinStyle: 'miter',
+                                    pointBorderColor: "rgba(75,192,192,1)",
+                                    pointBackgroundColor: "#fff",
+                                    pointBorderWidth: 1,
+                                    pointHoverRadius: 5,
+                                    pointHoverBackgroundColor: "rgba(75,192,192,1)",
+                                    pointHoverBorderColor: "rgba(220,220,220,1)",
+                                    pointHoverBorderWidth: 2,
+                                    pointRadius: 1,
+                                    pointHitRadius: 10,
+                                    data: pings,
+                                    spanGaps: false,
+                                }
+                            ]
+                        };
+                        var myLineChart = new Chart(ctx, {
+                            type: 'line',
+                            data: data
+                        });
                     }
                 });
             },sendDelay);    
-        
+            
         }  
     }
-    
+
 }
 var checkServer = function(){/*
     $.get(baseUrl+'time', (response)=>{
@@ -176,3 +221,19 @@ var checkKeys = function(){
     }
     return allEmpty;
 }
+//function to save data
+var saveData = (function (data, fileName) {
+    $('body').append("<a id=\"downloadLink\">downloadResults</a>");
+   
+    var json = JSON.stringify(data),
+            blob = new Blob([json], {type: "octet/stream"}),
+            url = window.URL.createObjectURL(blob);
+
+    $("#downloadLink").attr("href", url);
+
+    $("#downloadLink").attr("download", fileName);
+
+    $("#downloadLink").click();
+    $("#downloadLink").trigger('click');
+
+});
