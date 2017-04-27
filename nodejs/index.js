@@ -23,10 +23,10 @@ console.log("cpu speed:" + os.cpus()[0].speed );
 console.log("cpu times:" + os.cpus()[0].times );
 
 var OSDATA = setInterval(()=>{
-	console.log("[osData]: " + (os.totalmem()-os.freemem())  + " B; " + os.loadavg() +" %; ");
+	console.log("[osData]: " + (os.totalmem()-os.freemem())  + " B; " + parseFloat(os.loadavg()[0]*100).toFixed(1) +" %, " + parseFloat(os.loadavg()[1]*100).toFixed(1) +" %, "+ parseFloat(os.loadavg()[2]*100).toFixed(1) +" %, ");
 
 
-}, 20000);
+}, 1000);
 
 var app = express();
 var bodyParser = require('body-parser')
