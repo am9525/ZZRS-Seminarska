@@ -27,7 +27,11 @@ app.set('port', (process.env.PORT || 5000));
 //Ob koncanem testiranju bodo bolj urejene
 var baza = require('./baza');
 
-var baza_dela = false;  //Ali je baza dostopna?
+var baza_dela = baza.dela(function(err, dela){
+	
+	baza_dela = dela;
+
+});  //Ali je baza dostopna?
 
 var baza_steviloStolpcev = 1000;  //stevilo podatkovnih stolpcev v tabeli, brez stolpca za kljuc
                                   //v resnici je steviloStolpcev + 1 stolpcev
@@ -47,9 +51,10 @@ var casPrispelPrvi = 0;
 var casPrispelZadnji = 0;
 
 app.get('/', function(request, response) {
-  	response.render('index',{
-  		stAktivnihSenzorjev: stASenz,
-  		testSeIzvaja: testSeIzvaja,
+	response.render('index',{
+	  		stAktivnihSenzorjev: stASenz,
+	  		testSeIzvaja: testSeIzvaja,
+	  		bazaDela : baza_dela
 	});
 });
 app.post('/time', function(request, response) {
