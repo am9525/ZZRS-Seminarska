@@ -161,7 +161,7 @@ app.post('/update', function(request, response) {
     senzorPing = casPrispelZadnji - casPrispelPrvi;
     senzorPing /= stASenz;
     stPrispel = 0;
-    console.log("aprox ping: "+senzorPing);
+    console.log("aprox ping for one request -> "+senzorPing+"ms");
   }
   //vstavljanje v bazo
   baza.updateOne(baza_imeTabele,"ID","st",baza_steviloStolpcev,request.body.id,request.body.data,function(vrstica, stolpec, id,data){
@@ -180,10 +180,13 @@ app.post('/update', function(request, response) {
       console.log("Prejel " + stSprej + " zahtev" );
       timeDiffms = casZadnji-casPrvi;
       var timeDiff = new Date(timeDiffms);
-      
-      console.log("time took -> "+ timeDiffms+ "ms -> "+ timeDiff.getMinutes()+"min, "+timeDiff.getSeconds()+"sec");
+      timeDiffms/=stASenz;
+      //console.log("time took -> "+ timeDiffms+ "ms -> "+ timeDiff.getMinutes()+"min, "+timeDiff.getSeconds()+"sec");
+      console.log("time took for one request -> "+ timeDiffms+ "ms");
       var jsonResponse = JSON.stringify({ping: senzorPing, DBTime: timeDiffms});
       response.end(jsonResponse);
+      senzorPing = 0;
+      timeDiffms = 0;
       stSprej = 0;
     }
   },function(err){
