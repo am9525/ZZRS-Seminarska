@@ -21,13 +21,13 @@ console.log('free memory : ' + os.freemem() + " bytes.");
 console.log("cpu model:" + os.cpus()[0].model );
 console.log("cpu speed:" + os.cpus()[0].speed );
 console.log("cpu times:" + os.cpus()[0].times );
-
+/*
 var OSDATA = setInterval(()=>{
 	console.log("[osData]: " + (os.totalmem()-os.freemem())  + " B; " + parseFloat(os.loadavg()[0]*100).toFixed(1) +" %, " + parseFloat(os.loadavg()[1]*100).toFixed(1) +" %, "+ parseFloat(os.loadavg()[2]*100).toFixed(1) +" %, ");
 
 
 }, 1000);
-
+*/
 var app = express();
 var bodyParser = require('body-parser')
 app.use( bodyParser.json() );       // to support JSON-encoded bodies
@@ -196,9 +196,11 @@ app.post('/update', function(request, response) {
     console.log("aprox ping for one request -> "+senzorPing+"ms");
   }
   //vstavljanje v bazo
+
   baza.updateOne(baza_imeTabele,"ID","st",baza_steviloStolpcev,request.body.id,request.body.data,function(vrstica, stolpec, id,data){
-    console.log("vrstica: " + vrstica +" stolpec: "+ stolpec + " Value: " + data + " OK" );
-  
+    var usedRAM = (os.totalmem()-os.freemem());
+    console.log("vrstica: " + vrstica +" stolpec: "+ stolpec + " Value: " + data + " Porabljen RAM" +  usedRAM + " B " +" OK" );
+
     //zapomnimo obdelave prve zahteve
     if(stSprej === 0){
       casPrvi = new Date().getTime();
@@ -215,7 +217,7 @@ app.post('/update', function(request, response) {
       timeDiffms/=stASenz;
       //console.log("time took -> "+ timeDiffms+ "ms -> "+ timeDiff.getMinutes()+"min, "+timeDiff.getSeconds()+"sec");
       console.log("time took for one request -> "+ timeDiffms+ "ms");
-      var jsonResponse = JSON.stringify({ping: senzorPing, DBTime: timeDiffms});
+      var jsonResponse = JSON.stringify({ping: senzorPing, DBTime: timeDiffms, PorabRAM: usedRAM});
       response.end(jsonResponse);
       senzorPing = 0;
       timeDiffms = 0;
