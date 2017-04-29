@@ -1,5 +1,4 @@
 var express = require('express');
-var usage = require('usage');
 
 
 var os = require("os");
@@ -200,11 +199,7 @@ app.post('/update', function(request, response) {
 
   baza.updateOne(baza_imeTabele,"ID","st",baza_steviloStolpcev,request.body.id,request.body.data,function(vrstica, stolpec, id,data){
     //var usedRAM = (os.totalmem()-os.freemem());
-    var usedRam;
-    var pid = process.pid;
-    usage.lookup(pid, function(err, result) {
-      usedRAM = result;
-    });
+    var usedRAM = process.memoryUsage().heapUsed;
 
     console.log("vrstica: " + vrstica +" stolpec: "+ stolpec + " Value: " + data + " Porabljen RAM" +  usedRAM + " B " +" OK" );
 
