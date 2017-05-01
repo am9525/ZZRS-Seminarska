@@ -1,5 +1,6 @@
 import json
 import matplotlib.pyplot as plt
+import matplotlib.patches as mpatches
 import ast
 import math
 
@@ -34,10 +35,17 @@ def varianca(p,tabela):
 	v /= len(tabela)
 	return math.sqrt(v)
 
+def prikazEnega(ime,nacin):
+	povpTabela = []
+	with open(ime) as data_file:
+		data = json.load(data_file)	
+	for j in data:
+		povpTabela.append(ast.literal_eval(j["data"])[nacin])
+	return povpTabela
 
 
 def main():
-	nacin = "DBTime" #ping,PorabRAM,DBTime
+	nacin = "ping" #ping,PorabRAM,DBTime
 	#mapa = '100'   #100, 500, 1000, 2000
 	tabela = []
 	for mapa in [10,100,500,1000,2000]:
@@ -45,17 +53,28 @@ def main():
 		povp = sum(pTabela)/len(pTabela)
 		tabela.append(povp)
 		print("Povpr: "+str(povp)+"+/-: "+str(varianca(povp,pTabela)))
-	plt.plot([10,100,500,1000,2000],tabela,'b--o')
-	plt.ylabel('Velikost kopice [B]')
-	plt.xlabel('Delay [ms]')
-	plt.show()
-	# plt.plot(tabela)
-	# plt.plot(range(6,100),povpTabela(nacin, "100"))
-	# plt.ylabel('Cas [ms]')
-	# plt.xlabel('Velikost vrste')
-	# plt.xlim(6, 95)
+	# plt.plot([10,100,500,1000,2000],tabela,'b--o')
+	# plt.ylabel('Velikost kopice [B]')
+	# plt.xlabel('Delay [ms]')
 	# plt.show()
-	# print(casiPing)
+	################### ali
+	plt.plot(tabela)
+	plt.plot(range(6,100),povpTabela(nacin, "10"), label='delay 10ms')
+	plt.plot(range(6,100),povpTabela(nacin, "100"), label='delay 10ms')
+	plt.plot(range(6,100),povpTabela(nacin, "500"), label='delay 10ms')
+	plt.plot(range(6,100),povpTabela(nacin, "1000"), label='delay 10ms')
+	plt.plot(range(6,100),povpTabela(nacin, "2000"), label='delay 2000ms')
+	plt.legend(loc='down right')
+	plt.ylabel('Cas [ms]')
+	plt.xlabel('Velikost vrste')
+	plt.xlim(6, 95)
+	plt.show()
+	# ################## ali
+	# pTabela = prikazEnega("nov.json",nacin)
+	# plt.plot(pTabela)
+	# plt.show()
+
+
 
 if __name__ == "__main__":
     main()
