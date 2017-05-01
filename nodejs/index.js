@@ -76,6 +76,7 @@ var timeDiffms = 0; //time difference between first and last request
 var senzorPing = 0;
 var casPrispelPrvi = 0;
 var casPrispelZadnji = 0;
+var casBaze = 0;
 
 app.get('/', function(request, response) {
 	response.render('index',{
@@ -196,9 +197,11 @@ app.post('/update', function(request, response) {
     console.log("aprox ping for one request -> "+senzorPing+"ms");
   }
   //vstavljanje v bazo
-
+  var tic = new Date().getTime();
   baza.updateOne(baza_imeTabele,"ID","st",baza_steviloStolpcev,request.body.id,request.body.data,function(vrstica, stolpec, id,data){
     //var usedRAM = (os.totalmem()-os.freemem());
+    var toc = new Date().getTime();
+    casBaze += (toc - tic);
     var usedRAM = process.memoryUsage().heapUsed;
 
     console.log("vrstica: " + vrstica +" stolpec: "+ stolpec + " Value: " + data + " Porabljen RAM" +  usedRAM + " B " +" OK" );
@@ -217,12 +220,14 @@ app.post('/update', function(request, response) {
       timeDiffms = casZadnji-casPrvi;
       var timeDiff = new Date(timeDiffms);
       timeDiffms/=stASenz;
+      casBaze/=stASenz;
       //console.log("time took -> "+ timeDiffms+ "ms -> "+ timeDiff.getMinutes()+"min, "+timeDiff.getSeconds()+"sec");
       console.log("time took for one request -> "+ timeDiffms+ "ms");
-      var jsonResponse = JSON.stringify({ping: senzorPing, DBTime: timeDiffms, PorabRAM: usedRAM});
+      var jsonResponse = JSON.stringify({ping: senzorPing, DBTime: casBaze, PorabRAM: usedRAM});
       response.end(jsonResponse);
       senzorPing = 0;
       timeDiffms = 0;
+      casBaze = 0;
       stSprej = 0;
     }
   },function(err){
