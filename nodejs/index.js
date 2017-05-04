@@ -1,5 +1,4 @@
 var express = require('express');
-var cors = require('cors');
 var os = require("os");
 var bodyParser = require('body-parser');
 
@@ -30,14 +29,17 @@ var OSDATA = setInterval(()=>{
 */
 console.log("CORS should be working")
 var app = express();
-app.use(cors());
+
 app.use( bodyParser.json() );       // to support JSON-encoded bodies
 app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
   extended: true
 })); 
-
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
 app.use(express.static(__dirname + '/view/css'));
-
 // views is directory for all template files
 app.set('views', __dirname + '/view/ejs');
 app.set('view engine', 'ejs');
