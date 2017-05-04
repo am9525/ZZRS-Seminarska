@@ -1,15 +1,20 @@
-var minNumSensors = 10;
-var maxNumSensors = 20;
-var numAllSensors = 0;
-var numSensors = 0;
-var maxNumTests = 5;
-var numTests = 0;
+var minNumSensors = 10; //the lower threshold for the number of sensor to be tested
+var maxNumSensors = 20; //the higher threshold fot the number of sensor to be tested
+var sensorStep = 10; //for how much does the sensor value change during the test
+var numOfTests = (maxNumSensors-minNumSensors)/sensorStep+1; //number of tests to be executed
+var currTestNumber = 0;
+var currNumSensors = minNumSensors;//number of sensorts for the current test
+var maxTestRepeat = 5; // how many times is each test repeated
+var currTestRepeat = 0; // at which repetition is the current test
 var sendDelay = 1; //ms, delay between request from each sensor
 var sensors = []; // sensor ID and value array
 var baseUrl = 'http://localhost:5000/';
 var finished = true;
-var times = [];
-
+var times = []; //array containing all the results
+//charts
+var pingChart = null;
+var dbChart = null;
+var ramChart = null;
 $(document).ready(function(){
     //ping server first time
     checkServer();
@@ -30,35 +35,46 @@ $(document).ready(function(){
     $("#start").click(function(){
         $('progress').attr('value', 0);
         //if(!checkKeys()){
-        sendDelay = $('#sendDelay').val();
+        if($('#sendDelay').val() != "")
+            sendDelay = parseInt($('#sendDelay').val());
         //}
         if($('#baseUrl').val() != "")
             baseUrl = $('#baseUrl').val();
         //parse sensorRange
         if($('#sensorRange').val() != ""){
             var tmpRange  = $("#sensorRange").val().split("-");
-            minNumSensors = tmpRange[0];
-            maxNumSensors = tmpRange[1];
-            
+            minNumSensors = parseInt(tmpRange[0]);
+            maxNumSensors = parseInt(tmpRange[1]);
         }
-        if($('#numTests').val() != ""){
-            maxNumTests = $('#numTests').val();
-        }
+        if($('#sensorStep').val() != "")
+            sensorStep = parseInt($('#sensorStep').val());
+        
+        if($('#numTests').val() != "")
+            maxTestRepeat = parseInt($('#numTests').val());
+        
         //create initial sensor array
         for(var i = 0; i < maxNumSensors; i++){
             sensors.push({id : i, data: 0, time: 0})
         }
-
+        if(pingChart != null)
+            pingChart.destroy();
+        if(dbChart != null)
+            dbChart.destroy();
+        if(ramChart != null)
+            ramChart.destroy();
         //start stressing server
         if($('#serverStatus').is(':checked')){
             $("#clientStatus").prop("checked", true);
             $("#clientStatus").text('Clients are working'); 
-            numSensors = minNumSensors;
-            numAllSensors = maxNumSensors - minNumSensors;
-            numTests = 1;
-            $('#state').text("executing test: "+numSensors+"/"+maxNumSensors);
+            currNumSensors = minNumSensors;
+            numOfTests = (maxNumSensors-minNumSensors)/sensorStep+1; 
+            console.log("asasdasd",numOfTests);
+            currTestRepeat= 1;
+            currTestNumber = 0;
+                           
+            $('#state').text("executing test: "+currTestNumber+"/"+numOfTests);
             //triger first send
-            $.post(baseUrl+'manager/setNumSensors',{numSenz : numSensors},(data, status)=>{
+            $.post(baseUrl+'manager/setNumSensors',{numSenz : currNumSensors},(data, status)=>{
                 console.log("Data: " + data + "\nStatus: " + status);    
                 sendSensorData();
             });
@@ -77,24 +93,25 @@ $(document).ready(function(){
 });
 
 var sendSensorData = function(){
-    if(numSensors < maxNumSensors){
+    if(currNumSensors <= maxNumSensors){
+        console.log("numSensors:",currNumSensors);
         //generate random variables for data
-        for(var i = 0; i < numSensors; i++){
+        for(var i = 0; i < currNumSensors; i++){
             sensors[i] = {id : i, data: Math.floor(Math.random()*1000)}
         }
+        //array used for randomization
         var alreadyPicked = [];
         //randomize which sensor gets to send first
-        console.log("numSensors:",numSensors);
         do{
-            var whichIsNext = Math.floor(Math.random()*numSensors);
+            var whichIsNext = Math.floor(Math.random()*currNumSensors);
             if(alreadyPicked.indexOf(whichIsNext) === -1){
                 alreadyPicked.push(whichIsNext);
             }
-        }while(alreadyPicked.length != numSensors);
+        }while(alreadyPicked.length != currNumSensors);
         
         console.log("picked order", alreadyPicked);
         //send request in random order
-        for(var i = 0; i < numSensors; i++){
+        for(var i = 0; i < currNumSensors; i++){
             //time between each test
             setTimeout(function(){
                 var tmpSensor = sensors[alreadyPicked.pop()];
@@ -104,53 +121,56 @@ var sendSensorData = function(){
                         console.log("Status: " + status);
                     else if(data != ""){
                         var responseObj = JSON.parse(data);
-                        console.log("NumSensors: "+numSensors+data);
-                        times.push({sensorIndex: numSensors, data: data});
-                        if(numTests == maxNumTests){
-                            numTests = 0;
-                            numSensors++;
-                            $('progress').attr('value', (numSensors/numAllSensors)*100);
-                            $('#state').text("executing test: "+numSensors+"/"+maxNumSensors);
+                        times.push({sensorIndex: currNumSensors, data: data});
+                        console.log("time pushing: ",currNumSensors, data);
+                        if(currTestRepeat >= maxTestRepeat){
+                            currTestRepeat  = 0;
+                            currTestNumber++;
+                            currNumSensors += sensorStep;  
+                            $('progress').attr('value', (currTestNumber/numOfTests)*100);
+                            $('#state').text("executing test: "+currTestNumber+"/"+numOfTests);
                         }
-                        numTests++;
+                        currTestRepeat++;
+                       
                         setTimeout(()=>{
-                            $.post(baseUrl+'manager/setNumSensors',{numSenz : numSensors},(data, status)=>{
+                            $.post(baseUrl+'manager/setNumSensors',{numSenz : currNumSensors},(data, status)=>{
                                 console.log("Data: " + data + "\nStatus: " + responseObj);  
                                 sendSensorData();
                             });
                         },100);
+                        
                     }
                 });
             },sendDelay);    
             
         }  
     }
-    if(numSensors >= maxNumSensors){
-        //console.log(times);
-        var pings = [];
-        var dbTime = [];
-        var ram = [];
-        var labels = [];
-        var tmpPing = 0;
-        var tmpDBTime = 0;
-        var tmpRam = 0;
-        var numDiffTests = maxNumSensors-minNumSensors; // number of all senors
-        for(var i = 0; i < numDiffTests; i++){
-            for(var j = 0; j < maxNumTests; j++){
-                var dataObj = JSON.parse(times[i*maxNumTests+j].data);
+    if(currNumSensors > maxNumSensors){
+        console.log(currNumSensors,maxNumSensors);
+        var pings = []; // holds the recieved ping data
+        var dbTime = []; // holds the recieved DB time data
+        var ram = []; // holds the recived ram data
+        var labels = []; // holds the numSensor of the executed test
+        var tmpPing = 0; // temporary value used for mean
+        var tmpDBTime = 0;// temporary value used for mean
+        var tmpRam = 0;// temporary value used for mean
+        //get data from results
+        for(var i = 0; i < numOfTests; i++){
+            for(var j = 0; j < maxTestRepeat; j++){
+                var dataObj = JSON.parse(times[i*maxTestRepeat+j].data);
                 //console.log("numSensors:"+times[i*maxNumTests+j].sensorIndex+ " DBTime: "+dataObj.DBTime)
                 tmpPing += dataObj.ping;
                 tmpDBTime += dataObj.DBTime;
-                tmpRam += dataObj.PorabaRAM;
+                tmpRam += parseInt(dataObj.PorabRAM/1048576);
             }
             //write to array
-            tmpPing /= maxNumTests;
-            tmpDBTime /= maxNumTests;
-            tmpRam /= maxNumTests;
+            tmpPing /= maxTestRepeat;
+            tmpDBTime /= maxTestRepeat;
+            tmpRam /= maxTestRepeat;
             pings.push(tmpPing);
             dbTime.push(tmpDBTime);
             ram.push(tmpRam);
-            labels.push(times[i*maxNumTests].sensorIndex);
+            labels.push(times[i*maxTestRepeat].sensorIndex);
             tmpPing = 0;
             tmpDBTime = 0;
             tmpRam = 0;
@@ -160,6 +180,7 @@ var sendSensorData = function(){
         $("#clientStatus").prop("checked", false);
         $("#clientStatus").text('Clients are not working'); 
         saveData(times, "results.json");
+        //drawGraphs(pings, dbTime, ram);
         var dataPing = {
             labels: labels,
             datasets: [
@@ -195,7 +216,7 @@ var sendSensorData = function(){
             datasets: [
                 {
                     label: "RAM [MB]",
-                    data: dbTime,
+                    data: ram,
                     fill: false,
                     backgroundColor: "rgba(255, 0, 0,0.4)",//color of the fill under the curve
                     borderColor: "rgba(255, 0, 0,1)", // color of the line
@@ -205,7 +226,7 @@ var sendSensorData = function(){
                 }
             ]
         };
-        var pingChart= new Chart($("#ping"), {
+        pingChart= new Chart($("#ping"), {
             type: 'line',
             data: dataPing,
             options: {
@@ -231,7 +252,7 @@ var sendSensorData = function(){
             }
             
         });
-        var dbChar =  new Chart($("#dbTime"), {
+        dbChart =  new Chart($("#dbTime"), {
             type: 'line',
             data: dataDBTime,
             options: {
@@ -257,7 +278,8 @@ var sendSensorData = function(){
             }
                 
         });
-        var ramChar =  new Chart($("#ram"), {
+
+        ramChart =  new Chart($("#ram"), {
             type: 'line',
             data: dataRam,
             options: {
@@ -282,7 +304,7 @@ var sendSensorData = function(){
                 },
             }
                 
-        });
+        });    
     }
 }
 var checkServer = function(){/*
@@ -366,7 +388,132 @@ var saveData = (function (data, fileName) {
     $("#downloadLink").trigger('click');
 
 });
+var drawGraphs = function(pings, dbTime, ram){
+    var dataPing = {
+        labels: labels,
+        datasets: [
+            {
+                label: "Ping [ms]",
+                data: pings,
+                fill: false,
+                backgroundColor: "rgba(0, 255, 0,0.4)",//color of the fill under the curve
+                borderColor: "rgba(0, 255, 0,1)", // color of the line
+                pointBorderColor: "rgba(0,255,0,1)", // color od data points
+                pointBackgroundColor: "rgba(0,255,0,0.4)",
+                showLine: true,
+            }
+        ]
+    };
+    var dataDBTime = {
+        labels: labels,
+        datasets: [
+            {
+                label: "DBTime [ms]",
+                data: dbTime,
+                fill: false,
+                backgroundColor: "rgba(0, 0, 255,0.4)",//color of the fill under the curve
+                borderColor: "rgba(0, 0, 255,1)", // color of the line
+                pointBorderColor: "rgba(0,0,255,1)", // color od data points
+                pointBackgroundColor: "rgba(0,0,255,0.4)",
+                showLine: true,
+            }
+        ]
+    };
+    var dataRam = {
+        labels: labels,
+        datasets: [
+            {
+                label: "RAM [MB]",
+                data: ram,
+                fill: false,
+                backgroundColor: "rgba(255, 0, 0,0.4)",//color of the fill under the curve
+                borderColor: "rgba(255, 0, 0,1)", // color of the line
+                pointBorderColor: "rgba(255,0,0,1)", // color od data points
+                pointBackgroundColor: "rgba(255,0,0,0.4)",
+                showLine: true,
+            }
+        ]
+    };
+    pingChart = new Chart($("#ping"), {
+        type: 'line',
+        data: dataPing,
+        options: {
+            responsive: false,
+            scales:
+            {
+                xAxes: [{
+                    display: false
+                }],
+                yAxes: [{
+                    ticks: {
+                        max: 100,    
+                        beginAtZero: true,
+                    }
+                }]
+            },
+            layout: {
+                padding: {
+                top: 5,
+                right: 10,
+            }
+        },
+        }
+        
+    });
+    dbChart =  new Chart($("#dbTime"), {
+        type: 'line',
+        data: dataDBTime,
+        options: {
+            responsive: false,
+            scales:
+            {
+                xAxes: [{
+                    display: false
+                }],
+                yAxes: [{
+                    ticks: {
+                        
+                        beginAtZero: true,
+                    }
+                }]
+            },
+            layout: {
+                padding: {
+                    top: 5,
+                    right: 10,
+                }
+            },
+        }
+            
+    });
 
+    ramChart =  new Chart($("#ram"), {
+        type: 'line',
+        data: dataRam,
+        options: {
+            responsive: false,
+            scales:
+            {
+                xAxes: [{
+                    display: false
+                }],
+                yAxes: [{
+                    ticks: {
+                        
+                        beginAtZero: true,
+                    }
+                }]
+            },
+            layout: {
+                padding: {
+                    top: 5,
+                    right: 10,
+                }
+            },
+        }
+            
+    });    
+}
 /*fill: false, // fills the area under the curve
 lineTension: 0.1,//how smooth is the line 
 backgroundColor: "rgba(255, 0, 0,0.4)",//color of the fill under the curve

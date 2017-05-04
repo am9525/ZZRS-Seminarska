@@ -1,6 +1,8 @@
 var express = require('express');
-var os = require("os");
 var bodyParser = require('body-parser');
+var os = require("os");
+var sqlite3 = require('sqlite3').verbose();
+var db = new sqlite3.Database('nodejs/resources/db/results.db');
 
 // Endianness
 console.log('endianness : ' + os.endianness());
@@ -16,7 +18,6 @@ console.log('total memory : ' + os.totalmem() + " bytes.");
 
 // Total free memory
 console.log('free memory : ' + os.freemem() + " bytes.");
-
 console.log("cpu model:" + os.cpus()[0].model );
 console.log("cpu speed:" + os.cpus()[0].speed );
 console.log("cpu times:" + os.cpus()[0].times );
@@ -27,9 +28,16 @@ var OSDATA = setInterval(()=>{
 
 }, 1000);
 */
-console.log("CORS should be working")
-var app = express();
+//Each command inside the serialize() function is guaranteed to finish executing before the next one starts.
+db.serialize(()=>{
+  //runs SQL query dosent retrive any data
+  db.run("CREATE TABLE if not exists results (numSensor INTEGER(6) PRIMARY KEY, ping REAL, dbTime REAL, ram INT(4))");
+  db.run("INSERT into results(numSensor, ping, dbTime, ram) VALUES (1,2,3,4)");
+  console.log("hell");
+  db.close();
+});
 
+var app = express();
 app.use( bodyParser.json() );       // to support JSON-encoded bodies
 app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
   extended: true
@@ -152,7 +160,6 @@ app.get('/senzorji', function(request, response) {
       response.end(""+err);
     }
      
-
   });
 });
 
@@ -170,17 +177,6 @@ app.listen(app.get('port'), function() {
 });
 
 app.post('/update', function(request, response) {
-  /*console.log("ID: " + request.body.id+"\nData: " + request.body.data);
-  var senzorTime = request.body.time;
-  var serverTime = new Date().getTime();
-  senzorPing += Math.abs(serverTime - senzorTime);
-  stPrispel++;
-  if(stPrispel == stASenz){
-    senzorPing /= stASenz;
-    console.log("time took -> "+ senzorPing+ "ms");
-    stPrispel = 0;
-    senzorPing = 0;
-  }*/
   //zahteva za vstavljanje je prispela
   if(stPrispel == 0){
       //zapomnimo si cas prve prejete zahteve
@@ -224,7 +220,8 @@ app.post('/update', function(request, response) {
       timeDiffms/=stASenz;
       casBaze/=stASenz;
       //console.log("time took -> "+ timeDiffms+ "ms -> "+ timeDiff.getMinutes()+"min, "+timeDiff.getSeconds()+"sec");
-      console.log("time took for one request -> "+ timeDiffms+ "ms");
+      console.log("DBtime took for one request -> "+ timeDiffms+ "ms");
+      //if this is the last resposne
       var jsonResponse = JSON.stringify({ping: senzorPing, DBTime: casBaze, PorabRAM: usedRAM});
       response.end(jsonResponse);
       senzorPing = 0;
@@ -235,9 +232,9 @@ app.post('/update', function(request, response) {
   },function(err){
     console.log(err);
   });
-  //zato da nas clienti ne cakajo na repoonse
   
 });
+
 app.post('/manager/setNumSensors', function(request, response) {
   stASenz = request.body.numSenz
   console.log("Set the number of sensors to: "+stASenz)
