@@ -1,7 +1,7 @@
 var express = require('express');
-
-
+var cors = require('cors');
 var os = require("os");
+var bodyParser = require('body-parser');
 
 // Endianness
 console.log('endianness : ' + os.endianness());
@@ -29,12 +29,11 @@ var OSDATA = setInterval(()=>{
 }, 1000);
 */
 var app = express();
-var bodyParser = require('body-parser')
+app.use(cors())
 app.use( bodyParser.json() );       // to support JSON-encoded bodies
 app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
   extended: true
 })); 
-
 
 app.use(express.static(__dirname + '/view/css'));
 

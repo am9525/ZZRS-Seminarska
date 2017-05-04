@@ -2,7 +2,7 @@
   <head>
     <title>Simple server stresser</title>
     <meta content="Simple server stresser" charset="UTF-8">
-    <link rel="stylesheet" type="text/css" href="resources/css/main.css">
+    <link rel="stylesheet" type="text/css" href="resources/css/main-stresser.css">
     <link href="https://fonts.googleapis.com/css?family=Rubik" rel="stylesheet">
     <script src="resources/js/node_modules/jquery/dist/jquery.js"></script>
     <script src="resources/js/node_modules/chart.js/dist/Chart.bundle.min.js"></script>
@@ -17,11 +17,13 @@
        <input class="buttonSmall" id ="change" type="button" value = "Change">
 
       <label class="fieldLabel"  for="sensorRange">Sensor range:</label>
-      <input class="inputField" id = "sensorRange" type="text" name="sensorRange" placeholder="10-100">
+      <input class="inputField" id = "sensorRange" type="text" name="sensorRange" placeholder="10-20">
 
       <label class="fieldLabel" for="sendDelay">Send delay:</label>
       <input class="inputField" id = "sendDelay" type="text" name="refreshRate" placeholder="1">
-      
+
+       <label class="fieldLabel" for="numTests">Number of tests:</label>
+      <input class="inputField" id = "numTests" type="text" name="numTests" placeholder="5">
 
       <div class = "buttonContainer">
 
@@ -57,7 +59,11 @@
       </div>
       <ul>
       </ul>
-      <canvas id="myChart" width="400" height="400"></canvas>
+      <div id="graphs">
+        <canvas id="ping" width="400" height="400"></canvas>
+        <canvas id="dbTime" width="400" height="400"></canvas>
+        <canvas id="ram" width="400" height="400"></canvas>
+      </div>
     </div>
   </div>
 </body>
