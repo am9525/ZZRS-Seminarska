@@ -1,5 +1,6 @@
 var minNumSensors = 10;
 var maxNumSensors = 20;
+var numAllSensors = 0;
 var numSensors = 0;
 var maxNumTests = 5;
 var numTests = 0;
@@ -27,6 +28,7 @@ $(document).ready(function(){
     });
 
     $("#start").click(function(){
+        $('progress').attr('value', 0);
         //if(!checkKeys()){
         sendDelay = $('#sendDelay').val();
         //}
@@ -52,7 +54,9 @@ $(document).ready(function(){
             $("#clientStatus").prop("checked", true);
             $("#clientStatus").text('Clients are working'); 
             numSensors = minNumSensors;
+            numAllSensors = maxNumSensors - minNumSensors;
             numTests = 1;
+            $('#state').text("executing test: "+numSensors+"/"+maxNumSensors);
             //triger first send
             $.post(baseUrl+'manager/setNumSensors',{numSenz : numSensors},(data, status)=>{
                 console.log("Data: " + data + "\nStatus: " + status);    
@@ -105,6 +109,8 @@ var sendSensorData = function(){
                         if(numTests == maxNumTests){
                             numTests = 0;
                             numSensors++;
+                            $('progress').attr('value', (numSensors/numAllSensors)*100);
+                            $('#state').text("executing test: "+numSensors+"/"+maxNumSensors);
                         }
                         numTests++;
                         setTimeout(()=>{
@@ -237,7 +243,7 @@ var sendSensorData = function(){
                     }],
                     yAxes: [{
                         ticks: {
-                            max: 100,    
+                            
                             beginAtZero: true,
                         }
                     }]
@@ -263,7 +269,7 @@ var sendSensorData = function(){
                     }],
                     yAxes: [{
                         ticks: {
-                            max: 100,    
+                            
                             beginAtZero: true,
                         }
                     }]
