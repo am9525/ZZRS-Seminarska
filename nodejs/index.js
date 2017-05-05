@@ -31,10 +31,9 @@ var OSDATA = setInterval(()=>{
 //Each command inside the serialize() function is guaranteed to finish executing before the next one starts.
 db.serialize(()=>{
   //runs SQL query dosent retrive any data
-  db.run("CREATE TABLE if not exists results (numSensor INTEGER(6) PRIMARY KEY, ping REAL, dbTime REAL, ram INT(4))");
-  db.run("INSERT into results(numSensor, ping, dbTime, ram) VALUES (1,2,3,4)");
-  console.log("hell");
-  db.close();
+  db.run("CREATE TABLE if not exists results (numSensor INTEGER(6) PRIMARY KEY, ping REAL, dbTime REAL, ram INT(4), numResults INT(4))");
+  
+  console.log("Result local DB was initialized")
 });
 
 var app = express();
@@ -221,13 +220,47 @@ app.post('/update', function(request, response) {
       casBaze/=stASenz;
       //console.log("time took -> "+ timeDiffms+ "ms -> "+ timeDiff.getMinutes()+"min, "+timeDiff.getSeconds()+"sec");
       console.log("DBtime took for one request -> "+ timeDiffms+ "ms");
-      //if this is the last resposne
+      //if this is the last resposne send back data
       var jsonResponse = JSON.stringify({ping: senzorPing, DBTime: casBaze, PorabRAM: usedRAM});
-      response.end(jsonResponse);
-      senzorPing = 0;
-      timeDiffms = 0;
-      casBaze = 0;
-      stSprej = 0;
+      
+      console.log("you exists here"+senzorPing)
+      //save int DB
+      db.serialize(()=>{
+        var numResults =sqlDBTime= sqlPing = sqlRam = 0;
+        var SQLstmt = "SELECT * FROM results WHERE numSensor="+stASenz;
+        db.each(SQLstmt,(err, row)=>{
+          if(row != undefined){
+            numResults = parseInt(row.numResults);
+            sqlPing = parseFloat(row.ping);
+            sqlDBTime = parseFloat(row.dbTime);
+            sqlRam = parseInt(row.ram);
+            sqlPing *= numResults;sqlDBTime *= numResults;sqlRam *= numResults;
+            sqlPing += senzorPing; sqlDBTime += casBaze; sqlRam+= usedRAM; numResults++;
+            sqlPing /= numResults; 
+            sqlDBTime /= numResults;
+            sqlRam /= numResults;
+            SQLstmt = "UPDATE OR IGNORE results SET ping="+sqlPing+", dbTime="+sqlDBTime+", ram="+sqlRam+", numResults="+numResults+"  WHERE numSensor="+stASenz;
+            db.run(SQLstmt);
+          }
+          senzorPing = 0;
+          timeDiffms = 0;
+          casBaze = 0;
+          stSprej = 0;
+          response.end(jsonResponse);
+        });
+        db.get(SQLstmt,(err, row)=>{
+          if(row == undefined){
+            SQLstmt = "INSERT OR IGNORE INTO results(numSensor, ping, dbTime, ram, numResults) VALUES ("+stASenz+","+senzorPing+","+casBaze+","+usedRAM+","+1+")";
+            db.run(SQLstmt);
+            senzorPing = 0;
+            timeDiffms = 0;
+            casBaze = 0;
+            stSprej = 0;
+            response.end(jsonResponse);
+          }
+        });
+      });
+
     }
   },function(err){
     console.log(err);
