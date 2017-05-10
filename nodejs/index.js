@@ -31,9 +31,8 @@ var OSDATA = setInterval(()=>{
 //Each command inside the serialize() function is guaranteed to finish executing before the next one starts.
 db.serialize(()=>{
   //runs SQL query dosent retrive any data
-  db.run("CREATE TABLE if not exists results (numSensor INTEGER(6) PRIMARY KEY, ping REAL, dbTime REAL, ram INT(4), numResults INT(4))");
-  
-  console.log("Result local DB was initialized")
+  db.run("CREATE TABLE if not exists results (numSensors INTEGER(6) PRIMARY KEY, ping REAL, dbTime REAL, ram INT(4), numResults INT(4))");
+  console.log("Result local DB was initialized");
 });
 
 var app = express();
@@ -98,6 +97,21 @@ app.post('/time', function(request, response) {
   var time = new Date();
   var jsonResponse = JSON.stringify({serverTime: time});
   response.end(jsonResponse);
+});
+app.delete('/results', (request, response)=>{
+  db.serialize(()=>{
+    db.run("DROP TABLE results");
+    db.run("CREATE TABLE if not exists results (numSensors INTEGER(6) PRIMARY KEY, ping REAL, dbTime REAL, ram INT(4), numResults INT(4))");
+    response.status(200).send("Result local DB was initialized");
+  });
+});
+app.get('/results', (request, response)=>{
+  getDataFromResultTable((err, rows)=>{
+    if(err != null){
+      reponse.status(500).send("Something went wrong")
+    }
+    response.status(200).send(JSON.stringify(rows));
+  });
 });
 /*
 primer funkcije za prikaz statusa
@@ -191,6 +205,7 @@ app.post('/update', function(request, response) {
     senzorPing = casPrispelZadnji - casPrispelPrvi;
     senzorPing /= stASenz;
     stPrispel = 0;
+    console.log("steviloSenzorjev: "+stASenz);
     console.log("aprox ping for one request -> "+senzorPing+"ms");
   }
   //vstavljanje v bazo
@@ -219,15 +234,13 @@ app.post('/update', function(request, response) {
       timeDiffms/=stASenz;
       casBaze/=stASenz;
       //console.log("time took -> "+ timeDiffms+ "ms -> "+ timeDiff.getMinutes()+"min, "+timeDiff.getSeconds()+"sec");
-      console.log("DBtime took for one request -> "+ timeDiffms+ "ms");
+      console.log("dbTime took for one request -> "+ timeDiffms+ "ms");
       //if this is the last resposne send back data
-      var jsonResponse = JSON.stringify({ping: senzorPing, DBTime: casBaze, PorabRAM: usedRAM});
-      
-      console.log("you exists here"+senzorPing)
+      var jsonResponse = JSON.stringify({ping: senzorPing, dbTime: casBaze, ram: usedRAM});
       //save int DB
       db.serialize(()=>{
         var numResults =sqlDBTime= sqlPing = sqlRam = 0;
-        var SQLstmt = "SELECT * FROM results WHERE numSensor="+stASenz;
+        var SQLstmt = "SELECT * FROM results WHERE numSensors="+stASenz;
         db.each(SQLstmt,(err, row)=>{
           if(row != undefined){
             numResults = parseInt(row.numResults);
@@ -239,7 +252,7 @@ app.post('/update', function(request, response) {
             sqlPing /= numResults; 
             sqlDBTime /= numResults;
             sqlRam /= numResults;
-            SQLstmt = "UPDATE OR IGNORE results SET ping="+sqlPing+", dbTime="+sqlDBTime+", ram="+sqlRam+", numResults="+numResults+"  WHERE numSensor="+stASenz;
+            SQLstmt = "UPDATE OR IGNORE results SET ping="+sqlPing+", dbTime="+sqlDBTime+", ram="+sqlRam+", numResults="+numResults+"  WHERE numSensors="+stASenz;
             db.run(SQLstmt);
           }
           senzorPing = 0;
@@ -250,7 +263,7 @@ app.post('/update', function(request, response) {
         });
         db.get(SQLstmt,(err, row)=>{
           if(row == undefined){
-            SQLstmt = "INSERT OR IGNORE INTO results(numSensor, ping, dbTime, ram, numResults) VALUES ("+stASenz+","+senzorPing+","+casBaze+","+usedRAM+","+1+")";
+            SQLstmt = "INSERT OR IGNORE INTO results(numSensors, ping, dbTime, ram, numResults) VALUES ("+stASenz+","+senzorPing+","+casBaze+","+usedRAM+","+1+")";
             db.run(SQLstmt);
             senzorPing = 0;
             timeDiffms = 0;
@@ -295,26 +308,16 @@ app.post('/manager/zacniTestiranje', function(request, response){
 	response.redirect("/");
 });
 
-
-
-
-/*	Uporabiti bo lažje express, se mi zdi 
-
-const http = require('http')  
-const port = process.env.PORT || 3000;
-
-const requestHandler = (request, response) => {  
-  console.log(request.url)
-  response.end('Hello Node.js FFFServer!')
+var getDataFromResultTable = function(callback){
+  db.serialize(()=>{
+    db.all("SELECT * FROM results", (err, rows)=>{
+      if(err != null){
+        console.log(err);
+        callback(err, rows);
+      }
+      console.log(rows);
+      callback(err, rows);
+     // db.close();
+    });
+  });
 }
-
-const server = http.createServer(requestHandler)
-
-server.listen(port, (err) => {  
-  if (err) {
-    return console.log('something bad happened', err)
-  }
-
-  console.log(`server is listening on ${port}`)
-})
-*/

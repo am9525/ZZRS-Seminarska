@@ -126,6 +126,16 @@ label{
     border-color: limegreen;
     color: white;
 }
+.button#dropTable:hover {
+    background-color: orange;
+    border-color: orange;
+    color: white;
+}
+.button#pullData:hover {
+    background-color: magenta;
+    border-color: magenta;
+    color: white;
+}
 .button#stop:hover {
     background-color: red;
     border-color: red;
