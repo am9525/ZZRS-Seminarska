@@ -306,33 +306,32 @@ app.post('/manager/zacniTestiranje', function(request, response){
     var oks = 0;
     var stOpravljenihTestov = 0;
     testSeIzvaja=true;
-    var startTime = 0; 
     var timeForQuery = 0;
-    var endTime = 0;
+    
     console.log("zacelo se je testiranej baze");
     for(var i = 0; i < request.body.aktSenzorji; i++){
 
-      baza.updateOne(baza_imeTabele,"ID","st",baza_steviloStolpcev,Math.floor(Math.random()*request.body.aktSenzorji), 0,(vrstica, stolpec, id,data)=>{
-        oks++;
-        stOpravljenihTestov++;
-        console.log("ok", vrstica, stolpec);
-        if(stOpravljenihTestov == 1){
-           startTime = new Date().getTime();
-        }
-        if(stOpravljenihTestov >= request.body.aktSenzorji){
-          testSeIzvaja = false;
-          endTime = new Date().getTime();
-          timeForQuery = (endTime-startTime)/request.body.aktSenzorji;
-          console.log(timeForQuery);
-        }
-      },()=>{
-        errors++;
-        stOpravljenihTestov++;
-        console.log("error");
-        if(stOpravljenihTestov >= request.body.aktSenzorji)
-          testSeIzvaja = false;
+      setTimeout(()=>{
+        baza.updateOne(baza_imeTabele,"ID","st",baza_steviloStolpcev,Math.floor(Math.random()*request.body.aktSenzorji), 0,
+        (vrstica, stolpec, id,data, startTime)=>{
+          var endTime = new Date().getTime();
+          timeForQuery = (endTime-startTime);
+          oks++;
+          stOpravljenihTestov++;
+          console.log("ok", vrstica, stolpec, timeForQuery,"ms");
+          if(stOpravljenihTestov >= request.body.aktSenzorji){
+            testSeIzvaja = false;
+            console.log(timeForQuery/request.body.aktSenzorji,"ms");
+          }
+        },()=>{
+          errors++;
+          stOpravljenihTestov++;
+          console.log("error");
+          if(stOpravljenihTestov >= request.body.aktSenzorji)
+            testSeIzvaja = false;
         
-      });
+        });
+      },i*request.body.SendDelay);
     }
     
   }

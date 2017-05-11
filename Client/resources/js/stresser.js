@@ -164,17 +164,16 @@ var sendSensorData = function(){
                             $('#state').text("executing test: "+currTestNumber+"/"+numOfTests);
                         }
                         currTestRepeat++;
-                       
+                        //timetout between tests
                         setTimeout(()=>{
                             $.post(baseUrl+'manager/setNumSensors',{numSenz : currNumSensors},(data, status)=>{
                                 console.log("Data: " + data + "\nStatus: " + responseObj);  
                                 sendSensorData();
                             });
                         },100);
-                        
                     }
                 });
-            },sendDelay);    
+            },i*sendDelay);    
             
         }  
     }

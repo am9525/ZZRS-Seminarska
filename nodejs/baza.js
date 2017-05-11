@@ -242,9 +242,9 @@ module.exports = {
 		var stolpecId = senzorId%stStolpcev;
 		
 		var SQLSTAVEK = "UPDATE " + imeTabele + " SET " + predponaStolpcev+stolpecId+"="+data+" WHERE " + imeKljuca+" = "+vrsticaId+";";
-		 
+		var startTime = new Date().getTime();
 		var query = HerokuClient.query(SQLSTAVEK);
-		query.on('end', () => { okCallback(vrsticaId, stolpecId, senzorId,data);})
+		query.on('end', () => { okCallback(vrsticaId, stolpecId, senzorId,data, startTime);})
 			 .on('error',(err2) => { console.log("updateOne error");errorCallback(err2);});
 	},
 	/*
