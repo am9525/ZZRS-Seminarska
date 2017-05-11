@@ -211,7 +211,7 @@ app.post('/update', function(request, response) {
     casBaze += DBQueryEnd-DBQueryStart;
     var usedRAM = process.memoryUsage().heapUsed;
 
-    console.log("vrstica:",vrstica ,"stolpec:",stolpec,"Value:",data);
+    //console.log("vrstica:",vrstica ,"stolpec:",stolpec,"Value:",data);
     //console.log("Porabljen RAM",usedRAM,"B,"," OK QueryTime",DBQueryEnd-DBQueryStart,"ms");
     //zapomnimo obdelave prve zahteve
     stSprej++;
