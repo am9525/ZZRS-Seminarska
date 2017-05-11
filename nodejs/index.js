@@ -321,21 +321,15 @@ app.post('/manager/zacniTestiranje', function(request, response){
           console.log("ok", vrstica, stolpec, timeForQuery,"ms");
           if(stOpravljenihTestov >= request.body.aktSenzorji){
             testSeIzvaja = false;
-            console.log(timeForQuery/request.body.aktSenzorji,"ms");
+            console.log((endTime-startTime),"ms");
+            console.log("testiranje se je koncalo");
           }
-        },()=>{
-          errors++;
-          stOpravljenihTestov++;
-          console.log("error");
-          if(stOpravljenihTestov >= request.body.aktSenzorji)
-            testSeIzvaja = false;
-        
-        });
+        })
       },i*request.body.SendDelay);
     }
     
   }
-  console.log("testiranje se je koncalo");
+ 
   //testSeIzvaja = false;
 	//console.log(Object.getOwnPropertyNames(request.body) );
 	response.redirect("/");
