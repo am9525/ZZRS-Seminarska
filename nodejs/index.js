@@ -315,7 +315,7 @@ app.post('/manager/zacniTestiranje', function(request, response){
         baza.updateOne(baza_imeTabele,"ID","st",baza_steviloStolpcev,Math.floor(Math.random()*request.body.aktSenzorji), 0,
         (vrstica, stolpec, id,data, startTime)=>{
           var endTime = new Date().getTime();
-          timeForQuery = (endTime-startTime);
+          timeForQuery += (endTime-startTime);
           oks++;
           stOpravljenihTestov++;
           console.log("ok", vrstica, stolpec, timeForQuery,"ms");
