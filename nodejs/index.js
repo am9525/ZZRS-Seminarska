@@ -318,10 +318,11 @@ app.post('/manager/zacniTestiranje', function(request, response){
           timeForQuery += (endTime-startTime);
           oks++;
           stOpravljenihTestov++;
-          console.log("ok", vrstica, stolpec, timeForQuery,"ms");
+          console.log("ok", vrstica, stolpec, (endTime-startTime),"ms");
           if(stOpravljenihTestov >= request.body.aktSenzorji){
             testSeIzvaja = false;
-            console.log((endTime-startTime),"ms");
+            timeForQuery /= request.body.aktSenzorji;
+            console.log(timeForQuery,"ms");
             console.log("testiranje se je koncalo");
           }
         })
