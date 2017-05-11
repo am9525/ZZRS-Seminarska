@@ -74,13 +74,12 @@ var baza_steviloStolpcev = 1000;  //stevilo podatkovnih stolpcev v tabeli, brez 
 var baza_imeTabele = "Test";   //Ime tabele
 var testSeIzvaja = false; //boolean, ki pove ali se izvaja test
 
-//parametri za sentorje
+//parametri za senzorje
 var stASenz = 5;     //število aktivnih senzorjev
 var stSprej = 0;      //število prejetih stanj senzorjev
 var stPrispel = 0;
 var casZadnji = 0     //čas zadnjega obdelanega
 var casPrvi = 0;      //cas prvega obdelanega paketa
-var timeDiffms = 0; //time difference between first and last request
 var senzorPing = 0;
 var casBaze = 0;
 
@@ -189,54 +188,46 @@ app.listen(app.get('port'), function() {
 
 app.post('/update', function(request, response) {
   //save the time of request handling
-  var testEndTime = new Date().getTime();
-
+  var requestArrivalTime = new Date().getTime();
+  //for all request but the last one
   if (stPrispel < stASenz-1){
-    console.log("time took for",stASenz,"requests",testEndTime-request.body.time);
-    senzorPing+= testEndTime-request.body.time;
+    //console.log("time took for",stASenz,"requests",testEndTime-request.body.time);
+    senzorPing+= requestArrivalTime-request.body.time;
     response.end();
   }
   stPrispel++;
   if(stPrispel == stASenz){
-    senzorPing+= testEndTime-request.body.time;
-    console.log("time took for",stASenz,"requests",testEndTime-request.body.time);
+    senzorPing+= requestArrivalTime-request.body.time;
+    //console.log("time took for",stASenz,"requests",testEndTime-request.body.time);
     senzorPing /= stASenz;
     stPrispel = 0;
     console.log("steviloSenzorjev: "+stASenz);
-    console.log("aprox ping for one request -> "+senzorPing+"ms");
+    console.log("ping for numSensors", stASenz,"->",senzorPing,"ms");
   }
   //vstavljanje v bazo
-  var tic = new Date().getTime();
-  baza.updateOne(baza_imeTabele,"ID","st",baza_steviloStolpcev,request.body.id,request.body.data,function(vrstica, stolpec, id,data){
-    //var usedRAM = (os.totalmem()-os.freemem());
-    var toc = new Date().getTime();
-    casBaze += (toc - tic);
+  baza.updateOne(baza_imeTabele,"ID","st",baza_steviloStolpcev,request.body.id,request.body.data,function(vrstica, stolpec,id,data, DBQueryStart){
+    //save time when SQL query was processed
+    var DBQueryEnd= new Date().getTime();
+    casBaze += DBQueryEnd-DBQueryStart;
     var usedRAM = process.memoryUsage().heapUsed;
 
-    console.log("vrstica: " + vrstica +" stolpec: "+ stolpec + " Value: " + data + " Porabljen RAM" +  usedRAM + " B " +" OK" );
-
+    console.log("vrstica:",vrstica ,"stolpec:",stolpec,"Value:",data);
+    //console.log("Porabljen RAM",usedRAM,"B,"," OK QueryTime",DBQueryEnd-DBQueryStart,"ms");
     //zapomnimo obdelave prve zahteve
-    if(stSprej === 0){
-      casPrvi = new Date().getTime();
-    }
     stSprej++;
     if(stSprej == stASenz) {
-      //aplikacija je prejela podatke za vse senzorje
-      //shrani se čas zadnjega obdelanega
+      //we recieved all sensor data
+      //save time of last request
       casZadnji = new Date().getTime();
       baza.setUpdateTime(casZadnji);
-      console.log("Prejel " + stSprej + " zahtev" );
-      timeDiffms = casZadnji-casPrvi;
-      var timeDiff = new Date(timeDiffms);
-      timeDiffms/=stASenz;
+      console.log("Prejel",stSprej,"zahtev");
       casBaze/=stASenz;
-      //console.log("time took -> "+ timeDiffms+ "ms -> "+ timeDiff.getMinutes()+"min, "+timeDiff.getSeconds()+"sec");
-      console.log("dbTime took for one request -> "+ timeDiffms+ "ms");
+      console.log("dbTime took for one request ->",casBaze,"ms");
       //if this is the last resposne send back data
       var jsonResponse = JSON.stringify({ping: senzorPing, dbTime: casBaze, ram: usedRAM});
-      //save int DB
+      //save data to internal DB
       db.serialize(()=>{
-        var numResults =sqlDBTime= sqlPing = sqlRam = 0;
+        var numResults = sqlDBTime = sqlPing = sqlRam = 0;
         var SQLstmt = "SELECT * FROM results WHERE numSensors="+stASenz;
         db.each(SQLstmt,(err, row)=>{
           if(row != undefined){
@@ -253,7 +244,6 @@ app.post('/update', function(request, response) {
             db.run(SQLstmt);
           }
           senzorPing = 0;
-          timeDiffms = 0;
           casBaze = 0;
           stSprej = 0;
           response.end(jsonResponse);
@@ -264,7 +254,6 @@ app.post('/update', function(request, response) {
             db.run(SQLstmt);
             senzorPing = 0;
             timeDiffms = 0;
-            casBaze = 0;
             stSprej = 0;
             response.end(jsonResponse);
           }
@@ -272,7 +261,7 @@ app.post('/update', function(request, response) {
       });
 
     }
-  },function(err){
+  },(err)=>{
     console.log(err);
   });
   
