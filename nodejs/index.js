@@ -82,8 +82,6 @@ var casZadnji = 0     //čas zadnjega obdelanega
 var casPrvi = 0;      //cas prvega obdelanega paketa
 var timeDiffms = 0; //time difference between first and last request
 var senzorPing = 0;
-var casPrispelPrvi = 0;
-var casPrispelZadnji = 0;
 var casBaze = 0;
 
 app.get('/', function(request, response) {
@@ -190,19 +188,18 @@ app.listen(app.get('port'), function() {
 });
 
 app.post('/update', function(request, response) {
-  //zahteva za vstavljanje je prispela
-  if(stPrispel == 0){
-      //zapomnimo si cas prve prejete zahteve
-      casPrispelPrvi = new Date().getTime();
-      response.end();
-  }
-  else if (stPrispel < stASenz-1){
+  //save the time of request handling
+  var testEndTime = new Date().getTime();
+
+  if (stPrispel < stASenz-1){
+    console.log("time took for",stASenz,"requests",testEndTime-request.body.time);
+    senzorPing+= testEndTime-request.body.time;
     response.end();
   }
   stPrispel++;
   if(stPrispel == stASenz){
-    casPrispelZadnji = new Date().getTime();
-    senzorPing = casPrispelZadnji - casPrispelPrvi;
+    senzorPing+= testEndTime-request.body.time;
+    console.log("time took for",stASenz,"requests",testEndTime-request.body.time);
     senzorPing /= stASenz;
     stPrispel = 0;
     console.log("steviloSenzorjev: "+stASenz);
@@ -333,7 +330,8 @@ app.post('/manager/zacniTestiranje', function(request, response){
  
   //testSeIzvaja = false;
 	//console.log(Object.getOwnPropertyNames(request.body) );
-	response.redirect("/");
+	//response.redirect("/");
+  response.redirect('/');
 });
 
 var getDataFromResultTable = function(callback){

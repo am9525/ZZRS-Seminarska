@@ -178,35 +178,7 @@ var sendSensorData = function(){
         }  
     }
     if(currNumSensors > maxNumSensors){
-        console.log(currNumSensors,maxNumSensors);/*
-        var pings = []; // holds the recieved ping data
-        var dbTime = []; // holds the recieved DB time data
-        var ram = []; // holds the recived ram data
-        var labels = []; // holds the numSensor of the executed test
-        var tmpPing = 0; // temporary value used for mean
-        var tmpDBTime = 0;// temporary value used for mean
-        var tmpRam = 0;// temporary value used for mean
-        //get data from results
-        for(var i = 0; i < numOfTests; i++){
-            for(var j = 0; j < maxTestRepeat; j++){
-                var dataObj = JSON.parse(times[i*maxTestRepeat+j].data);
-                //console.log("numSensors:"+times[i*maxNumTests+j].sensorIndex+ " DBTime: "+dataObj.DBTime)
-                tmpPing += dataObj.ping;
-                tmpDBTime += dataObj.DBTime;
-                tmpRam += parseInt(dataObj.PorabRAM/1048576);
-            }
-            //write to array
-            tmpPing /= maxTestRepeat;
-            tmpDBTime /= maxTestRepeat;
-            tmpRam /= maxTestRepeat;
-            pings.push(tmpPing);
-            dbTime.push(tmpDBTime);
-            ram.push(tmpRam);
-            labels.push(times[i*maxTestRepeat].sensorIndex);
-            tmpPing = 0;
-            tmpDBTime = 0;
-            tmpRam = 0;
-        }*/
+        console.log(currNumSensors,maxNumSensors);
         getDataFromResults(times, true,(pings, dbTime, ram, labels)=>{
             drawGraphs(pings, dbTime, ram, labels);
         });
