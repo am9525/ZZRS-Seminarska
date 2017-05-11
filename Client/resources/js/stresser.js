@@ -391,8 +391,7 @@ var drawGraphs = function(pings, dbTime, ram, labels){
                     display: false
                 }],
                 yAxes: [{
-                    ticks: {
-                        max: 100,    
+                    ticks: {  
                         beginAtZero: true,
                     }
                 }]

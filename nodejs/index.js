@@ -294,17 +294,51 @@ app.post('/manager/zacniTestiranje', function(request, response){
 		request.body lastnosti:
 		'aktSenzorji', 			število koliko senzorjev naj bo aktivnih zatest
  		'izbiraTesta',			tip testa, ki se bo izvajal (še ne naredi nič)
-	   	'stZaporedTestov',		kolikokrat se bo test ponovil (še ne naredi nič)	
+    'stZaporedTestov',		kolikokrat se bo test ponovil (še ne naredi nič)	
  		'btZazeniTest'			ime gumba, ki se uporabi za aktivacijo testa
  		'RefreshRate'			v clientu za čas med pošiljanji
  		'SendDelay'				v clientu za čas med posameznim podatkom
 
 	*/
-	if(!testSeIzvaja){
-		testSeIzvaja=true;
-	} 
+  console.log(request.body);
+  if(request.body.izbiraTesta == "TestiranjeBaze"){
+    var errors = 0;
+    var oks = 0;
+    var stOpravljenihTestov = 0;
+    testSeIzvaja=true;
+    var startTime = 0; 
+    var timeForQuery = 0;
+    var endTime = 0;
+    console.log("zacelo se je testiranej baze");
+    for(var i = 0; i < request.body.aktSenzorji; i++){
 
-	console.log(Object.getOwnPropertyNames(request.body) );
+      baza.updateOne(baza_imeTabele,"ID","st",baza_steviloStolpcev,Math.floor(Math.random()*request.body.aktSenzorji), 0,(vrstica, stolpec, id,data)=>{
+        oks++;
+        stOpravljenihTestov++;
+        console.log("ok", vrstica, stolpec);
+        if(stOpravljenihTestov == 1){
+           startTime = new Date().getTime();
+        }
+        if(stOpravljenihTestov >= request.body.aktSenzorji){
+          testSeIzvaja = false;
+          endTime = new Date().getTime();
+          timeForQuery = (endTime-startTime)/request.body.aktSenzorji;
+          console.log(timeForQuery);
+        }
+      },()=>{
+        errors++;
+        stOpravljenihTestov++;
+        console.log("error");
+        if(stOpravljenihTestov >= request.body.aktSenzorji)
+          testSeIzvaja = false;
+        
+      });
+    }
+    
+  }
+  console.log("testiranje se je koncalo");
+  //testSeIzvaja = false;
+	//console.log(Object.getOwnPropertyNames(request.body) );
 	response.redirect("/");
 });
 

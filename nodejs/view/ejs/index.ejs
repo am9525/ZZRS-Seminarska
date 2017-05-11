@@ -7,6 +7,7 @@
     <!--<link href="../css/style.css" rel="stylesheet" type="text/css">-->
     <link href="style.css" rel="stylesheet" type="text/css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+    
   </head>
   <body  >
     <div id="naslovniDel">
@@ -15,7 +16,7 @@
     <div id="status"> <span>
         <div id="statusInnards1" class="internalSection padd10l  borderbox">
           <h3>Status plošča (WIP)</h3>
-          <p class="alertText"> <% if(testSeIzvaja) {%> TEST SE ŽE IZVAJA! <%} else {}%></p>
+          <p class="alertText"> <% if(testSeIzvaja) {%> TEST SE ŽE IZVAJA! <%} else {%>TEST SE NE IZVAJA <%}%> </p>
           <p  > <% if(bazaDela) {%> Baza DELA! <%} else {%> Baza NE DELA!!! <%}%></p>
         </div>
         <div id="statusInnards2" class="internalSection  padd10l borderbox">
@@ -27,10 +28,14 @@
             <br>
             <p class="inline">send delay:</p>  <input id="tfSenDel" type="text" name="SendDelay" class="inline">
             <hr>
-            <p class="inline">Tip testa:</p><seldiv><select id="izbiraTesta" class="inline" name="izbiraTesta">
-                <option value="TestniVnos">TestniVnos</option>
-            </select></seldiv>
-            <br>
+            <p class="inline">Tip testa:</p>
+              <seldiv>
+                <select id="izbiraTesta" class="inline" name="izbiraTesta">
+                  <option value="TestiranjeBaze">Testiraneje podatkovne baze</option>
+                  <option value="TesiranjeZahtev">Tesitranje sprejemanja zahtev</option>>
+                </select>
+              </seldiv>
+            </br>
             <p class="inline">Število zaporednih testov:</p> <input id="tfStZapTest" type="text" name="stZaporedTestov" class="inline">
             <hr>
             <input id="btZacTest" type="submit" value="Zaženi test" name="btZazeniTest">
@@ -49,7 +54,7 @@
         </form>
       </div>
     </div>
-      <script>
+    <script>
       <% if(testSeIzvaja){ %>
           $("#tfStAktSenz").attr("disabled", true);
           $("#btZacTest").attr("disabled", true);
@@ -65,7 +70,7 @@
           $("#btPostTabelo").attr("disabled", false);
           $("#btUnicTabelo").attr("disabled", false);
       <%}%> 
-      $("#tfStAktSenz").val("<%= stAktivnihSenzorjev %>") 
-      </script>
+      $("#tfStAktSenz").val("<%= stAktivnihSenzorjev %>");
+    </script>
   </body>
 </html>
