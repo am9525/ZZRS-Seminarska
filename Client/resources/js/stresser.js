@@ -15,6 +15,7 @@ var times = []; //array containing all the results
 var pingChart = null;
 var dbChart = null;
 var ramChart = null;
+var scaleStep = 10;
 $(document).ready(function(){
     //ping server first time
     checkServer();
@@ -42,9 +43,30 @@ $(document).ready(function(){
         });
     });
     $('#pullData').click(()=>{
-        $.get(baseUrl+'results', (response)=>{
+        $('progress').attr('value', 0);
+        //if(!checkKeys()){
+        if($('#sendDelay').val() != "")
+            sendDelay = parseInt($('#sendDelay').val());
+        //}
+        if($('#baseUrl').val() != "")
+            baseUrl = $('#baseUrl').val();
+        //parse sensorRange
+        if($('#sensorRange').val() != ""){
+            var tmpRange  = $("#sensorRange").val().split("-");
+            minNumSensors = parseInt(tmpRange[0]);
+            maxNumSensors = parseInt(tmpRange[1]);
+        }
+        if($('#sensorStep').val() != "")
+            sensorStep = parseInt($('#sensorStep').val());
+        
+        if($('#numTests').val() != "")
+            maxTestRepeat = parseInt($('#numTests').val());
+
+        $.post(baseUrl+'results', {sendDelay: sendDelay, min: minNumSensors, max: maxNumSensors, step: sensorStep},(response)=>{
             var testResult = JSON.parse(response);
-            console.log(testResult[0]);
+            
+            
+            //console.log(testResult[0]);
             if(pingChart != null)
                 pingChart.destroy();
             if(dbChart != null)
@@ -60,7 +82,7 @@ $(document).ready(function(){
             if($('#sensorStep').val() != "")
                 sensorStep = parseInt($('#sensorStep').val());
             maxTestRepeat = 1;
-            numOfTests = (maxNumSensors-minNumSensors)/sensorStep+1; 
+            numOfTests = testResult.length;
             getDataFromResults(testResult, false,(pings, dbTime, ram, labels)=>{
                 drawGraphs(pings, dbTime, ram, labels);
             });
@@ -107,11 +129,12 @@ $(document).ready(function(){
             times= [];
             $('#state').text("executing test: "+currTestNumber+"/"+numOfTests);
             //triger first send
-            $.post(baseUrl+'manager/setNumSensors',{numSenz : currNumSensors},(data, status)=>{
-                console.log("Data: " + data + "\nStatus: " + status);    
-                sendSensorData();
+            $.post(baseUrl+'manager/createLocalTable', {sendDelay: sendDelay}, (data, status)=>{
+                $.post(baseUrl+'manager/setNumSensors',{numSenz : currNumSensors, sendDelay: sendDelay},(data, status)=>{
+                    console.log("Data: " + data + "\nStatus: " + status);    
+                    sendSensorData();
+                });
             });
-            
         }
         else{
             console.log("Can't send if server is not online");
@@ -166,7 +189,7 @@ var sendSensorData = function(){
                         currTestRepeat++;
                         //timetout between tests
                         setTimeout(()=>{
-                            $.post(baseUrl+'manager/setNumSensors',{numSenz : currNumSensors},(data, status)=>{
+                            $.post(baseUrl+'manager/setNumSensors',{numSenz : currNumSensors, sendDelay: sendDelay},(data, status)=>{
                                 console.log("Data: " + data + "\nStatus: " + responseObj);  
                                 sendSensorData();
                             });
@@ -267,7 +290,7 @@ var saveData = (function (data, fileName) {
     $("#downloadLink").trigger('click');
 
 });
-var getDataFromResults = function(times, isJson,callback){
+var getDataFromResults = function(times/*raw data*/, isJson, callback){
     
     var pings = []; // holds the recieved ping data
     var dbTime = []; // holds the recieved DB time data
@@ -278,6 +301,7 @@ var getDataFromResults = function(times, isJson,callback){
     var tmpRam = 0;// temporary value used for mean
     //get data from results
     console.log(times);
+    console.log(numOfTests);
     for(var i = 0; i < numOfTests; i++){
         for(var j = 0; j < maxTestRepeat; j++){
             var dataObj = null;
@@ -298,7 +322,13 @@ var getDataFromResults = function(times, isJson,callback){
         pings.push(tmpPing);
         dbTime.push(tmpDBTime);
         ram.push(tmpRam);
-        labels.push(times[i*maxTestRepeat].numSensors);
+        if(times[i*maxTestRepeat].numSensors % scaleStep == 0){
+            labels.push(times[i*maxTestRepeat].numSensors);
+        }
+        else{
+            labels.push("");
+        }
+        
         tmpPing = 0;
         tmpDBTime = 0;
         tmpRam = 0;
@@ -359,7 +389,10 @@ var drawGraphs = function(pings, dbTime, ram, labels){
             scales:
             {
                 xAxes: [{
-                    display: false
+                    display: true,
+                    ticks:{
+                        autoSkip: true,
+                    }
                 }],
                 yAxes: [{
                     ticks: {  
@@ -384,7 +417,8 @@ var drawGraphs = function(pings, dbTime, ram, labels){
             scales:
             {
                 xAxes: [{
-                    display: false
+                    display: true,
+                    autoSkip: true,
                 }],
                 yAxes: [{
                     ticks: {
@@ -410,7 +444,8 @@ var drawGraphs = function(pings, dbTime, ram, labels){
             scales:
             {
                 xAxes: [{
-                    display: false
+                    display: true,
+                    autoSkip: true,
                 }],
                 yAxes: [{
                     ticks: {

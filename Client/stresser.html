@@ -20,8 +20,17 @@
       <input class="inputField" id = "sensorRange" type="text" name="sensorRange" placeholder="10-20">
 
       <label class="fieldLabel" for="sendDelay">Send delay:</label>
-      <input class="inputField" id = "sendDelay" type="text" name="refreshRate" placeholder="1">
-
+<!--      <input class="inputField" id = "sendDelay" type="text" name="refreshRate" placeholder="1"> !-->
+      <select id="sendDelay">
+          <option value="" disabled="disabled" selected="selected">Please select a delay</option>
+          <option value="1">1ms</option>
+          <option value="5">5ms</option>
+          <option value="10">10ms</option>
+          <option value="50">50ms</option>
+          <option value="100">100ms</option>
+          <option value="500">500ms</option>
+          <option value="1000">1000ms</option>
+      </select>
        <label class="fieldLabel" for="numTests">Number of tests:</label>
       <input class="inputField" id = "numTests" type="text" name="numTests" placeholder="5">
 

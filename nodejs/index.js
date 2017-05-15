@@ -28,12 +28,6 @@ var OSDATA = setInterval(()=>{
 
 }, 1000);
 */
-//Each command inside the serialize() function is guaranteed to finish executing before the next one starts.
-db.serialize(()=>{
-  //runs SQL query dosent retrive any data
-  db.run("CREATE TABLE if not exists results (numSensors INTEGER(6) PRIMARY KEY, ping REAL, dbTime REAL, ram INT(4), numResults INT(4))");
-  console.log("Result local DB was initialized");
-});
 
 var app = express();
 app.use( bodyParser.json() );       // to support JSON-encoded bodies
@@ -45,7 +39,9 @@ app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
   next();
 });
+
 app.use(express.static(__dirname + '/view/css'));
+app.use(express.static(__dirname + '/view/js'));
 // views is directory for all template files
 app.set('views', __dirname + '/view/ejs');
 app.set('view engine', 'ejs');
@@ -82,13 +78,11 @@ var casZadnji = 0     //čas zadnjega obdelanega
 var casPrvi = 0;      //cas prvega obdelanega paketa
 var senzorPing = 0;
 var casBaze = 0;
+var sendDelay = 1; //delay between sending time of sensors, sensorSend <---sendDelay---> nextSensorSend
 
 app.get('/', function(request, response) {
-	response.render('index',{
-	  		stAktivnihSenzorjev: stASenz,
-	  		testSeIzvaja: testSeIzvaja,
-	  		bazaDela : baza_dela
-	});
+	response.render('index');
+  
 });
 app.post('/time', function(request, response) {
   var time = new Date();
@@ -98,14 +92,15 @@ app.post('/time', function(request, response) {
 app.delete('/results', (request, response)=>{
   db.serialize(()=>{
     db.run("DROP TABLE results");
-    db.run("CREATE TABLE if not exists results (numSensors INTEGER(6) PRIMARY KEY, ping REAL, dbTime REAL, ram INT(4), numResults INT(4))");
+    db.run("CREATE TABLE if not exists results"+request.body.sendDelay+" (numSensors INTEGER(6) PRIMARY KEY, ping REAL, dbTime REAL, ram INT(4), numResults INT(4))");
     response.status(200).send("Result local DB was initialized");
   });
 });
-app.get('/results', (request, response)=>{
-  getDataFromResultTable((err, rows)=>{
+app.post('/results', (request, response)=>{
+  console.log("Got request for",request.body.sendDelay,"ms results");
+  getDataFromResultTable(request.body.sendDelay,request.body.min, request.body.max, request.body.step,(err, rows)=>{
     if(err != null){
-      reponse.status(500).send("Something went wrong")
+      response.status(500).send("Something went wrong")
     }
     response.status(200).send(JSON.stringify(rows));
   });
@@ -201,7 +196,6 @@ app.post('/update', function(request, response) {
     //console.log("time took for",stASenz,"requests",testEndTime-request.body.time);
     senzorPing /= stASenz;
     stPrispel = 0;
-    console.log("steviloSenzorjev: "+stASenz);
     console.log("ping for numSensors", stASenz,"->",senzorPing,"ms");
   }
   //vstavljanje v bazo
@@ -228,7 +222,7 @@ app.post('/update', function(request, response) {
       //save data to internal DB
       db.serialize(()=>{
         var numResults = sqlDBTime = sqlPing = sqlRam = 0;
-        var SQLstmt = "SELECT * FROM results WHERE numSensors="+stASenz;
+        var SQLstmt = "SELECT * FROM results"+sendDelay+" WHERE numSensors="+stASenz;
         db.each(SQLstmt,(err, row)=>{
           if(row != undefined){
             numResults = parseInt(row.numResults);
@@ -240,7 +234,7 @@ app.post('/update', function(request, response) {
             sqlPing /= numResults; 
             sqlDBTime /= numResults;
             sqlRam /= numResults;
-            SQLstmt = "UPDATE OR IGNORE results SET ping="+sqlPing+", dbTime="+sqlDBTime+", ram="+sqlRam+", numResults="+numResults+"  WHERE numSensors="+stASenz;
+            SQLstmt = "UPDATE OR IGNORE results"+sendDelay+" SET ping="+sqlPing+", dbTime="+sqlDBTime+", ram="+sqlRam+", numResults="+numResults+"  WHERE numSensors="+stASenz;
             db.run(SQLstmt);
           }
           senzorPing = 0;
@@ -250,7 +244,7 @@ app.post('/update', function(request, response) {
         });
         db.get(SQLstmt,(err, row)=>{
           if(row == undefined){
-            SQLstmt = "INSERT OR IGNORE INTO results(numSensors, ping, dbTime, ram, numResults) VALUES ("+stASenz+","+senzorPing+","+casBaze+","+usedRAM+","+1+")";
+            SQLstmt = "INSERT OR IGNORE INTO results"+sendDelay+"(numSensors, ping, dbTime, ram, numResults) VALUES ("+stASenz+","+senzorPing+","+casBaze+","+usedRAM+","+1+")";
             db.run(SQLstmt);
             senzorPing = 0;
             timeDiffms = 0;
@@ -266,15 +260,28 @@ app.post('/update', function(request, response) {
   });
   
 });
-
+app.post("/manager/createLocalTable", (request, response)=>{
+  //Each command inside the serialize() function is guaranteed to finish executing before the next one starts.
+  db.serialize(()=>{
+    //runs SQL query dosent retrive any data
+    db.run("CREATE TABLE if not exists results"+request.body.sendDelay+" (numSensors INTEGER(6) PRIMARY KEY, ping REAL, dbTime REAL, ram INT(4), numResults INT(4))");
+    console.log("Result local DB for",request.body.sendDelay,",ms was initialized");
+    response.end("Result local DB for "+request.body.sendDelay+" ms was initialized");
+  });
+});
 app.post('/manager/setNumSensors', function(request, response) {
   stASenz = request.body.numSenz
+  sendDelay = request.body.sendDelay;
   console.log("Set the number of sensors to: "+stASenz)
   response.end("Set the number of sensors to: "+stASenz);
+});
+app.get('/manger/testStatus',(request, response)=>{
+  
+  response.send({statusTest: testSeIzvaja, statusBaza: baza_dela});
 
 });
 app.post('/manager/zacniTestiranje', function(request, response){
-	/*
+  /*
 		To se sproži, ko kliknemo gumb na index.ejs strani
 		===
 		request.body lastnosti:
@@ -286,46 +293,60 @@ app.post('/manager/zacniTestiranje', function(request, response){
  		'SendDelay'				v clientu za čas med posameznim podatkom
 
 	*/
+  stASenz = request.body.aktSenzorji;
   console.log(request.body);
   if(request.body.izbiraTesta == "TestiranjeBaze"){
-    var errors = 0;
-    var oks = 0;
-    var stOpravljenihTestov = 0;
     testSeIzvaja=true;
     var timeForQuery = 0;
-    
+    var result = 0;
+    var testRepeat = 1;
     console.log("zacelo se je testiranej baze");
-    for(var i = 0; i < request.body.aktSenzorji; i++){
-
-      setTimeout(()=>{
-        baza.updateOne(baza_imeTabele,"ID","st",baza_steviloStolpcev,Math.floor(Math.random()*request.body.aktSenzorji), 0,
-        (vrstica, stolpec, id,data, startTime)=>{
-          var endTime = new Date().getTime();
-          timeForQuery += (endTime-startTime);
-          oks++;
-          stOpravljenihTestov++;
-          console.log("ok", vrstica, stolpec, (endTime-startTime),"ms");
-          if(stOpravljenihTestov >= request.body.aktSenzorji){
-            testSeIzvaja = false;
-            timeForQuery /= request.body.aktSenzorji;
-            console.log(timeForQuery,"ms");
-            console.log("testiranje se je koncalo");
-          }
-        })
-      },i*request.body.SendDelay);
-    }
     
+    for(var i = 0; i < request.body.stZaporedTestov; i++){
+      setTimeout(()=>{
+        var numCompletedtests = 0;
+        for(var j = 0; j < request.body.aktSenzorji; j++){
+          setTimeout(()=>{
+            baza.updateOne(baza_imeTabele,"ID","st",baza_steviloStolpcev,Math.floor(Math.random()*request.body.aktSenzorji), 0,
+            (vrstica, stolpec, id,data, startTime)=>{
+              var endTime = new Date().getTime();
+              timeForQuery += (endTime-startTime);
+              numCompletedtests++;
+              console.log("repeat",numCompletedtests,"ok", vrstica, stolpec, (endTime-startTime),"ms");
+              //if its the last test
+              if(numCompletedtests >= request.body.aktSenzorji){
+                timeForQuery /= request.body.aktSenzorji;
+                console.log(timeForQuery,"ms");
+                console.log("testiranje se je koncalo", testRepeat);
+                result += timeForQuery;
+                if(testRepeat >= request.body.stZaporedTestov){
+                  console.log("result",result);
+                  result /= request.body.stZaporedTestov;
+                  testSeIzvaja = false;
+                  console.log("final",result);
+                }
+                
+                testRepeat++;
+                numCompletedtests= 0;
+              }
+
+            });
+          },j*request.body.SendDelay);
+        }
+        
+      },i*1000);
+    }
   }
- 
+  response.redirect('/');
   //testSeIzvaja = false;
 	//console.log(Object.getOwnPropertyNames(request.body) );
 	//response.redirect("/");
-  response.redirect('/');
+  
 });
 
-var getDataFromResultTable = function(callback){
+var getDataFromResultTable = function(requestSendDelay,min,max,step,callback){
   db.serialize(()=>{
-    db.all("SELECT * FROM results", (err, rows)=>{
+    db.all("SELECT * FROM results"+requestSendDelay+" WHERE(numSensors >= "+min+" AND numSensors <= "+max+") AND (rowid-(SELECT rowid FROM results"+requestSendDelay+" where numSensors >= "+min+" ORDER BY numSensors LIMIT 1))%"+step+" = 0", (err, rows)=>{
       if(err != null){
         console.log(err);
         callback(err, rows);
