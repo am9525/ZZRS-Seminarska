@@ -221,8 +221,8 @@ var checkServer = function(){/*
         console.log("time took -> "+ timeDiffms+ "ms -> "+ timeDiff.getMinutes()+"min, "+timeDiff.getSeconds()+"sec");
         console.log(serverTime + " | " +clientTime);    
     });*/
-    $("#serverStatus").prop("checked", true);
-    /*
+    
+    
     $.get(baseUrl+'status',(response)=>{
         var responseObj = JSON.parse(response);
         console.log("Server: "+responseObj.status);
