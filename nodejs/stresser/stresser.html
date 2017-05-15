@@ -12,12 +12,19 @@
   <div id="pageBorder">
     <h1 id="heading">Simple server stresser</h1>
     <div class = "sensor-form">
-       <label class="fieldLabel"  for="baseUrl">Server base URL:</label>
-       <input class="urlField" id = "baseUrl" type="text" placeholder="http://localhost:5000/">
-       <input class="buttonSmall" id ="change" type="button" value = "Change">
 
       <label class="fieldLabel"  for="sensorRange">Sensor range:</label>
       <input class="inputField" id = "sensorRange" type="text" name="sensorRange" placeholder="10-20">
+
+      <label class="fieldLabel" for="sendDelay">Testing mode:</label>
+<!--      <input class="inputField" id = "sendDelay" type="text" name="refreshRate" placeholder="1"> !-->
+      <select id="testMode">
+          <option value="" disabled="disabled" selected="selected">Please selected testing method</option>
+          <option value="1">Test simulacije delovanja</option>
+          <option value="2">Test baze</option>
+          <option value="3">Test rama</option>
+          <option value="4">Test zahtev</option>
+      </select>
 
       <label class="fieldLabel" for="sendDelay">Send delay:</label>
 <!--      <input class="inputField" id = "sendDelay" type="text" name="refreshRate" placeholder="1"> !-->

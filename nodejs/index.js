@@ -88,9 +88,9 @@ app.post('/time', function(request, response) {
 });
 app.delete('/results', (request, response)=>{
   db.serialize(()=>{
-    db.run("DROP TABLE results");
+    db.run("DROP TABLE if exists results"+ request.body.sendDelay);
     db.run("CREATE TABLE if not exists results"+request.body.sendDelay+" (numSensors INTEGER(6) PRIMARY KEY, ping REAL, dbTime REAL, ram INT(4), numResults INT(4))");
-    response.status(200).send("Result local DB was initialized");
+    response.status(200).send("results"+ request.body.sendDelay+ " erased");
   });
 });
 app.post('/results', (request, response)=>{
@@ -277,64 +277,73 @@ app.get('/manger/testStatus',(request, response)=>{
   response.send({statusTest: testSeIzvaja, statusBaza: baza_dela});
 
 });
-app.post('/manager/zacniTestiranje', function(request, response){
-  /*
-		To se sproži, ko kliknemo gumb na index.ejs strani
-		===
-		request.body lastnosti:
-		'aktSenzorji', 			število koliko senzorjev naj bo aktivnih zatest
- 		'izbiraTesta',			tip testa, ki se bo izvajal (še ne naredi nič)
-    'stZaporedTestov',		kolikokrat se bo test ponovil (še ne naredi nič)	
- 		'btZazeniTest'			ime gumba, ki se uporabi za aktivacijo testa
- 		'RefreshRate'			v clientu za čas med pošiljanji
- 		'SendDelay'				v clientu za čas med posameznim podatkom
-
-	*/
-  stASenz = request.body.aktSenzorji;
-  console.log(request.body);
-  if(request.body.izbiraTesta == "TestiranjeBaze"){
-    testSeIzvaja=true;
-    var timeForQuery = 0;
-    var result = 0;
-    var testRepeat = 1;
-    console.log("zacelo se je testiranej baze");
-    
-    for(var i = 0; i < request.body.stZaporedTestov; i++){
+var testDB = function(currTest, maxTestRange, callback){
+  if(currTest)
+  var tmpResult = 0;
+  for(var j = 0; j < request.body.numRepeats; j++){
+    for(var k = 0; k < i; k++){
       setTimeout(()=>{
-        var numCompletedtests = 0;
-        for(var j = 0; j < request.body.aktSenzorji; j++){
-          setTimeout(()=>{
-            baza.updateOne(baza_imeTabele,"ID","st",baza_steviloStolpcev,Math.floor(Math.random()*request.body.aktSenzorji), 0,
-            (vrstica, stolpec, id,data, startTime)=>{
-              var endTime = new Date().getTime();
-              timeForQuery += (endTime-startTime);
-              numCompletedtests++;
-              console.log("repeat",numCompletedtests,"ok", vrstica, stolpec, (endTime-startTime),"ms");
-              //if its the last test
-              if(numCompletedtests >= request.body.aktSenzorji){
-                timeForQuery /= request.body.aktSenzorji;
-                console.log(timeForQuery,"ms");
-                console.log("testiranje se je koncalo", testRepeat);
-                result += timeForQuery;
-                if(testRepeat >= request.body.stZaporedTestov){
-                  console.log("result",result);
-                  result /= request.body.stZaporedTestov;
-                  testSeIzvaja = false;
-                  console.log("final",result);
-                }
-                
-                testRepeat++;
-                numCompletedtests= 0;
-              }
-
-            });
-          },j*request.body.SendDelay);
-        }
-        
-      },i*1000);
+        baza.updateOne(baza_imeTabele,"ID","st",baza_steviloStolpcev,Math.floor(Math.random()*k), 0,
+        (vrstica, stolpec, id,data, startTime)=>{
+          // we finished one repetition out of n
+          var queryStopTime = new Date().getTime();
+          tmpResult += queryStopTime-startTime;
+          currRepetition++; 
+          
+        });
+      }, k*request.body.sendDelay);
     }
   }
-  response.redirect('/');
+  
+}
+app.post('/test/baza', function(request, response){
+  console.log(request.body);
+  var results;
+  var tmpRange  = request.body.testRange.split("-");
+  var minTestRange = parseInt(tmpRange[0]);
+  var maxTestRange = parseInt(tmpRange[1]);
+  var currTest = 0;
+  var currRepetition = 0;
+  console.log(minTestRange, maxTestRange);
+  console.log("zacelo se je testiranje baze");
+
+  /*
+  for(var i = 0; i < request.body.numTests; i++){
+    setTimeout(()=>{
+      var numCompletedtests = 0;
+      for(var j = 0; j < request.body.numRequests; j++){
+        setTimeout(()=>{
+          baza.updateOne(baza_imeTabele,"ID","st",baza_steviloStolpcev,Math.floor(Math.random()*request.body.numRequests), 0,
+          (vrstica, stolpec, id,data, startTime)=>{
+            var endTime = new Date().getTime();
+            timeForQuery += (endTime-startTime);
+            numCompletedtests++;
+            console.log("repeat",numCompletedtests,"ok", vrstica, stolpec, (endTime-startTime),"ms");
+            //if its the last test
+            if(numCompletedtests >= request.body.numRequests){
+              timeForQuery /= request.body.numRequests;
+              console.log(timeForQuery,"ms");
+              console.log("testiranje se je koncalo", testRepeat);
+              result += timeForQuery;
+              if(testRepeat >= request.body.numTests){
+                console.log("result",result);
+                result /= request.body.numTests;
+                testSeIzvaja = false;
+                console.log("final",result);
+              }
+              
+              testRepeat++;
+              numCompletedtests= 0;
+            }
+
+          });
+        },j*request.body.SendDelay);
+      }
+      
+    },i*1000);
+  }*/
+  
+
   //testSeIzvaja = false;
 	//console.log(Object.getOwnPropertyNames(request.body) );
 	//response.redirect("/");

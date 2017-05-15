@@ -28,14 +28,11 @@ $(document).ready(function(){
     $(".inputField").keyup(()=>{
         //checkKeys();
     });
-
-    $("#change").click(()=>{
-        baseUrl = baseUrl = $('#baseUrl').val();
-    });
     $('#dropTable').click(()=>{
         $.ajax({
-            url: baseUrl+'results',
+            url: 'results',
             type: 'DELETE',
+            data: {sendDelay: parseInt($('#sendDelay').val())},
             success: function(response) {
                 // Do something with the result
                 console.log(response);
@@ -48,8 +45,6 @@ $(document).ready(function(){
         if($('#sendDelay').val() != "")
             sendDelay = parseInt($('#sendDelay').val());
         //}
-        if($('#baseUrl').val() != "")
-            baseUrl = $('#baseUrl').val();
         //parse sensorRange
         if($('#sensorRange').val() != ""){
             var tmpRange  = $("#sensorRange").val().split("-");
@@ -94,8 +89,6 @@ $(document).ready(function(){
         if($('#sendDelay').val() != "")
             sendDelay = parseInt($('#sendDelay').val());
         //}
-        if($('#baseUrl').val() != "")
-            baseUrl = $('#baseUrl').val();
         //parse sensorRange
         if($('#sensorRange').val() != ""){
             var tmpRange  = $("#sensorRange").val().split("-");
@@ -118,27 +111,37 @@ $(document).ready(function(){
             dbChart.destroy();
         if(ramChart != null)
             ramChart.destroy();
-        //start stressing server
+
         if($('#serverStatus').is(':checked')){
-            $("#clientStatus").prop("checked", true);
-            $("#clientStatus").text('Clients are working'); 
-            currNumSensors = minNumSensors;
-            numOfTests = (maxNumSensors-minNumSensors)/sensorStep+1; 
-            currTestRepeat= 1;
-            currTestNumber = 0;
-            times= [];
-            $('#state').text("executing test: "+currTestNumber+"/"+numOfTests);
-            //triger first send
-            $.post(baseUrl+'manager/createLocalTable', {sendDelay: sendDelay}, (data, status)=>{
-                $.post(baseUrl+'manager/setNumSensors',{numSenz : currNumSensors, sendDelay: sendDelay},(data, status)=>{
-                    console.log("Data: " + data + "\nStatus: " + status);    
-                    sendSensorData();
+            console.log($('#testMode').val());
+            if($('#testMode').val() == 1){
+                //start stressing server
+                $("#clientStatus").prop("checked", true);
+                $("#clientStatus").text('Clients are working'); 
+                currNumSensors = minNumSensors;
+                numOfTests = (maxNumSensors-minNumSensors)/sensorStep+1; 
+                currTestRepeat= 1;
+                currTestNumber = 0;
+                times= [];
+                $('#state').text("executing test: "+currTestNumber+"/"+numOfTests);
+                //triger first send
+                $.post(baseUrl+'manager/createLocalTable', {sendDelay: sendDelay}, (data, status)=>{
+                    $.post(baseUrl+'manager/setNumSensors',{numSenz : currNumSensors, sendDelay: sendDelay},(data, status)=>{
+                        console.log("Data: " + data + "\nStatus: " + status);    
+                        sendSensorData();
+                    });
                 });
-            });
+            }
+            if($('#testMode').val() == 2){
+                console.log("easd");
+                $.post(baseUrl+'test/baza',{numRepeats: maxTestRepeat, testRange: minNumSensors+"-"+maxNumSensors, sendDelay: sendDelay, testStep: sensorStep},(data, status)=>{
+
+                });
+                
+            }
         }
-        else{
-            console.log("Can't send if server is not online");
-        }
+        else
+            console.log("Can't send if server is not online")
 
     });
     $("#stop").click(function(){
