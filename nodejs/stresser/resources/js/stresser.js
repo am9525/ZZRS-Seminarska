@@ -8,7 +8,7 @@ var maxTestRepeat = 5; // how many times is each test repeated
 var currTestRepeat = 0; // at which repetition is the current test
 var sendDelay = 1; //ms, delay between request from each sensor
 var sensors = []; // sensor ID and value array
-var baseUrl = 'http://localhost:5000/';
+var baseUrl = '';
 var finished = true;
 var times = []; //array containing all the results
 //charts
