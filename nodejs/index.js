@@ -79,7 +79,7 @@ var casBaze = 0;
 var sendDelay = 1; //delay between sending time of sensors, sensorSend <---sendDelay---> nextSensorSend
 
 app.get('/', function(request, response) {
-  res.sendFile(path.join(__dirname + '/stresser/stresser.html'));
+  response.sendFile(path.join(__dirname + '/stresser/stresser.html'));
 });
 app.post('/time', function(request, response) {
   var time = new Date();
