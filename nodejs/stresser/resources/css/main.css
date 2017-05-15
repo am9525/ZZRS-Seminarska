@@ -1,0 +1,246 @@
+#heading{
+    color: dimgrey;
+    text-align: center;/* align the heading at the center*/
+    font-family: 'Rubik', sans-serif;
+} 
+.sensor-form{
+    text-align: center;/*align all elemnts of the from to center*/
+}
+.inputField{
+    border-radius: 25px; /* for curved inputs fields*/
+    border: 2px solid dodgerblue;
+    padding: 5px; /*how bug is the input field, inside*/
+    text-align: center; /* align labels at the center of inputs fields*/
+    width: 200px;
+}
+.urlField{
+    border-radius: 25px; /* for curved inputs fields*/
+    border: 2px solid dodgerblue;
+    padding: 5px; /*how bug is the input field, inside*/
+    text-align: center; /* align labels at the center of inputs fields*/
+    width: 130px;
+}
+body{
+    display: flex;
+}
+ul{
+    width: 200px;
+    height: 60px;
+    margin: auto;
+    color: red;
+}
+#pageBorder{
+    border: 2px solid dodgerblue;
+    border-radius: 15px;
+    width: 500px;
+    margin: auto; /* da se postavi na sredino */
+    padding-bottom: 20px;
+    background-color:  #f2f2f2
+}
+.flex {
+    display: flex;
+    width:80%;
+    margin-left: 10%; 
+    margin-top : 5px;
+    justify-content: center;
+}
+.flex label {
+    margin: auto 10px;
+}
+label{
+    font-family: 'Rubik', sans-serif;
+    color: dimgrey;
+    font-weight: bold;
+    margin: 5px;
+}
+.fieldLabel{
+    display: block;
+}
+.switchLabel{
+    margin-bottom: 1000px;
+}
+::-webkit-input-placeholder{
+    color: darkgrey
+}
+.button{
+    margin: 5px auto; /* use this to align buttons at center*/
+    background-color:  white;
+    border: 2px solid dodgerblue;
+    color: dimgrey;
+    padding: 16px 25px;
+    text-align: center;
+    font-family: 'Rubik', sans-serif;
+    color: dimgrey;
+    -webkit-transition-duration: 0.4s;
+    transition-duration: 0.4s;
+    cursor: pointer;
+    width: 90px;
+    border-radius: 25px;
+}
+.buttonSmall{
+    margin: 5px auto; /* use this to align buttons at center*/
+    background-color:  white;
+    border: 2px solid dodgerblue;
+    color: dimgrey;
+    padding: 6px;
+    text-align: center;
+    font-family: 'Rubik', sans-serif;
+    color: dimgrey;
+    -webkit-transition-duration: 0.4s;
+    transition-duration: 0.4s;
+    cursor: pointer;
+    width: 70px;
+    border-radius: 25px;
+}
+.buttonSmall:hover{
+    background-color: dodgerblue;
+    color: white;
+}
+.buttonDisabled {
+    margin: 5px auto; /* use this to align buttons at center*/
+    background-color:  darkgrey;
+    border: 2px solid dodgerblue;
+    color: dimgrey;
+    padding: 16px 25px;
+    text-align: center;
+    font-family: 'Rubik', sans-serif;
+    color: dimgrey;
+    -webkit-transition-duration: 0.4s;
+    transition-duration: 0.4s;
+    width: 90px;
+    border-radius: 25px; 
+}
+.button#start:hover {
+    background-color: limegreen;
+    border-color: limegreen;
+    color: white;
+}
+.button#stop:hover {
+    background-color: red;
+    border-color: red;
+    color: white;
+}
+/* The switch - the box araound the sldier*/
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+    margin-right: 0px;
+    
+}
+/* hides the default HTML checkbox*/
+.switch input {
+    display: none;
+    
+}
+/* slider backround *preparation* */
+.slider {
+    position: absolute;
+    cursor: pointer; /*get the pointer cursor like for links*/
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border: 2px solid dodgerblue;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+.slider:before {
+    position: absolute;
+    content: "";
+    height:  26px;
+    width: 26px;
+    left: 4px;
+    bottom: 2px;
+    background-color: red;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+input:checked + .slider:before{
+    background-color: limegreen;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(23px);
+  -ms-transform: translateX(23px);
+  transform: translateX(23px);
+}
+.slider.round {
+    border-radius: 34px;
+}
+.slider.round:before {
+    border-radius: 50%;
+}
+/* led */
+.buttonContainer {
+    display: flex;
+    flex-direction: column;
+    width: 200px;
+    margin-right: auto;
+    margin-left: auto;
+    text-align: left;
+}
+.labelButton{
+    display: flex;
+    width: 100%;
+}
+.buttonLabel {
+    margin: auto;
+    flex: 1;
+}
+.indicators {
+    display: flex;
+    text-align: left;
+    flex-direction: column;
+    margin: auto;
+    flex: 1;
+}
+.buttonLabel {
+    flex: 1;
+    line-height: 1.5em;
+}
+.ledAround {
+    position: relative;
+    display: inline-block;
+    width: 34px;
+    height: 34px;
+    margin-right: 0px;
+}
+/* hides the default HTML checkbox*/
+.ledAround input {
+    display: none;
+}
+/* slider backround *preparation* */
+.led {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border: 2px solid dodgerblue;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+.led:before {
+    position: absolute;
+    content: "";
+    height:  26px;
+    width: 26px;
+    left: 2px;
+    bottom: 2px;
+    background-color: red;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+input:checked + .led:before{
+    background-color: limegreen;
+}
+.led.round {
+    border-radius: 34px;
+}
+.led.round:before {
+    border-radius: 50%;
+}

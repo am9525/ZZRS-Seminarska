@@ -1,0 +1,87 @@
+<html>
+  <head>
+    <title>Simple server stresser</title>
+    <meta content="Simple server stresser" charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="resources/css/main-stresser.css">
+    <link href="https://fonts.googleapis.com/css?family=Rubik" rel="stylesheet">
+    <script src="resources/js/node_modules/jquery/dist/jquery.js"></script>
+    <script src="resources/js/node_modules/chart.js/dist/Chart.bundle.min.js"></script>
+    <script src="resources/js/stresser.js"></script>
+  </head>
+<body>
+  <div id="pageBorder">
+    <h1 id="heading">Simple server stresser</h1>
+    <div class = "sensor-form">
+       <label class="fieldLabel"  for="baseUrl">Server base URL:</label>
+       <input class="urlField" id = "baseUrl" type="text" placeholder="http://localhost:5000/">
+       <input class="buttonSmall" id ="change" type="button" value = "Change">
+
+      <label class="fieldLabel"  for="sensorRange">Sensor range:</label>
+      <input class="inputField" id = "sensorRange" type="text" name="sensorRange" placeholder="10-20">
+
+      <label class="fieldLabel" for="sendDelay">Send delay:</label>
+<!--      <input class="inputField" id = "sendDelay" type="text" name="refreshRate" placeholder="1"> !-->
+      <select id="sendDelay">
+          <option value="" disabled="disabled" selected="selected">Please select a delay</option>
+          <option value="1">1ms</option>
+          <option value="5">5ms</option>
+          <option value="10">10ms</option>
+          <option value="50">50ms</option>
+          <option value="100">100ms</option>
+          <option value="500">500ms</option>
+          <option value="1000">1000ms</option>
+      </select>
+       <label class="fieldLabel" for="numTests">Number of tests:</label>
+      <input class="inputField" id = "numTests" type="text" name="numTests" placeholder="5">
+
+       <label class="fieldLabel" for="sensorStep">Step:</label>
+      <input class="inputField" id = "sensorStep" type="text" name="sensorStep" placeholder="10">
+
+      <div class = "buttonContainer">
+
+        <div class="labelButton">
+          <label class="buttonLabel">Server availability:</label>
+          <label class="ledAround">
+            <input id="serverStatus"type="checkbox" disabled>
+            <div class="led round"></div>
+          </label>
+        </div>
+
+        <div class="labelButton">
+          <label class="buttonLabel">Clients are working:</label>
+          <label class="ledAround">
+            <input id="clientStatus"type="checkbox" disabled>
+            <div class="led round"></div>
+          </label>
+        </div>
+
+        <div class="labelButton">
+          <label class="buttonLabel">DB availability:</label>
+          <label class="ledAround">
+            <input id="DBStatus"type="checkbox" disabled>
+            <div class="led round"></div>
+          </label>
+        </div>
+
+      </div>
+
+      <div class="buttons">
+        <input class="button" id ="start" type="button" value = "Start">
+        <input class="button" id ="stop" type="button" value = "Stop">
+        <input class="button" id ="dropTable" type="button" value = "Erase">
+        <input class="button" id ="pullData" type="button" value = "Pull">
+      </div>
+      <progress max="100" value="0"></progress>
+      <p id="state"><p>
+      <ul>
+      </ul>
+      <div id="graphs">
+        <canvas id="ping" width="400" height="400"></canvas>
+        <canvas id="dbTime" width="400" height="400"></canvas>
+        <canvas id="ram" width="400" height="400"></canvas>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>

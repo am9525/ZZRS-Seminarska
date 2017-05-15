@@ -3,6 +3,7 @@ var bodyParser = require('body-parser');
 var os = require("os");
 var sqlite3 = require('sqlite3').verbose();
 var db = new sqlite3.Database('nodejs/resources/db/results.db');
+var path = require('path');
 
 // Endianness
 console.log('endianness : ' + os.endianness());
@@ -40,13 +41,10 @@ app.use(function(req, res, next) {
   next();
 });
 
-app.use(express.static(__dirname + '/view/css'));
-app.use(express.static(__dirname + '/view/js'));
+app.use('/', express.static(path.join(__dirname, 'stresser')));
 // views is directory for all template files
-app.set('views', __dirname + '/view/ejs');
-app.set('view engine', 'ejs');
-
-
+//app.set('views', __dirname + '/view/ejs');
+//app.set('view engine', 'ejs');
 
 app.set('port', (process.env.PORT || 5000));
  /*
@@ -81,8 +79,7 @@ var casBaze = 0;
 var sendDelay = 1; //delay between sending time of sensors, sensorSend <---sendDelay---> nextSensorSend
 
 app.get('/', function(request, response) {
-	response.render('index');
-  
+  res.sendFile(path.join(__dirname + '/stresser/stresser.html'));
 });
 app.post('/time', function(request, response) {
   var time = new Date();
