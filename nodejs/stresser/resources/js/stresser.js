@@ -134,14 +134,27 @@ $(document).ready(function(){
             }
             if($('#testMode').val() == 2){
                 numOfTests = (maxNumSensors-minNumSensors)/sensorStep+1; 
-                
+                var checkForResults;
                 $.post(baseUrl+'test/baza',{numRepeats: maxTestRepeat, testRange: minNumSensors+"-"+maxNumSensors, sendDelay: sendDelay, testStep: sensorStep},(data, status)=>{
-                    console.log("results", data);
-                    maxTestRepeat = 1;
+                    //check if tests are over
+                    checkForResults = setInterval(()=>{
+                        $.get(baseUrl+'test/check',(data,status)=>{
+                            console.log(data);
+                            if(data.ready == true){
+                               maxTestRepeat = 1;
+                               clearInterval(checkForResults);
+                                getDataFromResults(data.results, true,(pings, dbTime, ram, labels)=>{
+                                    //console.log("dbTime",dbTime);
+                                    drawGraphs(pings, dbTime, ram, labels);
+                                }); 
+                            }
+                        });
+                    },3000);
+                    /*maxTestRepeat = 1;
                     getDataFromResults(data, true,(pings, dbTime, ram, labels)=>{
                         console.log("dbTime",dbTime);
                         drawGraphs(pings, dbTime, ram, labels);
-                    });        
+                    });  */      
                 });
                 
             }

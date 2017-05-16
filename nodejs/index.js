@@ -64,10 +64,10 @@ var baza_dela = baza.dela(function(err, dela){
 
 var baza_steviloStolpcev = 1000;  //stevilo podatkovnih stolpcev v tabeli, brez stolpca za kljuc
                                   //v resnici je steviloStolpcev + 1 stolpcev
-
+//test paramters
 var baza_imeTabele = "Test";   //Ime tabele
 var testSeIzvaja = false; //boolean, ki pove ali se izvaja test
-
+var testResults = [];
 //parametri za senzorje
 var stASenz = 5;     //število aktivnih senzorjev
 var stSprej = 0;      //število prejetih stanj senzorjev
@@ -325,62 +325,32 @@ var testDB = function(request, results, callback){
   }
   
 }
+app.get('/test/check', (request, response)=>{
+  if(testSeIzvaja == true){
+    response.status(200).send({ready: false, results: null});
+  }
+  else{
+    response.status(200).send({ready: true, results: testResults});
+  }
+});
 app.post('/test/baza', function(request, response){
   console.log(request.body);
-  var results = [];
+  testResults = [];
   var tmpRange  = request.body.testRange.split("-");
   var minTestRange = parseInt(tmpRange[0]);
   maxTestRange = parseInt(tmpRange[1]);
   currTest = minTestRange;
   console.log(minTestRange, maxTestRange);
   console.log("zacelo se je testiranje baze");
+  testSeIzvaja = true;
   tmpRepeatResult = 0;
-  testDB(request, results, (results)=>{
+  testDB(request, testResults, (results)=>{
     console.log("end",results);
-    response.status(200).send(results)
+    testSeIzvaja = false;
+    testResults = results;
+    
   });
-  
-  /*
-  for(var i = 0; i < request.body.numTests; i++){
-    setTimeout(()=>{
-      var numCompletedtests = 0;
-      for(var j = 0; j < request.body.numRequests; j++){
-        setTimeout(()=>{
-          baza.updateOne(baza_imeTabele,"ID","st",baza_steviloStolpcev,Math.floor(Math.random()*request.body.numRequests), 0,
-          (vrstica, stolpec, id,data, startTime)=>{
-            var endTime = new Date().getTime();
-            timeForQuery += (endTime-startTime);
-            numCompletedtests++;
-            console.log("repeat",numCompletedtests,"ok", vrstica, stolpec, (endTime-startTime),"ms");
-            //if its the last test
-            if(numCompletedtests >= request.body.numRequests){
-              timeForQuery /= request.body.numRequests;
-              console.log(timeForQuery,"ms");
-              console.log("testiranje se je koncalo", testRepeat);
-              result += timeForQuery;
-              if(testRepeat >= request.body.numTests){
-                console.log("result",result);
-                result /= request.body.numTests;
-                testSeIzvaja = false;
-                console.log("final",result);
-              }
-              
-              testRepeat++;
-              numCompletedtests= 0;
-            }
-
-          });
-        },j*request.body.SendDelay);
-      }
-      
-    },i*1000);
-  }*/
-  
-
-  //testSeIzvaja = false;
-	//console.log(Object.getOwnPropertyNames(request.body) );
-	//response.redirect("/");
-  
+  response.status(200).send("Test started");
 });
 
 var getDataFromResultTable = function(requestSendDelay,min,max,step,callback){
