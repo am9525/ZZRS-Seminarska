@@ -133,9 +133,15 @@ $(document).ready(function(){
                 });
             }
             if($('#testMode').val() == 2){
-                console.log("easd");
+                numOfTests = (maxNumSensors-minNumSensors)/sensorStep+1; 
+                
                 $.post(baseUrl+'test/baza',{numRepeats: maxTestRepeat, testRange: minNumSensors+"-"+maxNumSensors, sendDelay: sendDelay, testStep: sensorStep},(data, status)=>{
-
+                    console.log("results", data);
+                    maxTestRepeat = 1;
+                    getDataFromResults(data, true,(pings, dbTime, ram, labels)=>{
+                        console.log("dbTime",dbTime);
+                        drawGraphs(pings, dbTime, ram, labels);
+                    });        
                 });
                 
             }

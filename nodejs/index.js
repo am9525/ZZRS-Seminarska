@@ -277,36 +277,69 @@ app.get('/manger/testStatus',(request, response)=>{
   response.send({statusTest: testSeIzvaja, statusBaza: baza_dela});
 
 });
-var testDB = function(currTest, maxTestRange, callback){
-  if(currTest)
-  var tmpResult = 0;
-  for(var j = 0; j < request.body.numRepeats; j++){
-    for(var k = 0; k < i; k++){
-      setTimeout(()=>{
-        baza.updateOne(baza_imeTabele,"ID","st",baza_steviloStolpcev,Math.floor(Math.random()*k), 0,
-        (vrstica, stolpec, id,data, startTime)=>{
-          // we finished one repetition out of n
-          var queryStopTime = new Date().getTime();
-          tmpResult += queryStopTime-startTime;
-          currRepetition++; 
-          
-        });
-      }, k*request.body.sendDelay);
-    }
+//variables for testing DB
+var sensorIndex = 0;
+var currTestRepeat = 0;
+var currTest = 0;
+var maxTestRange = 0;
+var tmpResult = 0;
+var tmpRepeatResult = 0;
+var testDB = function(request, results, callback){
+
+  for(var k = 0; k < currTest; k++){
+    setTimeout(()=>{
+      baza.updateOne(baza_imeTabele,"ID","st",baza_steviloStolpcev,Math.floor(Math.random()*k), 0,
+      (vrstica, stolpec, id,data, startTime)=>{
+        if(sensorIndex == 0)
+          tmpResult = 0;
+        //initialise results index
+        var queryEndTime = new Date().getTime();
+        tmpResult += (queryEndTime - startTime);
+        //console.log("time for request",queryEndTime - startTime,"ms","currTest",currTest,"testRepeat",currTestRepeat);
+        sensorIndex++;
+        //finished one reapeat of test
+        if(sensorIndex >= currTest){
+          sensorIndex = 0;
+          //console.log("tmpResult",tmpResult, request.body.numRepeats);
+          //console.log("result for one repeat",  tmpResult/currTest);
+          currTestRepeat++;
+          tmpRepeatResult += tmpResult/currTest;
+          //finished all repeats of one test
+          if(currTestRepeat >= request.body.numRepeats){
+            tmpRepeatResult /= request.body.numRepeats;
+            console.log("result for",currTest," sensors:", tmpRepeatResult);
+            results.push({data: JSON.stringify({ping: 0, dbTime: tmpRepeatResult, ram: 0}), numSensors: currTest});
+            currTest+= parseInt(request.body.testStep);
+            tmpRepeatResult = 0;
+            currTestRepeat = 0;
+          }
+          if(currTest <= maxTestRange){
+            setTimeout(()=>{testDB(request, results, callback)},100);
+          }
+          else{
+             callback(results);
+          }
+        }
+      });
+    }, k*request.body.sendDelay);
   }
   
 }
 app.post('/test/baza', function(request, response){
   console.log(request.body);
-  var results;
+  var results = [];
   var tmpRange  = request.body.testRange.split("-");
   var minTestRange = parseInt(tmpRange[0]);
-  var maxTestRange = parseInt(tmpRange[1]);
-  var currTest = 0;
-  var currRepetition = 0;
+  maxTestRange = parseInt(tmpRange[1]);
+  currTest = minTestRange;
   console.log(minTestRange, maxTestRange);
   console.log("zacelo se je testiranje baze");
-
+  tmpRepeatResult = 0;
+  testDB(request, results, (results)=>{
+    console.log("end",results);
+    response.status(200).send(results)
+  });
+  
   /*
   for(var i = 0; i < request.body.numTests; i++){
     setTimeout(()=>{
