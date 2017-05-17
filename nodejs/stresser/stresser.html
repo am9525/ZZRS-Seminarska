@@ -12,6 +12,9 @@
   <div id="pageBorder">
     <h1 id="heading">Simple server stresser</h1>
     <div class = "sensor-form">
+      <label class="fieldLabel"  for=scaleStep>Scale step</label>
+      <input class="urlField" id = "scaleStep" type="text" placeholder="10">
+      <input class="buttonSmall" id ="change" type="button" value = "Change">
 
       <label class="fieldLabel"  for="sensorRange">Sensor range:</label>
       <input class="inputField" id = "sensorRange" type="text" name="sensorRange" placeholder="10-20">
@@ -22,8 +25,6 @@
           <option value="" disabled="disabled" selected="selected">Please selected testing method</option>
           <option value="1">Test simulacije delovanja</option>
           <option value="2">Test baze</option>
-          <option value="3">Test rama</option>
-          <option value="4">Test zahtev</option>
       </select>
 
       <label class="fieldLabel" for="sendDelay">Send delay:</label>
@@ -80,7 +81,7 @@
       </div>
       <progress max="100" value="0"></progress>
       <p id="state"><p>
-      <ul>
+      <ul id="downloadLinks">
       </ul>
       <div id="graphs">
         <canvas id="ping" width="400" height="400"></canvas>

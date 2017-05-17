@@ -28,6 +28,11 @@ $(document).ready(function(){
     $(".inputField").keyup(()=>{
         //checkKeys();
     });
+     $("#change").click(()=>{
+        if($('#scaleStep').val() != "")
+            scaleStep = $('#scaleStep').val();
+     });
+
     $('#dropTable').click(()=>{
         $.ajax({
             url: 'results',
@@ -111,9 +116,9 @@ $(document).ready(function(){
             dbChart.destroy();
         if(ramChart != null)
             ramChart.destroy();
-
+        //clear download downloadLinks
+        $('#downloadLinks').empty();
         if($('#serverStatus').is(':checked')){
-            console.log($('#testMode').val());
             if($('#testMode').val() == 1){
                 //start stressing server
                 $("#clientStatus").prop("checked", true);
@@ -302,16 +307,14 @@ var checkKeys = function(){
 }
 //function to save data
 var saveData = (function (data, fileName) {
-    $('body').append("<a id=\"downloadLink\">downloadResults</a>");
+    $('#downloadLinks').append("<li><a id=\"jsonResult\">download JSON results</a></li>");
    
     var json = JSON.stringify(data),
             blob = new Blob([json], {type: "octet/stream"}),
             url = window.URL.createObjectURL(blob);
 
-    $("#downloadLink").attr("href", url);
-    $("#downloadLink").attr("download", fileName);
-    $("#downloadLink").click();
-    $("#downloadLink").trigger('click');
+    $("#jsonResult").attr("href", url);
+    $("#jsonResult").attr("download", fileName);
 
 });
 var getDataFromResults = function(times/*raw data*/, isJson, callback){
@@ -360,6 +363,7 @@ var getDataFromResults = function(times/*raw data*/, isJson, callback){
     callback(pings, dbTime, ram, labels);
 }
 var drawGraphs = function(pings, dbTime, ram, labels){
+    $('#downloadLinks').empty();
     var dataPing = {
         labels: labels,
         datasets: [
@@ -487,6 +491,19 @@ var drawGraphs = function(pings, dbTime, ram, labels){
         }
             
     });  
+    setTimeout(()=>{
+        //set download downloadLinks
+        var url_base64jp = document.getElementById("ping").toDataURL("image/jpg");
+        $('#downloadLinks').append("<li><a id=\"pingChartDowload\" download=\"PingChartJpg.jpg\">download ping chart</a></li>");
+        $('#pingChartDowload').attr("href", url_base64jp);
+        url_base64jp = document.getElementById("dbTime").toDataURL("image/jpg");
+        $('#downloadLinks').append("<li><a id=\"dbChartDowload\" download=\"DbChartJpg.jpg\">download DB chart</a></li>");
+        $('#dbChartDowload').attr("href", url_base64jp);
+        url_base64jp = document.getElementById("ram").toDataURL("image/jpg");
+        $('#downloadLinks').append("<li><a id=\"ramChartDowload\" download=\"RamChartJpg.jpg\">download ping chart</a></li>");
+        $('#ramChartDowload').attr("href", url_base64jp);
+    },1000);
+
 }
 /*fill: false, // fills the area under the curve
 lineTension: 0.1,//how smooth is the line 
